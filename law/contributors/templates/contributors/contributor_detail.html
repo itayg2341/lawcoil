@@ -1,0 +1,21 @@
+{% extends "base.html" %}{% load i18n %}
+
+{% block title %}{{object.name}} - {% trans "Contributors" %} - {{block.super }}{% endblock title %}
+
+{% block content %}
+
+<div class="row collapse">
+  <article class="medium-8 medium-push-2 columns grid-top-double-margin grid-top-bottom-padded end">
+    <header>
+      <h1>
+        <span class="title-contrib-photo contrib-photo" aria-hidden="true" {% if contrib.small_photo %}style="background-image:url('{{contrib.small_photo.url}}')"{% endif %}></span>
+        {{object.name}}
+      </h1>
+    </header>
+    <section class="grid-top-double-margin">
+      {{object.short_desc|safe}}
+    </section>
+  </article>
+</div>
+
+{% endblock content %}

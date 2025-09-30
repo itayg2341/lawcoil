@@ -1,0 +1,94 @@
+#side-menu {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: $side-menu-width-small;
+  #{$language-start}: -$side-menu-width;
+  z-index: 99;
+  background-color: $side-menu-background-color;
+  color: $side-menu-text-color;
+  transition: #{$language-start} 0.3s ease-in-out;
+  overflow: auto;
+
+  &.expanded {
+    #{$language-start}: 0;
+  }
+
+  .menu {
+    li.is-accordion-submenu-parent {
+      a {
+        padding: 0.25rem 0;
+      }
+    }
+  }
+
+  @include breakpoint(medium) {
+    width: $side-menu-width;
+  }
+}
+
+.side-menu-top {
+  position: relative;
+}
+
+.side-menu-title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+#side-menu-close {
+  margin-#{$language-end}: rem-calc(15);
+
+  font-size: 1.1em;
+
+  @include breakpoint(small only) {
+    font-size: 1.3rem;
+  }
+}
+
+.side-menu-padded {
+  padding: 0 rem-calc(30);
+
+  @include breakpoint(medium) {
+    padding: 0 rem-calc(60);
+  }
+}
+
+.side-menu-bottom {
+  a {
+    color: $alt-blue;
+
+    &.red-link {
+      color: $alt-red;
+    }
+
+    &:hover, &:focus {
+      color: white;
+    }
+  }
+
+  .nested {
+    a {
+      color: white;
+
+      &:hover, &:focus {
+        color: $alt-blue;
+      }
+    }
+
+  }
+
+}
+
+.side-menu-social-links {
+  margin-top: rem-calc(16);
+  padding-top: rem-calc(20);
+
+  .gray-link {
+    color: $alt-blue;
+    padding: rem-calc(5);
+    font-size: rem-calc(20);
+  }
+}

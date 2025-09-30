@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}{{object.title}} - {{block.super}}{% endblock title %}
+
+{% block content %}
+  <article class="row collapse grid-bottom-double-margin">
+    <div class="large-8 large-offset-2 medium-10 medium-offset-1 columns end">
+      <header class="grid-top-bottom-padded grid-padded-small-only">
+        <h1 class="primary-blue">{{object.title}}</h1>
+      </header>
+      <div class="grid-padded-small-only">
+        {{object.content|safe}}
+      </div>
+    </div>
+  </article>
+{% endblock content %}

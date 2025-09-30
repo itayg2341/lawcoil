@@ -1,0 +1,23 @@
+{% load i18n %}
+<nav data-equalizer-watch>
+  <ul class="links-sidebar vertical-menu" data-accordion-menu data-equalizer-watch>
+    <li><a href="{{about_page.get_absolute_url}}">{{about_page.title}}</a></li>
+    <li><a href="{{about_group_page.get_absolute_url}}">{{about_group_page.title}}</a></li>
+    <li>
+      <a href="{% url 'practices:index' %}">{% trans "Practice Areas" %}</a>
+      <ul class="menu vertical nested{% if expanded == 'practices' %} is-active{% endif %}">
+        {% for practice in practices %}
+        <li><a href="{{ practice.get_absolute_url }}">{{ practice.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </li>
+    <li>
+      <a href="{% url 'lawyers:index' %}">{% trans "Group Lawyers" %}</a>
+      <ul class="menu vertical nested{% if expanded == 'lawyers' %} is-active{% endif %}">
+        {% for lawyer in lawyers %}
+        <li><a href="{{ lawyer.get_absolute_url }}">{{ lawyer.name }}</a></li>
+        {% endfor %}
+      </ul>
+    </li>
+  </ul>
+</nav>

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}{% load i18n %}
+
+{% block title %}{% trans "Contact Us" %} - {{ block.super }}{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="medium-8 medium-offset-2 columns">
+      <h1 class="blue-title grid-top-double-margin grid-bottom-double-margin">{% trans "Contact Us" %}</h1>
+      <form action="{% url 'contact:index' %}" method="post" novalidate>
+        <div class="row">
+          {% if form.errors %}
+            <div class="medium-12 columns">
+              <div class="alert callout">
+                {%  trans "Please fix the errors below." %}
+                {{ form.non_field_errors }}
+              </div>
+            </div>
+          {% endif %}
+          <div class="medium-4 columns{% if form.name.errors %} with-error{% endif %}">
+            <label for="{{ form.name.auto_id }}">{{ form.name.label }} *</label>
+            {{ form.name }}
+            {{ form.name.errors }}
+          </div>
+          <div class="medium-8 columns{% if form.email.errors %} with-error{% endif %}">
+            <label for="{{ form.email.auto_id }}">{{ form.email.label }} *</label>
+            {{ form.email }}
+            {{ form.email.errors }}
+          </div>
+          <div class="medium-4 columns">
+            <label for="{{ form.phone.auto_id }}">{{ form.phone.label }}</label>
+            {{ form.phone }}
+          </div>
+          <div class="medium-4 columns">
+            <label for="{{ form.role.auto_id }}">{{ form.role.label }}</label>
+            {{ form.role }}
+          </div>
+          <div class="medium-4 columns">
+            <label for="{{ form.organization.auto_id }}">{{ form.organization.label }}</label>
+            {{ form.organization }}
+          </div>
+          <div class="medium-12 columns{% if form.content.errors %} with-error{% endif %}">
+            <label for="{{ form.content.auto_id }}">{{ form.content.label }} *</label>
+            {{ form.content }}
+            {{ form.content.errors }}
+          </div>
+          <div class="medium-12 columns text-end">
+            <button type="submit" class="dark-blue button">{% trans "Send Message" %}</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

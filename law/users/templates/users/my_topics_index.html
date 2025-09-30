@@ -1,0 +1,41 @@
+{% extends "base.html" %}{%  load i18n %}
+
+{% block title %}{%  trans 'My Topics' %} - {{ block.super }}{% endblock %}
+
+{% block content %}
+{% include "users/_my_top_menu.html" %}
+<div class="border-bottom light-gray-bg hide-for-large">
+  <h3 class="grid-padded grid-top-padded larger-for-small">{% trans "My Topics" %}</h3>
+</div>
+<div class="grid-top-double-margin-for-large grid-bottom-double-margin-for-large">
+  <div class="row collapse border-top-for-large" id="main-equalizer" data-equalizer>
+    {% for cat in object_list %}
+    <div class="light-gray-bg small-6 medium-4 large-3 border-end border-bottom columns{% if forloop.last %} end{% endif %}">
+      <div class="category-box">
+        <a href="{% url 'topics:unfollow' cat_slug=cat.slug %}" class="unfollow-link gray-link" data-tooltip aria-haspopup="true" title="{% blocktrans with cat_name=cat.name %}Stop Following {{cat_name}}{% endblocktrans %}">
+          <span class="show-for-sr">{% blocktrans with cat_name=cat.name %}Stop Following {{cat_name}}{% endblocktrans %}</span>
+          <span aria-hidden="true" class="about-link">&times;</span>
+        </a>
+        <h4>
+          <a href="{% url 'my:topics_category' cat_slug=cat.slug %}" class="category-box-title" style="color: {{cat.color}}">
+            <i class="category-icon {{cat.icon_css_class}}" aria-hidden="true"></i><br>
+            {{cat.name}}
+          </a>
+        </h4>
+        <a href="{% url 'my:topics_category' cat_slug=cat.slug %}" class="category-button button">
+          {% blocktrans with followers_count=cat.followers_count%}{{followers_count}} Followers{% endblocktrans %}
+        </a>
+      </div>
+    </div>
+    {% empty %}
+    <div class="callout warning text-center">
+      <p>{% blocktrans %}No topics followed.{% endblocktrans %}</p>
+      {% url 'my:settings' as settings_url%}
+      <p>
+        {% blocktrans %}You can select topics to following at <a href="{{settings_url}}">your setting page</a>.{% endblocktrans %}
+      </p>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

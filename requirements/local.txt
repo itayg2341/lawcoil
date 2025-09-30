@@ -1,0 +1,20 @@
+# Local development dependencies go here
+-r base.txt
+coverage>=7.4.0
+Sphinx>=7.2.6
+Werkzeug>=3.0.1
+django-test-plus>=2.2.0
+factory_boy>=3.3.0
+
+# django-debug-toolbar for Django 4+
+django-debug-toolbar>=4.3.0
+
+# ipdb: use latest for Python 3.12
+ipdb>=0.13.13
+
+# gevent/maildump: check for modern alternatives or remove if unused
+# gevent>=24.2.1
+# maildump: check for Python 3.12 support or use a modern mail testing tool
+
+# for legacy db
+#mysqlclient>=2.2.0

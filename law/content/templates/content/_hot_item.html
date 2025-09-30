@@ -1,0 +1,13 @@
+{% load content_tags %}
+<article class="grid-all-padded hot-item border-bottom">
+  <h4 class="listing-item-title">
+    <a class="gray-link" href="{{item.get_absolute_url}}">{{item.title}}</a>
+  </h4>
+  {% if item.language == 'he' %}
+  <p>{{item.content|cut_till_bracket|safe}}</p>
+  {% endif %}
+  <time datetime="{{item.created_at|date:"c"}}" class="listing-time hot">
+    {{item.created_at|date:"DATE_FORMAT"}}
+  </time>
+  <a class="category-button button" href="{{category.get_absolute_url}}">{{category.name}}</a>
+</article>

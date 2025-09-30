@@ -1,0 +1,75 @@
+{% extends "base.html" %}{% load i18n photos content_tags %}
+{% block extra_head %}
+{{ block.super }}
+    <meta name="description" content="{% trans "Copyright, Privacy, Open Source, Information Technology, Internet Law, Israeli Law" %}">
+{% endblock extra_head %}
+{% block body_class %}index-page{% endblock body_class %}
+{% block content %}
+  {% get_random_photo 'wide' as wide_photo %}
+
+  <div class="small-12 columns border-bottom hide-for-large" aria-hidden="true">
+    <img class="full-width" data-interchange="[{{ wide_photo }}, small]" alt="Splash image">
+  </div>
+  <div class="medium-9 columns border-bottom border-end-medium-up light-gray-bg-small">
+    <h5 class="grid-padded header-even-margin normal">
+      {% trans "My Content" %}
+    </h5>
+  </div>
+  <div class="medium-3 columns border-bottom show-for-medium">
+    <h5 class="grid-padded header-even-margin normal">
+      {% trans "Insights" %}
+    </h5>
+  </div>
+
+  <div class="row collapse" id="main-equalizer" data-equalizer data-equalize-on="medium">
+    {% for col in regular_items_cols %}
+    <div class="large-3 medium-4 columns border-end-medium-up listing-col topics-col index-items-col-{{forloop.counter}} {% if forloop.counter == 2 %}show-for-medium{% endif %}{% if forloop.counter == 3 %}show-for-large{% endif %}" data-equalizer-watch>
+      {% if forloop.counter == 3 %}
+      <div aria-hidden="true" class="large-splash-image"
+          data-interchange="[{{ wide_photo }}, large]"></div>
+      {% endif %}
+      {% for item in col %}
+      {% listing_item item %}
+      {% endfor %}
+      {% if forloop.counter == 2 %}
+      <div aria-hidden="true" class="first tall-splash-image show-for-large"
+           data-interchange="[{% get_random_photo 'narrow' %}, medium]"></div>
+      {% endif %}
+      {% if forloop.counter == 3 and regular_items_paginator.has_next %}
+      <div class="grid-top-bottom-padded text-center more-button-container">
+        <a href="?page={{regular_items_paginator.next_page_number}}" class="dark-blue button"
+           data-topics-url="{% url 'content_ajax:ajax_items'%}?category='my-topics'"
+           data-topics-page="{{regular_items_paginator.next_page_number}}"
+           data-topics-slug="my-topics"
+           id="index-more-my-content"
+           data-topics-also="#index-more-insights">
+          {% trans "More of My Content" %}
+        </a>
+      </div>
+      {% endif %}
+    </div>
+    {% endfor %}
+    <div class="small-12 columns border-bottom border-top show-for-small-only light-gray-bg">
+      <h5 class="grid-padded header-even-margin normal">
+        {% trans "Insights" %}
+      </h5>
+    </div>
+    <div class="large-3 medium-4 columns hot-items-col" data-equalizer-watch>
+      {% for item in hot_items %}
+      {% include "content/_hot_item.html" with item=item category=item.category only %}
+      {% endfor %}
+      {% if hot_items_paginator.has_next %}
+      <div class="grid-top-bottom-padded text-center">
+        <a href="?page={{hot_items_paginator.next_page_number}}" class="dark-blue button"
+           data-topics-url="{% url 'content_ajax:ajax_items'%}?category='hot-topics'"
+           data-topics-page="{{hot_items_paginator.next_page_number}}"
+           data-topics-slug="hot-topics"
+           id="index-more-insights"
+           data-topics-also="#index-more-my-content">
+          {% trans "More Insights" %}
+        </a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

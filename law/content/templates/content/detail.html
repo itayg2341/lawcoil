@@ -1,0 +1,197 @@
+{% extends "base.html" %}{% load i18n content_tags staticfiles %}
+{% block title %}{{object.title}} - {{model_verbose_name}} - {{block.super}}{% endblock %} {% block content %}
+{% block extra_head %}
+{{block.super}}
+    <meta name="description" content="{{object.content|striptags|truncatewords:60}}">
+    <meta name="author" content="{{ contributors|join:", " }}">
+    <meta property="og:title" content="{{object.title}}">
+{% endblock extra_head %}
+<article class="grid-top-bottom-padded">
+  <header>
+    <div class="row no-margin-for-small">
+      {% if admin_url %}
+      <div class="medium-2 columns">
+        <div class="grid-padded grid-bottom-padded no-padding-for-small">
+          <a href="{{ admin_url }}"><i class="fa fa-pencil-square-o"> {% trans "Edit" %}</i></a>
+        </div>
+      </div>
+      {% endif %}
+      <div class="hide-for-medium">
+        <time datetime="{{object.created_at|date:" c "}}" class="listing-time grid-padded">
+          {{object.created_at|date:"DATE_FORMAT"}}
+        </time>
+      </div>
+      <h1 class="medium-8 {% if not admin_url %}medium-offset-2{% endif %} columns end content-detail-title">{{object.title}}</h1>
+    </div>
+    <div class="row no-margin-for-small">
+      <div class="medium-2 columns show-for-medium">
+        <time datetime="{{object.created_at|date:" c "}}" class="listing-time grid-padded text-center">
+          {{object.created_at|date:"DATE_FORMAT"}}
+        </time>
+      </div>
+      <div class="medium-8 columns end grid-bottom-padded">
+        <div class="float-start item-tags">
+          {% if LANGUAGE_CODE == 'he' %} {% for category in categories %} {% include "content/_category_tag_follow.html" with category=category %} {% endfor %} {% endif %}
+        </div>
+      </div>
+    </div>
+  </header>
+  <section class="row no-margin-for-small">
+    <div class="medium-2 columns item-sidebar">
+        {% for contrib in contributors %}
+        <div class="sidebar-contrib grid-padded">
+          {% if contrib.show_link or contrib.laywer %}
+          <a href="{{ contrib.normalized_link }}" class="contrib-photo sidebar-contrib-photo" aria-hidden="true" {% if contrib.normalized_photo %}style="background-image:url('{{contrib.normalized_photo.url}}')"{% endif %}></a>
+          {% else %}
+          <div class="contrib-photo sidebar-contrib-photo" aria-hidden="true" {% if contrib.normalized_photo %}style="background-image:url('{{contrib.normalized_photo.url}}')"{% endif %}></div>
+          {% endif %}
+          <div class="sidebar-contrib-name">
+            <strong>
+              {% trans "By" %}{{LANGUAGE_MARKER}}
+              {% if contrib.show_link or contrib.lawyer %}
+              <a href="{{ contrib.normalized_link }}">{{contrib}}</a>
+              {% else %}
+              {{contrib}}
+              {% endif %}
+            </strong>
+          </div>
+          <div class="sidebar-contrib-desc">
+            {{contrib.short_desc|default:""|safe}}
+          </div>
+        </div>
+        {% endfor %}
+
+        {% if similar_items %}
+        <div class="similar-items hide-for-small-only">
+          <div class="border-bottom grid-padded compact">
+            <h4>{% trans "Might interest you" %}</h4>
+          </div>
+          {% for item in similar_items %}
+          {% listing_item item words=15 compact=True %}
+          {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    <div class="medium-8 columns end">
+      <div>
+        <div class="clearfix">
+          <span class="float-start reading-time">
+            <strong>{% trans "Reading time" %}:</strong>
+            {% if not object.reading_time %}
+            {% trans "Less than a minute" %}
+            {% else %}
+            {% blocktrans count minutes=object.reading_time %}1 Minute{% plural %}{{minutes}} minutes{% endblocktrans %}
+            {% endif %}
+          </span>
+          <div class="float-end item-actions">
+            <button class="hollow no-border button" type="button" data-toggle="share-actions" data-tooltip aria-haspopup="true" title="{% trans "Share this page" %}">
+              <span class="show-for-sr">{% trans "Share this page" %}</span>
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </button>
+            <a href="{% url 'my:save_toggle' slug=object.slug content_type=model_url_name %}" class="hollow no-border button toggle-save" data-tooltip aria-haspopup="true" title="{% if not is_saved %}{% trans 'Save to &quot;My Content&quot;' %}{% else %}{% trans 'Remove from &quot;My Content&quot;'%}{% endif %}">
+              {% if not is_saved %}
+              <span class="show-for-sr">{% trans 'Save to &quot;My Content&quot;' %}</span>
+              <i class="fa fa-bookmark-o" aria-hidden="true"></i>
+              {% else %}
+              <span class="show-for-sr">{% trans 'Remove from &quot;My Content&quot;' %}</span>
+              <i class="fa fa-bookmark" aria-hidden="true"></i>
+              {% endif %}
+            </a>
+            <div id="share-actions" class="dropdown-pane border-all {{LANGUAGE_START}}" data-dropdown data-auto-focus="true">
+              <a class="gray-link" href="{{facebook_url}}" target="_blank" data-tooltip aria-haspopup="true" title="{% trans "Share on Facebook" %}">
+                <span class="show-for-sr">{% trans "Share on Facebook" %}</span>
+                <i class="fa fa-facebook-square" aria-hidden="true"></i>
+              </a>
+              <a class="gray-link" href="{{linkedin_url}}" target="_blank" data-tooltip aria-haspopup="true" title="{% trans "Share on Linkedin" %}">
+                <span class="show-for-sr">{% trans "Share on Linkedin" %}</span>
+                <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+              </a>
+              <a class="gray-link" href="{{gplus_url}}" target="_blank" data-tooltip aria-haspopup="true" title="{% trans "Share on Google+" %}">
+                <span class="show-for-sr">{% trans "Share on Google+" %}</span>
+                <i class="fa fa-google-plus-square" aria-hidden="true"></i>
+              </a>
+              <a class="gray-link" href="{{twitter_url}}" target="_blank" data-tooltip aria-haspopup="true" title="{% trans "Share on Twitter" %}">
+                <span class="show-for-sr">{% trans "Share on Twitter" %}</span>
+                <i class="fa fa-twitter" aria-hidden="true"></i>
+              </a>
+              <a class="gray-link" href="mailto:?subject={{ object.title }}&amp;body={{ full_path }}" data-tooltip aria-haspopup="true" title="{% trans "Share via Email" %}">
+                <span class="show-for-sr">{% trans "Share via Email" %}</span>
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+          {% if object.attachment %}
+            <a class="float-end grid-end-padded" style="line-height: 3rem;" href="{{ object.attachment.url }}">
+              <strong>
+                <i class="fa fa-download"></i>
+                {% trans "View Document" %}
+              </strong>
+            </a>
+          {% endif %}
+        </div>
+        <div class="article-content">
+          {{object.content|safe}}
+        </div>
+        {% if object.url %}
+          <div class="text-center">
+            <a href="{{ object.url }}" class="text-large alt-blue title-font button" target="_blank" rel="noopener">{% trans "Visit Link" %}</a>
+          </div>
+        {% endif %}
+      </div>
+      {% if show_blurb %}
+      <footer class="text-small grid-top-bottom-padded">
+        <strong>
+        {% trans "This article is edited and published by the" %}
+        <a href="{% url 'pages:page' slug='about-group' %}">{% trans "Cyber, Privacy, and Copyright Group" %}</a>
+        {% blocktrans %}
+        at Pearl Cohen. The Group specializes in legal matters related to computer systems and the Internet,
+        maintaining expertise in cutting-edge areas such as artificial intelligence, internet law, data protection,
+        cybersecurity and privacy, computer law and contracts, electronic signatures, communications, copyright,
+        open source, and intellectual property.
+        {% endblocktrans %}
+        </strong>
+      </footer>
+      {% endif %}
+    </div>
+  </section>
+</article>
+{% endblock %}
+
+{% block javascript %}
+{{ block.super }}
+  {% if LANGUAGE_CODE == 'he' %}
+      <link rel="gettext" type="application/x-po" href="{% static 'js/he.po' %}">
+      <script src="{% static 'js/gettext.js' %}"></script>
+  {% endif %}
+      <script src="{% static 'js/annotator.min.js' %}"></script>
+      <script>
+          var content_uri = '{{ create_slug_uri }}',
+              load_uri = {% if annotator_uri %}'{{ annotator_uri }}'{% else %}null{% endif %},
+              app = new annotator.App();
+
+          var pageUri = function () {
+              return {
+                  beforeAnnotationCreated: function (ann) {
+                      ann.uri = content_uri;
+                  }
+              };
+          };
+
+          app.include(annotator.ui.main, {element: document.querySelector('.article-content')});
+          app.include(annotator.storage.http, {
+              prefix: '',
+              urls: {
+                  create: '{% url "annotations:create" %}',
+                  update: '{% url "annotations:root" %}api/{id}/',
+                  destroy: '{% url "annotations:root" %}api/{id}/',
+                  search: '{% url "annotations:search" %}'
+              }
+          });
+          app.include(pageUri)
+          app.start().then(function () {
+              if (load_uri) {
+                  app.annotations.load({uri: load_uri});
+              }
+          });
+      </script>
+{% endblock %}

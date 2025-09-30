@@ -1,0 +1,30 @@
+{% extends "base.html" %}{% load i18n content_tags %}
+
+{% block title %}{% trans "RSS Updates" %} - {{ block.super }}{% endblock title %}
+
+{% block content %}
+{% get_cached_generic_categories as cached_generic_categories %}
+
+<div class="grid-top-bottom-padded border-bottom">
+  <div class="row collapse">
+    <h1 class="primary-blue grid-top-padded medium-8 medium-offset-2 columns">{% trans "RSS Updates" %}</h1>
+  </div>
+</div>
+
+<div class="row collapse grid-top-double-margin grid-bottom-double-margin">
+  <nav class="medium-8 medium-offset-2 columns">
+    <p>
+    {% blocktrans %}
+    Everything published on the site also appears in RSS feeds. All you need to
+    do is add the feed to your favorite reader (app, web site, whatever), and
+    that's all.
+    {% endblocktrans %}
+    </p>
+    <ul>
+      {% for cat in cached_generic_categories %}
+      <li><a href="{% url "rss:categories" slug=cat.slug %}">{{ cat }}</a></li>
+      {% endfor %}
+    </ul>
+  </nav>
+</div>
+{% endblock content %}

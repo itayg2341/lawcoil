@@ -1,0 +1,50 @@
+Admin
+------
+
+[x] Hide accounts section
+[x] Content section should be 1st in admin
+[x] Change "Contact" section title to "פניות מהאתר"
+[x] In "Feedback messages" email should be clickable
+[x] Change "Contributors" section title to "רשימת מחברים"
+[x] In contributors, add link field, if show_link is enabled, display name with
+    link in the site
+[x] In mailing lists, fix typo "אל תשלח לפי ימים"
+[x] In categories Change "Israeli interent law update" to "Internet Law Update"
+[x] Show mailing list subscriberes under Mailing lists section in admin
+[x] CKEditor: Remove smileys, flash and styles
+[x] CKEDitor: Add bullets, numbering, pase simple text
+[x] In admin: Social accounts: Move below or hide
+[x] Admin|users: Add filter for mailing list subscribers
+[x] Hide "Sites" section in admin
+[x] Group together "Practices", "Group Laywers", "About group", "About law.co.il"
+[x] In language selection, Hebrew should be default
+[x] Date time fields should be LTR
+[x] Uploaded file manager
+[x] Categotries field in content editing should use django's "Move between 2
+    selections" mechanism
+[x] Add ordering to "Contributors" and make sure the selection in content
+    editing is correctly ordered
+[x] Remove "link_to" when adding content to verditcts model
+
+
+Site
+----
+
+[x] Add link to admin page for the display object (if have perms)
+[x] Top menu - change "Site updates" to "Updates"
+[x] Top menu - Change "פסקי דין" to "פסיקה"
+[x] Top menu - Add legislation section
+[x] Accessability should be on left side of site in RTL and right on LTR
+[x] Add "Related stories" ("You might be interested in")
+[x] Lawyer description shows "Adv." instead of "עו"ד"
+[x] In "verdicas" and "Legistlation" sections show "עיון במסמך" instead of
+    "Download"
+
+Meta
+----
+[ ] Should copy all the static files from old site to new site.
+[ ] Check issue with css not loading from the server on some pages
+[ ] Free software section from current site should be moved to "Knowledge
+    centers"
+[ ] Notify Haim about the django cookies
+[ ] Check problem with dates ordering for index/news page

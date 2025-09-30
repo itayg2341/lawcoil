@@ -1,0 +1,539 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-08-30 18:47+0300\n"
+"PO-Revision-Date: 2019-03-12 12:08+0200\n"
+"Last-Translator: Meir Kriheli <mkriheli@gmail.com>\n"
+"Language-Team: LANGUAGE <he@li.org>\n"
+"Language: he\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: admin.py:8
+msgid "law.co.il administration"
+msgstr "ניהול law.co.il"
+
+#: apps_overrides.py:7
+msgid "FileBrowser"
+msgstr "מנהל קבצים"
+
+#: templates/404.html:4 templates/404.html:8
+msgid "Page Not found"
+msgstr "עמוד לא קיים"
+
+#: templates/404.html:10
+msgid "This is not the page you were looking for."
+msgstr "זה לא העמוד שחיפשת."
+
+#: templates/_social_buttons.html:3
+msgid "LinkedIn"
+msgstr "לינקדאין"
+
+#: templates/_social_buttons.html:7
+msgid "Twitter"
+msgstr "טוויטר"
+
+#: templates/_social_buttons.html:11
+msgid "Facebook"
+msgstr "פייסבוק"
+
+#: templates/_social_buttons.html:15
+msgid "Telegram"
+msgstr "טלגרם"
+
+#: templates/account/email.html:6
+msgid "Account"
+msgstr ""
+
+#: templates/account/email.html:12
+msgid "E-mail Addresses"
+msgstr ""
+
+#: templates/account/email.html:14
+msgid "The following e-mail addresses are associated with your account:"
+msgstr ""
+
+#: templates/account/email.html:28
+msgid "Verified"
+msgstr ""
+
+#: templates/account/email.html:30
+msgid "Unverified"
+msgstr ""
+
+#: templates/account/email.html:32
+msgid "Primary"
+msgstr ""
+
+#: templates/account/email.html:38
+msgid "Make Primary"
+msgstr ""
+
+#: templates/account/email.html:39
+msgid "Re-send Verification"
+msgstr ""
+
+#: templates/account/email.html:40
+msgid "Remove"
+msgstr ""
+
+#: templates/account/email.html:47
+msgid "Warning:"
+msgstr ""
+
+#: templates/account/email.html:47
+msgid ""
+"You currently do not have any e-mail address set up. You should really add "
+"an e-mail address so you can receive notifications, reset your password, etc."
+msgstr ""
+
+#: templates/account/email.html:52
+msgid "Add E-mail Address"
+msgstr ""
+
+#: templates/account/email.html:57
+msgid "Add E-mail"
+msgstr ""
+
+#: templates/account/email.html:68
+msgid "Do you really want to remove the selected e-mail address?"
+msgstr ""
+
+#: templates/account/email_confirm.html:6
+#: templates/account/email_confirm.html:13
+#: templates/account/email_confirmed.html:6
+#: templates/account/email_confirmed.html:13
+msgid "Confirm E-mail Address"
+msgstr ""
+
+#: templates/account/email_confirm.html:19
+#, python-format
+msgid ""
+"Please confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is an e-mail "
+"address for user %(user_display)s."
+msgstr ""
+
+#: templates/account/email_confirm.html:23
+msgid "Confirm"
+msgstr ""
+
+#: templates/account/email_confirm.html:30
+#, python-format
+msgid ""
+"This e-mail confirmation link expired or is invalid. Please <a "
+"href=\"%(email_url)s\">issue a new e-mail confirmation request</a>."
+msgstr ""
+
+#: templates/account/email_confirmed.html:17
+#, python-format
+msgid ""
+"You have confirmed that <a href=\"mailto:%(email)s\">%(email)s</a> is an e-"
+"mail address for user %(user_display)s."
+msgstr ""
+
+#: templates/account/login.html:8 templates/account/login.html:14
+#: templates/account/login.html:40
+msgid "Sign In"
+msgstr ""
+
+#: templates/account/login.html:17
+#, python-format
+msgid ""
+"Please sign in with one\n"
+"    of your existing third party accounts. Or, <a "
+"href=\"%(signup_url)s\">sign up</a>\n"
+"    for a %(site_name)s account and sign in below:"
+msgstr ""
+
+#: templates/account/login.html:27
+msgid "or"
+msgstr ""
+
+#: templates/account/login.html:41
+msgid "Forgot Password?"
+msgstr ""
+
+#: templates/account/logout.html:5 templates/account/logout.html:12
+#: templates/account/logout.html:21
+msgid "Sign Out"
+msgstr ""
+
+#: templates/account/logout.html:14
+msgid "Are you sure you want to sign out?"
+msgstr ""
+
+#: templates/account/password_change.html:5
+#: templates/account/password_change.html:9
+#: templates/account/password_change.html:23
+#: templates/account/password_reset_from_key.html:6
+#: templates/account/password_reset_from_key.html:12
+#: templates/account/password_reset_from_key_done.html:4
+#: templates/account/password_reset_from_key_done.html:10
+msgid "Change Password"
+msgstr ""
+
+#: templates/account/password_reset.html:7
+#: templates/account/password_reset.html:14
+#: templates/account/password_reset_done.html:6
+#: templates/account/password_reset_done.html:12
+msgid "Password Reset"
+msgstr ""
+
+#: templates/account/password_reset.html:19
+msgid ""
+"Forgotten your password? Enter your e-mail address below, and we'll send you "
+"an e-mail allowing you to reset it."
+msgstr ""
+
+#: templates/account/password_reset.html:24
+msgid "Reset My Password"
+msgstr ""
+
+#: templates/account/password_reset.html:27
+msgid "Please contact us if you have any trouble resetting your password."
+msgstr ""
+
+#: templates/account/password_reset_done.html:18
+msgid ""
+"We have sent you an e-mail. Please contact us if you do not receive it "
+"within a few minutes."
+msgstr ""
+
+#: templates/account/password_reset_from_key.html:12
+msgid "Bad Token"
+msgstr ""
+
+#: templates/account/password_reset_from_key.html:16
+#, python-format
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a <a href=\"%(passwd_reset_url)s\">new password reset</"
+"a>."
+msgstr ""
+
+#: templates/account/password_reset_from_key.html:22
+msgid "change password"
+msgstr ""
+
+#: templates/account/password_reset_from_key.html:25
+#: templates/account/password_reset_from_key_done.html:11
+msgid "Your password is now changed."
+msgstr ""
+
+#: templates/account/password_set.html:5 templates/account/password_set.html:11
+#: templates/account/password_set.html:16
+msgid "Set Password"
+msgstr ""
+
+#: templates/account/signup.html:6
+msgid "Signup"
+msgstr ""
+
+#: templates/account/signup.html:13 templates/account/signup.html:31
+msgid "Sign Up"
+msgstr ""
+
+#: templates/account/signup.html:15
+#, python-format
+msgid ""
+"Already have an account? Then please <a href=\"%(login_url)s\">sign in</a>."
+msgstr ""
+
+#: templates/account/signup.html:25
+#, python-format
+msgid ""
+"\n"
+"          By Subscribing to, and using the site you acknowledge reading and "
+"agreeing\n"
+"          to the <a href=\"%(terms_url)s\">Terms of use</a> and\n"
+"          <a href=\"%(privacy_url)s\">Privacy policy</a>.\n"
+"          "
+msgstr ""
+"\n"
+"בהרשמה לאתר ובשימוש בו אתה מאשר שקראת את        <a "
+"href=\"%(terms_url)s\">תנאי השימוש</a> באתר\n"
+"        ו<a href=\"%(privacy_url)s\">מדיניות הפרטיות</a>\n"
+"והסכמת להם."
+
+#: templates/account/signup_closed.html:5
+#: templates/account/signup_closed.html:11
+msgid "Sign Up Closed"
+msgstr ""
+
+#: templates/account/signup_closed.html:13
+msgid "We are sorry, but the sign up is currently closed."
+msgstr ""
+
+#: templates/account/verification_sent.html:5
+#: templates/account/verification_sent.html:11
+#: templates/account/verified_email_required.html:5
+#: templates/account/verified_email_required.html:11
+msgid "Verify Your E-mail Address"
+msgstr ""
+
+#: templates/account/verification_sent.html:13
+#, python-format
+msgid ""
+"We have sent an e-mail to <a href=\"mailto:%(email)s\">%(email)s</a> for "
+"verification. Follow the link provided to finalize the signup process. "
+"Please contact us if you do not receive it within a few minutes."
+msgstr ""
+
+#: templates/account/verified_email_required.html:15
+msgid ""
+"This part of the site requires us to verify that\n"
+"    you are who you claim to be. For this purpose, we require that you\n"
+"    verify ownership of your e-mail address. "
+msgstr ""
+
+#: templates/account/verified_email_required.html:19
+msgid ""
+"We have sent an e-mail to you for\n"
+"    verification. Please click on the link inside this e-mail. Please\n"
+"    contact us if you do not receive it within a few minutes."
+msgstr ""
+
+#: templates/account/verified_email_required.html:23
+#, python-format
+msgid ""
+"<strong>Note:</strong> you can still <a href=\"%(email_url)s\">change your e-"
+"mail address</a>."
+msgstr ""
+
+#: templates/admin/base_site.html:4
+msgid "Django site admin"
+msgstr ""
+
+#: templates/admin/base_site.html:11
+msgid "Django administration"
+msgstr "ניהול law.co.il"
+
+#: templates/admin_filters/tree_dropdown_filter.html:5
+#, python-format
+msgid " By %(filter_title)s "
+msgstr ""
+
+#: templates/base.html:6
+msgid ""
+"Copyright, Privacy, Open Source, Information Technology, Internet Law, "
+"Israeli Law"
+msgstr "זכויות יוצרים, פרטיות, קוד פתוח, טכנולוגיות מידע, משפט באינטרנט"
+
+#: templates/base.html:39
+msgid "Legal Portal for Internet, Cyber and Information Technologies"
+msgstr "הפורטל המשפטי לאינטרנט, סייבר וטכנולוגיית מידע"
+
+#: templates/base.html:43 templates/base.html:44 templates/base.html:86
+#: templates/base.html:265 templates/base.html:267
+msgid "Navigation"
+msgstr "ניווט"
+
+#: templates/base.html:58 templates/base.html:175
+msgid "Hello"
+msgstr "שלום"
+
+#: templates/base.html:60 templates/base.html:173
+msgid "My Avatar"
+msgstr "תמונת הפרופיל שלי"
+
+#: templates/base.html:65 templates/base.html:80 templates/base.html:356
+msgid "Log in"
+msgstr "כניסה"
+
+#: templates/base.html:66 templates/base.html:342
+msgid "Register"
+msgstr "הרשמה"
+
+#: templates/base.html:78 templates/base.html:149 templates/base.html:184
+msgid "Log out"
+msgstr "התנתקות"
+
+#: templates/base.html:101 templates/base.html:103 templates/base.html:271
+#: templates/base.html:273
+msgid "Search"
+msgstr "חיפוש"
+
+#: templates/base.html:115 templates/base.html:282
+msgid "News"
+msgstr "חדשות"
+
+#: templates/base.html:116 templates/base.html:283
+msgid "Articles"
+msgstr "מאמרים"
+
+#: templates/base.html:118 templates/base.html:285
+msgid "Verdicts"
+msgstr "פסיקה"
+
+#: templates/base.html:119 templates/base.html:286
+msgid "Legislation"
+msgstr ""
+
+#: templates/base.html:121 templates/base.html:303
+msgid "Links"
+msgstr "קישורים"
+
+#: templates/base.html:123 templates/base.html:287
+msgid "Knowledge Centers"
+msgstr "מוקדי ידע"
+
+#: templates/base.html:124
+msgctxt "Main header"
+msgid "Site Updates"
+msgstr "עדכונים"
+
+#: templates/base.html:137
+msgid ""
+"The website of Adv. Haim Ravia heading the Cyber, Privacy &amp; Copyright "
+"group at Pearl Cohen Zedek Latzer Baratz. Online since 1996"
+msgstr ""
+"אתר האינטרנט של עו&quot;ד חיים רביה העומד בראש קבוצת האינטרנט, הסייבר "
+"וזכויות היוצרים של פרל כהן צדק לצר ברץ. פועל מ־1996"
+
+#: templates/base.html:144 templates/base.html:179
+msgid "Settings"
+msgstr "הגדרות"
+
+#: templates/base.html:145 templates/base.html:180
+msgid "My Topics"
+msgstr "הנושאים שלי"
+
+#: templates/base.html:146 templates/base.html:181
+msgid "My Notes"
+msgstr "ההערות שלי"
+
+#: templates/base.html:147 templates/base.html:182
+msgid "My Content"
+msgstr "התכנים שלי"
+
+#: templates/base.html:148 templates/base.html:183 templates/base.html:340
+msgid "Setting"
+msgstr "הגדרות"
+
+#: templates/base.html:163
+msgid "Advanced search"
+msgstr "חיפוש מתקדם"
+
+#: templates/base.html:204
+msgid ""
+"Thousands of lawyers and legal personnel assisted by trusted and timely "
+"knowledge. Join them:"
+msgstr ""
+"אלפי עורכי דין ואנשי משפט נעזרים בידע משפטי מהימן ועדכני. הצטרפו גם אתם:"
+
+#: templates/base.html:210
+#, python-format
+msgid ""
+"\n"
+"        By Subscribing to, and using the site you acknowledge reading and "
+"agreeing\n"
+"        to the <a href=\"%(terms_url)s\">Terms of use</a> and\n"
+"        <a href=\"%(privacy_url)s\">Privacy policy</a>.\n"
+"      "
+msgstr ""
+"\n"
+"בהרשמה לאתר ובשימוש בו אתה מאשר שקראת את        <a "
+"href=\"%(terms_url)s\">תנאי השימוש</a> באתר\n"
+"        ו<a href=\"%(privacy_url)s\">מדיניות הפרטיות</a>\n"
+"והסכמת להם."
+
+#: templates/base.html:229
+msgid ""
+"law.co.il is run since 1996 by the Cyber, Privacy &amp; Copyright group of "
+"Pearl Cohen Zedek Latzer Baratz."
+msgstr ""
+"law.co.il מופעל בידי קבוצת הסייבר, הפרטיות וזכויות היוצרים של פרל כהן צדק "
+"לצר ברץ."
+
+#: templates/base.html:232
+msgid ""
+"The group specializes in the legal aspects of using computer systems and the "
+"Internet."
+msgstr "הקבוצה מתמחה בסוגיות המתעוררות בעת שימוש בטכנולוגיות מידע ואינטרנט."
+
+#: templates/base.html:235 templates/base.html:318
+msgid "About Group"
+msgstr "אודות הקבוצה"
+
+#: templates/base.html:243
+msgid "Cyber, Privacy &amp; Copyright group<br>Pearl Cohen Zedek Latzer Baratz"
+msgstr " קבוצת הסייבר, הפרטיות וזכויות היוצרים<br>פרל כהן צדק לצר ברץ"
+
+#: templates/base.html:244
+msgid ""
+"121 Menachem Begin Rd.<br>Azrieli Sarona Tower – 53 fl.<br>Tel-Aviv "
+"6701203<br>Israel"
+msgstr "דרך מנחם בגין 121<br>מגדל עזריאלי שרונה – קומה 53<br>תל אביב 6701203"
+
+#: templates/base.html:245
+msgid "Tel. 972-3-3039000"
+msgstr "טל': 03-3039000"
+
+#: templates/base.html:247 templates/base.html:336
+msgid "Contact Us"
+msgstr "צרו קשר"
+
+#: templates/base.html:280
+msgid "Sections"
+msgstr "מדורים"
+
+#: templates/base.html:293
+msgid "Topics"
+msgstr "נושאים"
+
+#: templates/base.html:312
+msgid "Site Updates"
+msgstr "עדכונים מהאתר"
+
+#: templates/base.html:315
+msgid "About"
+msgstr "אודות"
+
+#: templates/base.html:321
+msgid "Practice Areas"
+msgstr ""
+
+#: templates/base.html:324
+msgid "Group Lawyers"
+msgstr ""
+
+#: templates/base.html:327
+msgid "Terms of Use"
+msgstr "תנאי שימוש"
+
+#: templates/base.html:330
+msgid "Privacy Policy"
+msgstr "מדיניות הפרטיות"
+
+#: templates/base.html:333
+msgid "Accessibility Statement"
+msgstr "הצהרת נגישות"
+
+#: templates/base.html:359
+#, python-format
+msgid "New user? <a href=\"%(signup_url)s\">Click here</a> to register"
+msgstr "משתמשים חדשים? להרשמה <a href=\"%(signup_url)s\">לחצו כאן</a>"
+
+#: templates/registration/logged_out.html:4
+#: templates/registration/logged_out.html:12
+msgid "Home"
+msgstr ""
+
+#: templates/registration/logged_out.html:8
+msgid "Thanks for spending some quality time with the Web site today."
+msgstr ""
+
+#: templates/registration/logged_out.html:10
+msgid "Log in again"
+msgstr "כניסה חוזרת"
+
+#~ msgid "Shenkar 5<br>Herzliya 4672505<br>Israel"
+#~ msgstr "שנקר 5<br>הרצליה 4672505"

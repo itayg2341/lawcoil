@@ -1,0 +1,83 @@
+{% extends "base.html" %}{% load i18n %}
+
+{% block title %}
+{{category.name}} - {% trans "Links" %} - {{block.super}}
+{% endblock %}
+
+{% block content%}
+<div class="hide-for-medium grid-all-padded border-bottom">
+  <a href="#" class="gray-link top" aria-haspopup="true" data-toggle="about-popup-menu">
+    {% trans "Links categories" %}
+    <i class="fa fa-chevron-{{LANGUAGE_END}}" aria-hidden="true"></i>
+  </a>
+</div>
+<div class="dropdown-pane" id="about-popup-menu" data-dropdown>
+    <ul class="links-sidebar" data-equalizer-watch>
+      {% for cat in root_categories %}
+      <li{% if  root_category == cat %} class="active"{% endif %}>
+        <a href="{{cat.get_absolute_url}}">{{cat}}</a>
+      </li>
+      {% endfor %}
+    </ul>
+</div>
+<div class="row collapse" data-equalizer data-equalize-on="medium">
+  <div class="large-2 medium-3 columns show-for-medium">
+    <ul class="links-sidebar" data-equalizer-watch>
+      {% for cat in root_categories %}
+      <li{% if  root_category == cat %} class="active"{% endif %}>
+        <a href="{{cat.get_absolute_url}}">{{cat}}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="large-10 medium-9 columns grid-top-padded " data-equalizer-watch>
+    {% if category.ancestors %}
+    <ul class="menu simple menu-inline grid-padded smaller">
+      {% for ancestor in category_ancestors %}
+      <li>
+        <i class="fa fa-chevron-{{LANGUAGE_END}}" aria-hidden="true"></i>
+        <a href="{{ancestor.get_absolute_url}}" class="gray-link">{{ancestor.name}}</a>
+      </li>
+      {% endfor %}
+    </ul>
+    <h1 class="grid-padded content-detail-title alt-red">{{category.name}}</h1>
+    {% endif %}
+    <div class="grid-padded">
+      {% if category.desc %}
+      <div class="grid-bottom-padded">{{ category.desc|safe }}</div>
+      {% endif %}
+      <ul class="no-bullet">
+        {% for link in links %}
+        <li class="grid-bottom-padded">
+          <a href="{{link.url}}">
+            {% if LANGUAGE_CODE == 'he' %}{{ link.hebname }}{% else %}{{ link.engname }}{% endif %}
+          </a>
+          <div>{% if LANGUAGE_CODE == 'he' %}{{ link.hebdesc|safe }}{% else %}{{ link.engdesc|safe }}{% endif %}</div>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+
+    {% for sub_cat in child_categories %}
+    <h5 class="grid-padded border-top links-sub-title">
+      <a href="{{sub_cat.get_absolute_url }}" class="gray-link">{{sub_cat.name}}</a>
+    </h5>
+    {% if not sub_cat.is_leaf_node %}
+    <ul class="no-bullet grid-padded">
+      {% for cat in sub_cat.get_children %}
+      <li>
+        <a href="{{cat.get_absolute_url}}">{{cat.name}}</a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endfor %}
+
+    <div class="border-top bottom-spacer">
+    </div>
+
+  </div>
+</div>
+{% endblock %}

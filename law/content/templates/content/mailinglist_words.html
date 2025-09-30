@@ -1,0 +1,101 @@
+{% load static from staticfiles %}{% load i18n %}
+<html>
+<head
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <style type="text/css">
+    <!--
+    body	{
+      background-color:#ffffff;
+      direction: rtl;
+      font-family: sans-serif;
+      font-size: 13px;
+      line-height:135%;
+      color: #1f1f1f;
+    }
+    h3	{
+      font-size: 20px;
+      color: #336d92;
+    }
+    a:link	{
+      font-style: normal;
+      font-weight: bold;
+      color: #3c7fb2;
+      text-decoration: none;
+    }
+    a:visited	{
+      font-weight: bold;
+      color: #3c7fb2;
+      text-decoration: none;
+    }
+    a:hover	{
+      text-decoration: underline;
+    }
+    div.news_item	{
+      border-top: 1px solid #b9b9b9;
+      padding: 15px;
+      background-color: #ffffff;
+      margin-top: 30px;
+    }
+    div.disclaimer	{
+      border: 1px solid #b9b9b9;
+      margin-top: 5px;
+      padding: 10px;
+      direction: rtl;
+      margin-top: 15px;
+      background-color: #f0f0f0;
+    }
+    div.main	{
+      border: 1px solid #cccccc;
+      padding: 1%;
+      background-color: rgb(255, 255, 255);}
+    li	{
+      list-style: square;
+    }
+    -->
+  </style>
+</head>
+
+<body dir="rtl" lang="he" link="#3c7fb2" style=" background-color:#ffffff; direction: rtl; font-family: sans-serif; font-size: 13px; line-height:135%; color: #1f1f1f;">
+
+<div style="background-color:#ededed; direction: rtl; font-family: sans-serif; font-size: 13px; line-height:135%; color: #1f1f1f;">
+  <div class="main" style=" border: 1px solid #cccccc; padding: 1%; background-color: rgb(255, 255, 255); ">
+
+    <table border="0" cellspacing="0" cellpadding="0" style="width: 100%;">
+      <tr>
+        <td>
+          <h3 style="font-size: 20px; color: #336d92; ">{% trans "Watch words" %}</h3>
+        </td>
+
+        <td align="left" style="text-align: left;">
+          <a href="https://{{site.domain}}">
+            <img src="https://{{site.domain}}{% static 'images/logo_small.png' %}" alt="law.co.il" width="96" height="38" border="0" title="בקר ב- law.co.il">
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <div style="padding-top: 6pt; border-top: 1px dotted #a8a8a8; text-align:left;">{% now "d.m.Y" %}</div>
+          <p>
+            אחת או יותר מהמילים אשר ביקשת לעקוב אחריהן מופיעות ב:<br/>
+            <a href="https://{{ site.domain }}{{ item.get_absolute_url}}" style="font-style: normal; font-weight: bold; color: #3c7fb2; text-decoration: none;">https://{{ site.domain }}{{item.get_absolute_url }}</a><br/>
+            אשר התווסף או עודכן לאחרונה.
+          </p>
+          <p>
+            המילים שנמצאו: <strong>{{ words }}</strong>.
+          </p>
+
+          <div class="disclaimer" style="border: 1px solid #b9b9b9; margin-top: 5px; padding: 10px; direction: rtl; margin-top: 15px; background-color: #f0f0f0;">
+            הודעה זו נשלחת אליך מפני שבקשת לעקוב אחר המילים הנ&quot;ל באתר
+            <a href="https://{{ site.domain }}/" style="font-style: normal; font-weight: bold; color: #3c7fb2; text-decoration: none;">{{ site.domain }}</a>.
+            אם ברצונך לשנות את המילים למעקב, בקר ב<a href="https://{{ site.domain }}/my/settings/" style="font-style: normal; font-weight: bold; color: #3c7fb2; text-decoration: none;">"חשבון שלי"</a> באתר ושנה בקלות ובמהירות את העדפותיך. השימוש בהודעה זו כפוף
+            ל<a href="http://www.{{ site.domain }}/terms/" style="font-style: normal; font-weight: bold; color: #3c7fb2; text-decoration: none;">תנאי השימוש</a> באתר. © רביה ושות&acute;, עורכי דין, {% now "Y" %}.
+            כל הזכויות שמורות. law.co.il<sup>&reg;</sup> הוא סימן מסחר רשום של עו&quot;ד חיים רביה
+          </div>
+        </td>
+      </tr>
+    </table>
+
+  </div>
+</div>
+</body>
+</html>

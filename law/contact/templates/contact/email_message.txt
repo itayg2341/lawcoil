@@ -1,0 +1,9 @@
+{% load i18n %}
+
+{% trans "Name" %}: {{ object.name }}
+{% trans "Email" %}: {{ object.email }}
+{% trans "Phone" %}: {{ object.phone }}
+{% trans "Role" %}: {{ object.role }}
+{% trans "Organization" %}: {{ object.organization }}
+{% trans "Content" %}:
+{{ object.content }}

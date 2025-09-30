@@ -1,0 +1,273 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-14 12:31+0200\n"
+"PO-Revision-Date: 2017-02-14 12:54+0200\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: apps.py:7
+msgid "Users"
+msgstr "משתמשים"
+
+#: filters.py:9
+msgid "Mailing List Subsctiber"
+msgstr "מנוי רשימת דיוור"
+
+#: filters.py:14
+msgid "Yes"
+msgstr "כן"
+
+#: filters.py:15
+msgid "No"
+msgstr "לא"
+
+#: forms.py:43
+msgid "Sign In"
+msgstr ""
+
+#: forms.py:51
+msgid "Forgot Password?"
+msgstr ""
+
+#: forms.py:80
+msgid "Register"
+msgstr ""
+
+#: models.py:20
+msgid "Name of User"
+msgstr "שם מלא"
+
+#: models.py:21
+msgid "Encrypted Password"
+msgstr ""
+
+#: models.py:23
+msgid "Organization"
+msgstr "ארגון"
+
+#: models.py:25
+msgid "Role"
+msgstr "תפקיד"
+
+#: models.py:26
+msgid "Phone"
+msgstr "טלפון"
+
+#: models.py:27
+msgid "Address"
+msgstr "כתובת"
+
+#: models.py:30
+msgid "Avatar"
+msgstr "תמונת פרופיל"
+
+#: models.py:34
+msgid "Watch words"
+msgstr "מילים למעקב"
+
+#: models.py:35
+msgid ""
+"Receive an email when a published article or news item contains a word or "
+"expression. Each word or expression in a separate line, minimum length is 4 "
+"characters."
+msgstr ""
+"ניתן לקבל הודעה בדואר אלקטרוני כאשר מתפרסמים ידיעה או מאמר המכילים מילה או "
+"ביטוי. נא לציין את המילים שברצונך לעקוב אחריהם. כל מילה או ביטוי בשורה משלה, "
+"כאשר האורך המינימלי הוא מילה בת 4 תווים."
+
+#: models.py:40
+msgid "Send newsletters?"
+msgstr "שליחת רשימות דיוור?"
+
+#: models.py:65
+msgid "User"
+msgstr ""
+
+#: models.py:67 templates/users/my_settings.html:176
+msgid "Name"
+msgstr ""
+
+#: models.py:68 templates/users/my_settings.html:177
+msgid "Email"
+msgstr ""
+
+#: models.py:71
+msgid "Share Contact"
+msgstr ""
+
+#: models.py:72
+msgid "Share Contacts"
+msgstr ""
+
+#: models.py:80
+msgid "Group"
+msgstr "קבוצה"
+
+#: models.py:81
+msgid "Groups"
+msgstr "קבוצות"
+
+#: templates/users/_my_top_menu.html:5 templates/users/my_topics.html:3
+#: templates/users/my_topics_index.html:3
+#: templates/users/my_topics_index.html:8
+msgid "My Topics"
+msgstr "הנושאים שלי"
+
+#: templates/users/_my_top_menu.html:6
+msgid "My Notes"
+msgstr "ההערות שלי"
+
+#: templates/users/_my_top_menu.html:7 templates/users/my_content.html:3
+msgid "My Content"
+msgstr "התכנים שלי"
+
+#: templates/users/_my_top_menu.html:8
+msgid "Setting"
+msgstr "הגדרות"
+
+#: templates/users/my_content.html:9 templates/users/my_topics.html:9
+msgid "Filter by"
+msgstr "סנן לפי"
+
+#: templates/users/my_content.html:12 templates/users/my_topics.html:12
+msgid "News"
+msgstr "חדשות"
+
+#: templates/users/my_content.html:16 templates/users/my_topics.html:16
+msgid "Articles"
+msgstr "מאמרים"
+
+#: templates/users/my_content.html:20 templates/users/my_topics.html:20
+msgid "Verdicts"
+msgstr "פסיקה"
+
+#: templates/users/my_content.html:38
+msgid "More of My Content"
+msgstr "עוד נושאים שלי"
+
+#: templates/users/my_content.html:47 templates/users/my_topics.html:48
+msgid "No content found"
+msgstr "לא נמצאו תכנים"
+
+#: templates/users/my_settings.html:3 templates/users/my_settings.html:8
+msgid "My Settings"
+msgstr "ההגדרות שלי"
+
+#: templates/users/my_settings.html:15
+msgid "Please fix the errors below."
+msgstr "נא לתקן את השגיאות מתחת."
+
+#: templates/users/my_settings.html:23
+msgid "Your settings were saved"
+msgstr "ההגדרות שלך נשמרו"
+
+#: templates/users/my_settings.html:24
+msgid "Close"
+msgstr ""
+
+#: templates/users/my_settings.html:31
+msgid "Personal Details"
+msgstr "פרטים אישיים"
+
+#: templates/users/my_settings.html:60
+msgid "Click here to change password"
+msgstr "לחצו כאן לשינוי סיסמה"
+
+#: templates/users/my_settings.html:115
+msgid "Select Photo"
+msgstr "בחרו תמונה"
+
+#: templates/users/my_settings.html:125
+msgid "Topics Followed"
+msgstr "מעקב אחר נושאים"
+
+#: templates/users/my_settings.html:126
+msgid "Follow the content subjects that interest you"
+msgstr "עקבו אחר תכנים בנושאים המעניינים אתכם"
+
+#: templates/users/my_settings.html:136
+msgid "Updates"
+msgstr "עדכון שוטף"
+
+#: templates/users/my_settings.html:137
+msgid "Stay up to date with news and new content"
+msgstr "השארו מעודכנים בחדשות והתכנים החדשים באתר"
+
+#: templates/users/my_settings.html:142
+msgid "Mailing Lists"
+msgstr ""
+
+#: templates/users/my_settings.html:169
+msgid "My Group"
+msgstr "הקבוצה שלי"
+
+#: templates/users/my_settings.html:170
+msgid "Define group of contacts you would like share site's content with"
+msgstr "הגדירו את קבוצת אנשי הקשר איתם תרצו לשתף בתכני האתר"
+
+#: templates/users/my_settings.html:197
+msgid "Save Settings"
+msgstr "שמור הגדרות"
+
+#: templates/users/my_settings.html:207
+msgid "Add Contact"
+msgstr "הוספת איש קשר"
+
+#: templates/users/my_settings.html:208
+msgid "Remove"
+msgstr "הסרה"
+
+#: templates/users/my_topics.html:39
+msgid "More of My Topcs"
+msgstr "עוד נושאים שלי"
+
+#: templates/users/my_topics_index.html:15
+#: templates/users/my_topics_index.html:16
+#, python-format
+msgid "Stop Following %(cat_name)s"
+msgstr "הפסקת מעקב אחר %(cat_name)s"
+
+#: templates/users/my_topics_index.html:26
+#, python-format
+msgid "%(followers_count)s Followers"
+msgstr "%(followers_count)s עוקבים"
+
+#: templates/users/my_topics_index.html:32
+msgid "No topics followed."
+msgstr "אין נושאים במעקב."
+
+#: templates/users/my_topics_index.html:35
+#, python-format
+msgid ""
+"You can select topics to following at <a href=\"%(settings_url)s\">your "
+"setting page</a>."
+msgstr ""
+"ניתן לבחור נושאים למעקב ב<a href=\"%(settings_url)s\">עמוד ההגדרות שלך</a>."
+
+#: views.py:140
+msgid "Item removed from &quot;My Content&quot;"
+msgstr "הפריט הוסר מה&quot;תכנים שלי&quot;"
+
+#: views.py:141
+msgid "Save to &quot;My Content&quot;"
+msgstr "שמור ב&quot;תכנים שלי&quot;"
+
+#: views.py:145
+msgid "Item saved to &quot;My Content&quot;"
+msgstr "הפריט נשמר ב&quot;תכנים שלי&quot;"
+
+#: views.py:146
+msgid "Remove from &quot;My Content&quot;"
+msgstr "הסרת פריט מה&quot;תכנים שלי&quot;"

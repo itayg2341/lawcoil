@@ -1,0 +1,213 @@
+{%  extends "base.html" %}{% load i18n thumbnail %}{% load static from staticfiles %}
+
+{% block title %}{% trans "My Settings" %} - {{ block.super }}{% endblock %}
+
+{% block content %}
+{% include "users/_my_top_menu.html" %}
+<div class="border-bottom light-gray-bg hide-for-large">
+  <h3 class="grid-padded grid-top-padded larger-for-small">{% trans "My Settings" %}</h3>
+</div>
+<form action="{% url "my:settings" %}" method="post" id="my-settings-form" enctype="multipart/form-data">
+  {% csrf_token %}
+  {% if form.errors or share_contacts.errors %}
+    <div class="grid-all-padded border-bottom">
+      <div class="alert callout">
+        {%  trans "Please fix the errors below." %}
+        {{ form.non_field_errors }}
+      </div>
+    </div>
+  {% endif %}
+  {% if saved %}
+    <div class="grid-all-padded border-bottom">
+      <div class="success callout text-center" data-closable>
+        {% trans "Your settings were saved" %}
+        <button class="close-button" aria-label="{% trans 'Close' %}" type="button" data-close>
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+  {% endif %}
+  <div class="grid-padded grid-top-padded border-bottom">
+    <h2 class="red">{% trans "Personal Details" %}</h2>
+  </div>
+  <div class="row">
+    <div class="medium-6 columns">
+      <div class="grid-all-double-padded">
+        <div class="row">
+            <div class="large-76 medium-12  columns">
+              <label>
+                {{ form.name.label }}
+                {{ form.name }}
+              </label>
+            </div>
+            <div class="large-6 medium-12 columns {% if form.username.errors %}with-error{% endif %}">
+              <label>
+                {{ form.username.label }} <span class="red">*</span>
+                {{ form.username }}
+                {{ form.username.errors }}
+              </label>
+            </div>
+            <div class="medium-12 columns {% if form.email.errors %}with-error{% endif %}">
+              <label>
+                {{ form.email.label }}
+                {{ form.email }}
+                {{ form.email.errors }}
+              </label>
+            </div>
+            <div class="medium-12 columns grid-top-double-margin">
+              <a href="{% url 'account_change_password' %}">
+                <i class="fa fa-key">
+                {% trans "Click here to change password" %}</i>
+              </a>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div class="medium-6 columns border-start">
+      <div class="grid-all-double-padded">
+        <div class="row">
+          <div class="medium-12 columns">
+            <label>
+              {{ form.organization.label }}
+              {{ form.organization }}
+            </label>
+          </div>
+          <div class="large-6 medium-12 columns">
+            <label>
+              {{ form.role.label }}
+              {{ form.role }}
+            </label>
+          </div>
+          <div class="large-6 medium-12 columns">
+            <label>
+              {{ form.phone.label }}
+              {{ form.phone }}
+            </label>
+          </div>
+          <div class="medium-12 columns">
+            <label>
+              {{ form.address.label }}
+              {{ form.address }}
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-all-double-padded border-top{% if form.avatar.errors %} with-error{% endif %}">
+    <p>
+      <label for="id_avatar" class="inline-block">{{ form.avatar.label }}</label>
+    </p>
+    <div class="clearfix">
+      <div class="float-start">
+        {% if object.avatar %}
+          <img src="{% thumbnail object.avatar 140x140 %}" alt="Default avatar" class="float-start my-settings-avatar">
+        {% else %}
+          <img src="{% static "images/user.png" %}" alt="Default avatar" class="float-start my-settings-avatar">
+        {% endif %}
+      </div>
+      <div class="float-start filefield-outer">
+        <p class="my-settings-file-description">
+          {% if object.avatar %}{{ object.avatar.url }}{% endif %}
+        </p>
+        <div class="filefield-overlay">
+          <button class="alt-blue button">{% trans "Select Photo" %}</button>
+          {{ form.avatar }}
+        </div>
+      </div>
+    </div>
+    {{ form.avatar.errors }}
+  </div>
+
+  <div class="grid-all-padded border-top">
+    <h2 class="red">
+      {% trans "Topics Followed" %}
+      <small class="title-sub">{% trans "Follow the content subjects that interest you" %}</small>
+    </h2>
+  </div>
+
+  <div class="grid-all-double-padded border-top" id="my-settings-categories">
+    {{ form.categories }}
+  </div>
+
+  <div class="grid-all-padded border-top">
+    <h2 class="red">
+      {% trans "Updates" %}
+      <small class="title-sub">{% trans "Stay up to date with news and new content" %}</small>
+    </h2>
+  </div>
+
+  <div class="grid-all-double-padded border-top" id="my-settings-mailing-lists">
+    <h4>{% trans "Mailing Lists" %}</h4>
+    {% for pk, choice in form.mailing_lists.field.widget.choices %}
+      <div class="row">
+        <div class="medium-4 columns">
+          <label for="id_mailing_lists_{{ forloop.counter0 }}">
+            <input type="checkbox" id="id_mailing_lists_{{ forloop.counter0 }}"
+              name="mailing_lists" value="{{ pk }}"
+              {% if pk in selected_mailing_lists %}checked{% endif %}>
+            {{ choice }}
+          </label>
+        </div>
+        <div class="medium-8 columns">
+          <p>
+             {% for ml in all_mailing_lists %}{% if ml.pk == pk %}{{ ml.description|striptags }}{% endif %}{% endfor %}
+          </p>
+        </div>
+      </div>
+    {% endfor %}
+    <div class="my-settings-updates row grid-top-double-margin{% if form.watch_words.errors %} with-error{% endif %}">
+      <div class="medium-12 columns"><h4>{{ form.watch_words.label_tag }}</h4></div>
+      <div class="medium-12 columns"><small>{{ form.watch_words.help_text }}</small></div>
+      <div class="medium-12 columns">{{ form.watch_words }}{{ form.watch_words.errors }}</div>
+    </div>
+  </div>
+
+  <div class="grid-all-padded border-top">
+    <h2 class="red">
+      {% trans "My Group" %}
+      <small class="title-sub">{% trans "Define group of contacts you would like share site's content with" %}</small>
+    </h2>
+  </div>
+
+  <div class="grid-all-double-padded border-top my-settings-contacts">
+    <div class="row">
+      <p class="medium-3 columns text-center">{% trans "Name" %}</p>
+      <p class="medium-3 columns text-center end">{% trans "Email" %}</p>
+    </div>
+    {% for frmset in share_contacts %}
+      <div class="row contact-row">
+        <div class="medium-3 columns{% if frmset.name.errors %} with-error{% endif %}">
+          {{ frmset.id }}
+          {% if frmset.instance.pk %}{{ frmset.DELETE }}{% endif %}
+          {{ frmset.name }}
+          {{ frmset.name.errors }}
+        </div>
+        <div class="medium-3 columns end{% if frmset.email.errors %} with-error{% endif %}">
+          {{ frmset.email }}
+          {{ frmset.email.errors }}
+        </div>
+      </div>
+    {% endfor %}
+    {{ share_contacts.management_form }}
+  </div>
+
+  <div class="grid-all-padded light-gray-bg border-top">
+    <button type="submit" class="dark-blue button">{% trans "Save Settings" %}</button>
+  </div>
+</form>
+{% endblock %}
+
+{% block javascript %}
+  {{ block.super }}
+  <script>
+    $('.my-settings-contacts .contact-row').formset({
+      prefix: '{{ share_contacts.prefix }}',
+      addText: '{% trans "Add Contact" %}',
+      deleteText: '{% trans "Remove" %}',
+      addCssClass: 'alt-blue button',
+      deleteCssClass: 'alt-blue button',
+    });
+  </script>
+{% endblock %}

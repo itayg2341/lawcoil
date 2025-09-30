@@ -1,0 +1,74 @@
+{% extends "base.html" %}{% load i18n content_tags photos staticfiles %}
+
+{% block title %}{{category.name}} - {% trans 'Topics' %} - {{block.super}}{% endblock %}
+{% block body_class %}listing-with-images{% endblock body_class %}
+
+{% block content %}
+  <div class="row collapse" aria-hidden="true">
+    <div class="small-12 columns border-bottom">&nbsp;</div>
+  </div>
+  <div class="row collapse">
+    <div class="small-12 columns border-bottom content-listing-title grid-padded">
+      <h4 class="grid-padded">
+        <a href="#" class="gray-link top" data-toggle="all-categories-dropdown"
+           data-tooltip aria-has-popup="true" title="{% trans "Click for topic selection" %}">
+            {% trans "Topics" %}
+          <i class="fa fa-chevron-{{LANGUAGE_END}}" aria-hidden="true"></i>
+        </a>
+        <a href="">{{category.name}}</a>
+      </h4>
+      <nav id="all-categories-dropdown" class="dropdown-pane"
+        data-dropdown data-auto-focus="true" data-close-on-click="true">
+        {% get_cached_generic_categories as cached_generic_categories %}
+        <ul class="grid-top-bottom-padded row">
+          {% for cat in cached_generic_categories %}
+          <li class="medium-4 large-3 small-12 columns {% if forloop.last %}end{% endif %}">
+            <a class="white-link" href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <div class="row collapse" id="main-equalizer" data-equalizer data-equalize-on="medium">
+    {% for col in items_cols %}
+    <div class="large-3 medium-4 columns {% if not forloop.last %}border-end-medium-up {% endif %}listing-col topics-col items-col-{{forloop.counter}}{% if forloop.counter > 1 %} show-for-medium{% endif %}{% if forloop.counter == 4 %} show-for-large{% endif %}" data-equalizer-watch>
+      {% if forloop.counter == 2 %}
+      <div aria-hidden="true" class="tall-splash-image first show-for-medium-only"
+           data-interchange="[ {% static 'images/transparent.gif' %}, small], [{% get_random_photo 'narrow' %}, medium], [ {% static 'images/transparent.gif' %}, large]"></div>
+      {% endif %}
+      {% if forloop.counter == 3 %}
+      <div aria-hidden="true" class="tall-splash-image first show-for-large"
+           data-interchange="[ {% static 'images/transparent.gif' %}, small], [{% get_random_photo 'narrow' %}, large]"></div>
+      {% endif %}
+      {% for item in col %}
+      {% listing_item item %}
+      {% endfor %}
+      {% if forloop.counter == 1 %}
+      <div aria-hidden="true" class="tall-splash-image second show-for-medium-only"
+           data-interchange="[ {% static 'images/transparent.gif' %}, small], [{% get_random_photo 'narrow' %}, medium], [ {% static 'images/transparent.gif' %}, large]"></div>
+      {% endif %}
+      {% if forloop.counter == 4 and items_paginator.has_next%}
+      <div class="grid-top-bottom-padded text-center more-button-container">
+        <a href="?page={{items_paginator.next_page_number}}" class="dark-blue button"
+           data-topics-url="{% url 'content_ajax:ajax_items'%}"
+           data-topics-page="{{items_paginator.next_page_number}}"
+           data-topics-type="{{model_name}}"
+           {% if category %}data-topics-slug="{{category.slug}}"{% endif %}
+          >
+          {% blocktrans with category_name=category.name %}More from {{category_name}}{% endblocktrans %}
+        </a>
+      </div>
+      {% endif %}
+    </div>
+    {% empty %}
+    <div class="large-margined row collapse">
+      <div class="medium-4 medium-offset-4 columns">
+        <div class="callout warning text-center">
+          {% blocktrans with category_name=category.name %}No {{category_name}} items found{% endblocktrans %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+{% endblock %}

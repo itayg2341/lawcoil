@@ -1,0 +1,29 @@
+{% extends "base.html" %}{% load about_tags i18n %}
+
+{% block title %}{{object.title}} - {{block.super}}{% endblock title %}
+
+{% block content %}
+  <div class="hide-for-medium grid-all-padded border-bottom">
+    <a href="#" class="gray-link top" aria-haspopup="true" data-toggle="about-popup-menu">
+      {% trans "About" %}
+      <i class="fa fa-chevron-{{LANGUAGE_END}}" aria-hidden="true"></i>
+    </a>
+  </div>
+  <div class="dropdown-pane" id="about-popup-menu" data-dropdown>
+      {% render_about_sidebar %}
+  </div>
+
+  <div class="row collapse" data-equalizer data-equalize-on="medium">
+    <div class="large-2 medium-3 columns show-for-medium" data-equalizer-watch>
+      {% render_about_sidebar %}
+    </div>
+    <article class="large-8 large-offset-1 medium-7 medium-offset-1 columns end" data-equalizer-watch>
+      <header class="grid-top-bottom-padded grid-padded-small-only">
+        <h1 class="primary-blue">{{object.title}}</h1>
+      </header>
+      <div class="grid-padded-small-only grid-bottom-padded">
+        {{object.content|safe}}
+      </div>
+    </article>
+  </div>
+{% endblock content %}

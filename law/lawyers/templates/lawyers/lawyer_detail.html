@@ -1,0 +1,53 @@
+{% extends "base.html" %}{% load i18n about_tags %}
+
+{% block title %}{{object.name}} - {% trans "Group Lawyers" %} - {{block.super}}{% endblock title %}
+
+{% block content %}
+  <div aria-hidden="true">
+    <img src="{{ object.large_photo.url }}" alt="{{ object.name }}">
+  </div>
+  <div class="hide-for-medium grid-all-padded border-bottom">
+    <a href="#" class="gray-link top" aria-haspopup="true" data-toggle="about-popup-menu">
+      {% trans "Group Lawyers" %}
+      <i class="fa fa-chevron-{{LANGUAGE_END}}" aria-hidden="true"></i>
+    </a>
+  </div>
+  <div class="dropdown-pane" id="about-popup-menu" data-dropdown>
+      {% render_about_sidebar expanded='lawyers' %}
+  </div>
+  <div class="row collapse" data-equalizer data-equalize-on="medium">
+    <div class="large-2 medium-3 columns show-for-medium" data-equalizer-watch>
+      {% render_about_sidebar expanded='lawyers' %}
+    </div>
+    <div class="large-10 medium-9 columns" data-equalizer-watch>
+      <article class="row collapse grid-bottom-double-margin">
+        <div class="medium-10 medium-offset-1 columns end">
+          <header class="grid-top-bottom-padded grid-padded-small-only">
+            <h1 class="content-detail-title">{{object.name}}</h1>
+            <div class="clearfix">
+              <h4 class="float-start-large larger-for-small">{{ object.title }}</h4>
+              <div class="float-end-large">
+                {% if object.phone %}
+                <a class="hollow button" href="tel:{{ object.phone }}" rel="nofollow">
+                  <span class="show-for-sr">{% trans "Phone" %}</span>
+                  {{ object.phone }}
+                  <i aria-hidden="true" class="fa fa-phone"></i>
+                </a>
+                {% endif %}
+                {% if object.email %}
+                <a class="hollow button no-border" href="mailto:{{ object.email }}" rel="nofollow">
+                  <span class="show-for-sr">{% trans "Email" %}</span>
+                  <i aria-hidden="true" class="fa fa-envelope-o"></i>
+                </a>
+                {% endif %}
+              </div>
+            </div>
+          </header>
+          <div class="grid-padded-small-only">
+            {{object.description|safe}}
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+{% endblock content %}

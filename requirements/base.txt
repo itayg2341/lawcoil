@@ -1,0 +1,69 @@
+cryptography>=42.0.0
+django-mailer>=2.2.1
+	# ...existing code...
+python-bidi>=0.4.2
+django>=4.2,<5.0
+
+# Configuration
+# Use latest compatible version
+django-environ>=0.10.0
+# django-secure is deprecated and not needed in Django 4+
+
+
+
+# Forms
+django-braces>=1.15.0
+django-crispy-forms>=2.0
+crispy-bootstrap4>=2022.1
+# django-floppyforms is unmaintained, consider removing or replacing
+crispy-forms-foundation>=1.0.0
+
+# Models
+django-model-utils>=4.3.1
+
+# Images
+Pillow>=10.0.0
+
+# For user registration, either via email or social
+# Well-built with regular release cycles!
+django-allauth>=0.59.0
+
+
+# Python-PostgreSQL Database Adapter
+psycopg2-binary>=2.9.9
+
+# Unicode slugification
+python-slugify>=8.0.1
+django-autoslug>=1.9.9
+
+# Time zones support
+# pytz is not needed in Django 4.2+ (uses zoneinfo)
+
+# Redis support
+django-redis>=5.4.0
+redis>=5.0.0
+
+# Tree support
+django-mptt>=0.14.0
+
+django-extensions>=3.2.3
+
+# Your custom requirements go here
+# Remove or update the following as needed for compatibility:
+django-colorfield>=0.10.0
+# django-gm2m: check for modern alternatives or remove if unused
+# simple-crypt: consider using cryptography
+django-ckeditor>=6.7.0
+beautifulsoup4>=4.12.3
+# django-bidi-utils: check for compatibility or remove
+# solid-i18n: remove, not compatible with Django 4+
+easy-thumbnails>=2.8.5
+django-digg-paginator>=0.2.0
+django-embed-video>=1.4.7
+# django-filebrowser-no-grappelli: check for Django 4+ support
+# django-modeladmin-reorder: check for Django 4+ support
+django-analytical>=3.2.0,<4.0.0
+django-cleanup>=8.0.0
+# django-unused-media: check for Django 4+ support
+# django-capture-tag: check for Django 4+ support
+# django-mailer: check for Django 4+ support

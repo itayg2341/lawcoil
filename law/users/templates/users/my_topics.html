@@ -1,0 +1,54 @@
+{% extends "base.html" %}{%  load i18n content_tags %}
+
+{% block title %} {{category.name}} - {%  trans 'My Topics' %} - {{ block.super }}{% endblock %}
+
+{% block content %}
+{% include "users/_my_top_menu.html" %}
+  <div class="row collapse">
+    <div class="small-12 columns border-bottom filter-by">
+      {% trans "Filter by" %}
+      <a href="{% url 'my:topics_by_type' content_type='news' cat_slug=category.slug %}" class="button category-button{% if model_type == 'news' %} active{% endif %}">
+        <i class="fa fa-bullhorn {% if LANGUAGE_DIRECTION == 'rtl' %} fa-flip-horizontal{% endif %}"></i>
+        {% trans "News" %}
+      </a>
+      <a href="{% url 'my:topics_by_type' content_type='articles' cat_slug=category.slug %}" class="button category-button{% if model_type == 'articles' %} active{% endif %}">
+        <i class="fa fa-file-text-o"></i>
+        {% trans "Articles" %}
+      </a>
+      <a href="{% url 'my:topics_by_type' content_type='computer-law' cat_slug=category.slug %}" class="button category-button{% if model_type == 'computer-law' %} active{% endif %}">
+        <i class="fa fa-gavel {% if LANGUAGE_DIRECTION == 'ltr' %} fa-flip-horizontal{% endif %}"></i>
+        {% trans "Verdicts" %}
+      </a>
+    </div>
+  </div>
+
+  <div class="row collapse" id="main-equalizer" data-equalizer data-equalize-on="medium">
+    {% for col in items_cols %}
+      <div class="medium-3 columns {% if not forloop.last %}border-end {% endif %}listing-col topics-col items-col-{{forloop.counter}}" data-equalizer-watch>
+        {% for item in col %}
+          {% listing_item item %}
+        {% endfor %}
+        {% if forloop.counter == 4 and items_paginator.has_next %}
+          <div class="grid-top-bottom-padded text-center">
+            <a href="?page={{items_paginator.next_page_number}}" class="dark-blue button"
+               data-topics-url="{% url 'content_ajax:ajax_items'%}"
+               data-topics-page="{{items_paginator.next_page_number}}"
+               data-topics-slug="{{category.slug}}"
+               {% if model_type %}data-topics-type="{{model_type}}"{% endif %}
+            >
+              {% trans "More of My Topcs" %}
+            </a>
+          </div>
+        {% endif %}
+      </div>
+    {% empty %}
+      <div class="large-margined row collapse">
+        <div class="medium-4 medium-offset-4 columns">
+          <div class="callout warning text-center">
+            {% blocktrans %}No content found{% endblocktrans %}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

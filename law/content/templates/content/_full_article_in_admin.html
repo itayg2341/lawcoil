@@ -1,0 +1,21 @@
+{% load i18n %}
+<article style="max-width: 40vw">
+  <p style="direction: {{direction}}"><strong><a href="{{admin_change_url}}">{{object.title}}</a></strong></p>
+  <section style="padding-{{lang_start}}: 10px; direction: {{direction}}">
+  {% if object.short_desc and object.short_desc|striptags and object.short_desc != '&nbsp;' %}
+    {{object.short_desc|safe}}
+  {% else %}
+    {{object.content|truncatewords_html:60|safe}}
+  {% endif %}
+  </section>
+  <footer style="margin-top: 1em;">
+    <hr>
+    <p>
+      {% trans "Categories" %}:
+      {{ object.categories.all|join:", " }}
+      <br>
+      {% trans "Contributors" %}:
+      {{ object.contributors.all|join:", " }}
+    </p>
+  </footer>
+</article>

@@ -1,0 +1,94 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-01-19 11:20+0200\n"
+"PO-Revision-Date: 2017-01-19 11:21+0200\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: apps.py:7
+msgid "Site Feedback"
+msgstr "פניות מהאתר"
+
+#: forms.py:14
+msgid "What would you like to write to us?"
+msgstr "מה תרצו לכתוב לנו?"
+
+#: models.py:7 templates/contact/email_message.html:9
+#: templates/contact/email_message.txt:3
+msgid "Name"
+msgstr "שם"
+
+#: models.py:8 templates/contact/email_message.html:13
+#: templates/contact/email_message.txt:4
+msgid "Email"
+msgstr "דואר אלקטרוני"
+
+#: models.py:9 templates/contact/email_message.html:17
+#: templates/contact/email_message.txt:5
+msgid "Phone"
+msgstr "טלפון"
+
+#: models.py:10 templates/contact/email_message.html:21
+#: templates/contact/email_message.txt:6
+msgid "Role"
+msgstr "תפקיד"
+
+#: models.py:11 templates/contact/email_message.html:25
+#: templates/contact/email_message.txt:7
+msgid "Organization"
+msgstr "ארגון"
+
+#: models.py:13 templates/contact/email_message.html:29
+#: templates/contact/email_message.txt:8
+msgid "Content"
+msgstr "תוכן"
+
+#: models.py:14
+msgid "Received At"
+msgstr "התקבלה ב"
+
+#: models.py:19
+msgid "Feedback Message"
+msgstr "הודעת משוב"
+
+#: models.py:20
+msgid "Feedback Messages"
+msgstr "הודעות משוב"
+
+#: templates/contact/feedback_form.html:3
+#: templates/contact/feedback_form.html:8
+#: templates/contact/feedback_success.html:9
+msgid "Contact Us"
+msgstr "צרו קשר"
+
+#: templates/contact/feedback_form.html:14
+msgid "Please fix the errors below."
+msgstr "נא לתקן את השגיאות מתחת."
+
+#: templates/contact/feedback_form.html:47
+msgid "Send Message"
+msgstr "שלחו הודעה"
+
+#: templates/contact/feedback_success.html:3
+msgid "Message sent"
+msgstr "ההודעה נשלחה"
+
+#: templates/contact/feedback_success.html:13
+msgid "Sent the message. Thank you for contacting us."
+msgstr "ההודעה נשלחה. תודה על הזמן שהקדשתם ליצירת הקשר."
+
+#: templates/contact/feedback_success.html:14
+msgid "We will check the message and reply in case of need."
+msgstr "אנו נבדוק את המשוב ונענה במקרה הצורך."

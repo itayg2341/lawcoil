@@ -1,0 +1,63 @@
+{% extends "base.html" %}{% load i18n staticfiles thumbnail about_tags %}
+
+{% block title %}{{object.title}} - {% trans "Practice Areas" %} - {{block.super}}{% endblock title %}
+
+{% block content %}
+  <img src="{% static 'images/practice-areas.jpg' %}" alt="{% trans "Practice Areas" %}" class="block-image">
+  <div class="hide-for-medium grid-all-padded border-bottom">
+    <a href="#" class="gray-link top" aria-haspopup="true" data-toggle="about-popup-menu">
+      {% trans "Practice Areas" %}
+      <i class="fa fa-chevron-{{LANGUAGE_END}}" aria-hidden="true"></i>
+    </a>
+  </div>
+  <div class="dropdown-pane" id="about-popup-menu" data-dropdown>
+      {% render_about_sidebar expanded='practices' %}
+  </div>
+  <article class="border-bottom">
+    <header class="border-bottom-medium-up grid-top-padded">
+      <div class="row collapse">
+        <div class="large-8 large-offset-3 medium-7 medium-offset-4 columns">
+          <h1 class="primary-blue grid-padded-small-only">{{object.title}}</h1>
+        </div>
+      </div>
+    </header>
+    <div class="row collapse" id="main-equalizer" data-equalizer data-equalize-on="medium">
+      <div class="large-2 medium-3 columns show-for-medium" data-equalizer-watch>
+        {% render_about_sidebar expanded='practices' %}
+      </div>
+      <div class="large-8 large-offset-1 medium-7 medium-offset-1 columns end grid-top-bottom-padded" data-equalizer-watch>
+        <div class="grid-padded-small-only">
+          {{object.content|safe}}
+        </div>
+      </div>
+    </div>
+  </article>
+  <div class="border-bottom grid-top-padded grid-start-padded">
+    <h3>{% blocktrans %}Group Lawyers{% endblocktrans %}</h3>
+  </div>
+  <nav class="row collapse grid-top-double-margin">
+    {% for lawyer in lawyers %}
+      <div class="text-center medium-3 columns{% if forloop.last %} end{% endif %} grid-bottom-double-margin">
+        <a href="{{ lawyer.get_absolute_url }}">
+          <img class="lawyer-round-photo" src="{% thumbnail lawyer.profile_photo 200x200 crop=True %}" alt="{{ lawyer.name }}">
+        </a>
+        <p class="grid-top-padded">
+          <a href="{{ lawyer.get_absolute_url }}" class="gray-link">
+            <strong>{% trans "Adv." %} {{ lawyer }}</strong>
+          </a>
+        </p>
+        <span class="inline-block text-end lawyer-contacts">
+          <a href="tel:{{ lawyer.phone }}">
+            <span class="show-for-sr">{% trans "Phone" %}</span>
+            {{ lawyer.phone }}
+            <i class="fa fa-phone icon-with-circle"></i>
+          </a><br>
+          <a href="mailto:{{ lawyer.email }}">
+            {% trans "Email" %}
+            <i class="fa fa-envelope-o icon-with-circle"></i>
+          </a>
+        </span>
+      </div>
+    {% endfor %}
+  </nav>
+{% endblock content %}

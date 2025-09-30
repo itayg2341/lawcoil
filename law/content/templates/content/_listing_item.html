@@ -1,0 +1,30 @@
+{% load i18n %}
+<article class="listing-item grid-top-bottom-padded border-bottom{% if compact %} compact{% endif %}" data-date="{{ item.created_at|date:"c" }}">
+  {% if LANGUAGE_CODE == 'he' %}
+  {% include "content/_category_tag.html" with category=category only %}
+  {% endif %}
+  <section class="grid-all-padded">
+    {% if not compact %}
+    <time datetime="{{item.created_at|date:"c"}}" class="listing-time">
+      {{item.created_at|date:"DATE_FORMAT"}}
+    </time>
+    {% endif %}
+    <h{{heading_level}} class="listing-item-title"><a href="{{item.get_absolute_url}}">{{item.title}}</a></h{{heading_level}}>
+    <div>
+      {{item.content|safe|truncatewords_html:words}}
+    </div>
+    <footer class="reading-time">
+      {% if not compact %}
+      <div class="float-start"><a href="{{ item.get_absolute_url }}">{% trans "Read More" %}</a></div>
+      {% endif %}
+      <div{% if not compact %} class="float-end"{% endif %}>
+        <strong>{% trans "Reading time" %}:</strong>
+        {% if not item.reading_time %}
+        {% trans "Less than a minute" %}
+        {% else %}
+        {% blocktrans count minutes=item.reading_time %}1 Minute{% plural %}{{minutes}} minutes{% endblocktrans %}
+        {% endif %}
+      </div>
+    </footer>
+  </section>
+</article>

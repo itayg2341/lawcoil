@@ -1,0 +1,406 @@
+{% load static i18n content_tags links crispy_forms_tags user_tags thumbnail core_tags %}<!DOCTYPE html>
+<html lang="{{LANGUAGE_CODE}}" dir="{{LANGUAGE_DIRECTION}}" class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>{% block title %}law.co.il{% endblock title %}{% if is_index %} - {% trans "Copyright, Privacy, Open Source, Information Technology, Internet Law, Israeli Law" %}{% endif %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="title" content="{{ meta_title }}">
+    <meta name="google-site-verification" content="HV6lHW_UnzFZtEPaILE3Rv0FCJv5d1zWtQ3lShOdgps">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico'%}?v=1" />
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    {% block css %}
+    <!-- Your stuff: Third-party css libraries go here -->
+    {% if LANGUAGE_CODE != 'he' %}
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
+    {% endif %}
+    <!-- This file store project specific CSS -->
+    <link href="{% static 'css/project.css'|add_direction:'rtl_only' %}?v=9" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/print.css'|add_direction:'rtl_only' %}" media="print">
+    {% endblock %}
+
+    {% block extra_head %}
+    {% for feed in feeds %}
+    <link rel="alternate" type="application/rss+xml" href="{{ feed.url }}" title="{{ feed.title }}">
+    {% endfor %}
+    {% endblock %}
+
+  </head>
+
+  <body class="{{user.is_authenticated|yesno:"authenticated,annon"}} {% block body_class %}{% endblock %}">
+    <header class="main-header">
+        <h1 class="logo"><a href="/{% if LANGUAGE_CODE != 'he' %}{{ LANGUAGE_CODE }}/{% endif %}"><img src="{% static 'images/logo.png' %}" alt="law.co.il" /></a></h1>
+        <h2 class="slogan show-for-medium">{% trans 'Legal Portal for Internet, Cyber and Information Technologies' %}</h2>
+        <div class="row collapse main-header-top-nav show-for-large">
+          <div class="medium-6 columns text-{{LANGUAGE_START}} header-lang-nav">
+            <a href="#" class="gray-link" id="toggle-nav">
+              <i class="fa fa-bars" aria-label="{% trans "Navigation" %}"></i>
+              <span class="show-for-large">{% trans "Navigation" %}</span>
+            </a>
+            <span class="language-select">
+              {% if LANGUAGE_CODE == 'he' %}
+              {% language 'en' %}<a href="{% url 'home' %}">EN</a>{% endlanguage %}
+              {% else %}
+              {% language 'he' %}<a href="{% url 'home' %}">HE</a>{% endlanguage %}
+              {% endif %}
+            </span>
+          </div>
+          <div class="medium-6 columns show-for-large text-{{LANGUAGE_END}}">
+
+            {% if user.is_authenticated %}
+            <a class="header-logged-in{% if not user.avatar %} no-avatar{% endif %}" href="#" aria-haspopup="trye">
+              {% trans "Hello" %}{{ LANGUAGE_MARKER }} {{user}}
+              {% if user.avatar %}
+                <span class="header-logged-in-avatar"><img src="{% thumbnail user.avatar 37x37 %}" alt="{% trans "My Avatar" %}"></span>
+              {% endif %}
+            </a>
+            {% else %}
+            <span class="header-login">
+              <a href="{% url 'account_login' %}" class="gray-link login-link">{% trans "Log in" %}</a>
+              <a href="{% url 'account_signup' %}">{% trans "Register" %}</a>
+            </span>
+            {% endif %}
+
+            <span class="header-social-links">
+              {% include "_social_buttons.html" %}
+            </span>
+          </div>
+        </div>
+
+        <div class="alt-login hide-for-large">
+            {% if user.is_authenticated %}
+              <a href="{% url 'account_logout' %}" class="gray-link">{% trans "Log out" %}</a>
+            {% else %}
+              <a href="{% url 'account_login' %}" class="gray-link login-link">{% trans "Log in" %}</a>
+            {% endif %}
+        </div>
+
+        <div class="alt-lang-nav hide-for-large">
+          <a href="#" class="gray-link" id="alt-toggle-nav">
+            <i class="fa fa-bars" aria-label="{% trans "Navigation" %}"></i>
+          </a>
+          <span class="language-select">
+            {% if LANGUAGE_CODE == 'he' %}
+            {% language 'en' %}<a href="{% url 'home' %}">EN</a>{% endlanguage %}
+            {% else %}
+            {% language 'he' %}<a href="{% url 'home' %}">HE</a>{% endlanguage %}
+            {% endif %}
+          </span>
+        </div>
+
+
+        <div class="main-header-bottom-nav show-for-medium">
+          <div class="row collapse main-header-bottom-inner">
+            <form method="get" action="{% url 'search:index'%}" class="large-{{ narrow_search|yesno:'2,3'  }} medium-1 columns top-search">
+              <label class="show-for-sr" for="search">{% trans "Search" %}</label>
+              <input type="text" name="q" id="search" value="{{ request.GET.q }}">
+              <button type="submit" class="search-button" aria-label="{% trans "Search" %}">
+                <i class="fa fa-search"></i>
+              </button>
+            </form>
+
+            <a href="#" class="search-expand medium-1 columns show-for-medium-only">
+                <span class="show-for-sr">Expand search form</span>
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </a>
+
+            <nav class="large-{{ narrow_search|yesno:'9,8'  }} medium-10 columns">
+              <ul class="top-menu">
+                <li><a{% if item_type != 'news' %} class="gray-link"{% endif %} href="{% url 'content:index' content_type='news'%}">{% trans "News" %}</a></li>
+                <li><a{% if item_type != 'articles' %} class="gray-link"{% endif %} href="{% url 'content:index' content_type='articles'%}">{% trans "Articles" %}</a></li>
+                {% if LANGUAGE_CODE == 'he' %}
+                <li><a{% if item_type != 'computer-law' %} class="gray-link"{% endif %} href="{% url 'content:index' content_type='computer-law' %}">{% trans "Verdicts" %}</a></li>
+                <li><a{% if item_type != 'legislation' %} class="gray-link"{% endif %} href="{% url 'content:index' content_type='legislation' %}">{% trans "Legislation" %}</a></li>
+                {% endif %}
+                <li><a{% if not is_links %} class="gray-link"{% endif %} href="{% url 'links:index' %}">{% trans "Links" %}</a></li>
+                {% if LANGUAGE_CODE == 'he' %}
+                  <li><a{% if not is_knowledge %} class="gray-link"{% endif %} href="{% url 'knowledge:index' %}">{% trans "Knowledge Centers" %}</a></li>
+                  <li><a{% if not is_site_updates and page.slug != 'updates' %} class="gray-link"{% endif %} href="{% url 'pages:page' slug='updates' %}">{% trans "Site Updates" context "Main header"%}</a></li>
+                {% endif %}
+              </ul>
+            </nav>
+
+            <div class="medium-1 columns text-{{LANGUAGE_END}}">
+              <a class="main-header-about-link" href="#">
+                <span class="show-for-sr">Info</span>
+                <span aria-hidden="true" class="about-link">i</span>
+              </a>
+            </div>
+
+            <div class="main-header-about-slogan">
+              {% trans "The website of Adv. Haim Ravia heading the Cyber, Privacy &amp; Copyright group at Pearl Cohen Zedek Latzer Baratz. Online since 1996" %}
+              <a class="main-header-about-close" href="#">
+                <span class="show-for-sr">Close</span>
+                <span aria-hidden="true" class="about-link">X</span>
+              </a>
+            </div>
+            {% if user.is_authenticated %}
+            <div class="main-header-user-dd-menu" data-close-on-click="true" aria-label="{% trans "Settings" %}">
+              <a href="{% url 'my:topics' %}" class="gray-link">{% trans "My Topics"%}</a>
+              <a href="#" class="gray-link">{% trans "My Notes" %}</a>
+              <a href="{% url 'my:content' %}" class="gray-link">{% trans "My Content" %}</a>
+              <a href="{% url 'my:settings' %}" class="gray-link">{% trans "Setting" %}</a>
+              <a href="{% url 'account_logout' %}" class="red-link">{% trans "Log out" %}</a>
+              <a href="#" class="gray-link pull-{{LANGUAGE_END}} main-header-user-dd-menu-close">
+                <span class="show-for-sr">Close</span>
+                <span aria-hidden="true" class="about-link">X</span>
+              </a>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+
+          <div class="main-header-advanced-search show-for-large">
+            <div class="row collapse border-bottom border-start border-end">
+              <div class="large-{{ narrow_search|yesno:'2,3'  }} columns advanced-search text-{{LANGUAGE_END}}">
+
+                <a href="#" class="advanced-search-link">{% trans "Advanced search" %}</a>
+              </div>
+            </div>
+          </div>
+
+
+          {% if user.is_authenticated %}
+          <div class="hide-for-large grid-padded grid-top-bottom-padded text-{{LANGUAGE_START}} alt-header-logged-in{% if not user.avatar %} no-avatar{% endif %}">
+            <a href="{% url 'my:settings' %}" data-toggle="alt-header-logged-in-dropdown" aria-haspop="true">
+              {% if user.avatar %}
+              <span class="header-logged-in-avatar"><img src="{% thumbnail user.avatar 37x37 %}" alt="{% trans "My Avatar" %}"></span>
+              {% endif %}
+              {% trans "Hello" %}{{ LANGUAGE_MARKER }} {{user}}
+            </a>
+          </div>
+          {% endif %}
+          <div class="dropdown-pane" id="alt-header-logged-in-dropdown" data-dropdown data-close-on-click="true" aria-label="{% trans "Settings" %}">
+            <a href="{% url 'my:topics' %}" class="gray-link">{% trans "My Topics"%}</a>
+            <a href="#" class="gray-link">{% trans "My Notes" %}</a>
+            <a href="{% url 'my:content' %}" class="gray-link">{% trans "My Content" %}</a>
+            <a href="{% url 'my:settings' %}" class="gray-link">{% trans "Setting" %}</a>
+            <a href="{% url 'account_logout' %}" class="red-link">{% trans "Log out" %}</a>
+          </div>
+    </header>
+
+      <div class="main-content row collapse">
+        {# {% if messages %} #}
+        {# <div class="small-12 columns border-bottom"> #}
+        {#   {% for message in messages %} #}
+        {#   <div class="callout {% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</div> #}
+        {#   {% endfor %} #}
+        {# </div> #}
+        {# {% endif %} #}
+        {% block content %}
+        <p>Use this document as a way to quick start any new project.</p>
+        {% endblock content %}
+      </div>
+
+      <footer>
+        {% if not user.is_authenticated %}
+        <div class="footer-signup row">
+          <h4>{% blocktrans %}Thousands of lawyers and legal personnel assisted by trusted and timely knowledge. Join them:{% endblocktrans %}</h4>
+          {% get_signup_form as signup_form %}
+          {% crispy signup_form %}
+      {% url 'pages:page' slug='terms' as terms_url %}
+      {% url 'pages:page' slug='privacy' as privacy_url %}
+      <div class="text-{{LANGUAGE_END}}">
+      {% blocktrans %}
+        By Subscribing to, and using the site you acknowledge reading and agreeing
+        to the <a href="{{terms_url}}">Terms of use</a> and
+        <a href="{{privacy_url}}">Privacy policy</a>.
+      {% endblocktrans %}
+      </div>
+        </div>
+        {% endif %}
+        <div class="main-footer">
+            <div class="row collapse footer-container">
+              <div class="medium-3 columns footer-logo-container">
+                <a href="/"><img src="{% static 'images/logo.png' %}" alt="law.co.il" /></a>
+              </div>
+              <div class="large-6 medium-9 columns end">
+                  <div class="large-5 medium-6 columns">
+                    <div class="footer-alt-logo-container">
+                      <a href="/"><img src="{% static 'images/logo.png' %}" alt="law.co.il" /></a>
+                    </div>
+                    <div>
+                      {% trans "law.co.il is run since 1996 by the Cyber, Privacy &amp; Copyright group of Pearl Cohen Zedek Latzer Baratz." %}
+                    </div>
+                    <div>
+                      {% trans "The group specializes in the legal aspects of using computer systems and the Internet." %}
+                    </div>
+                    <div class="main-footer-button-container show-for-medium">
+                      <a href="{% url 'pages:page' slug='about-group' %}" class="alt-blue title-font button">{% trans "About Group" %}</a>
+                    </div>
+                  </div>
+                  <div class="medium-6 large-offset-1 columns end">
+                    <div class="main-footer-social-buttons">
+                      {% include "_social_buttons.html" %}
+                    </div>
+                    <div class="show-for-medium">
+                      <div>{% trans "Cyber, Privacy &amp; Copyright group<br>Pearl Cohen Zedek Latzer Baratz" %}</div>
+                      <div>{% trans "121 Menachem Begin Rd.<br>Azrieli Sarona Tower – 53 fl.<br>Tel-Aviv 6701203<br>Israel" %}</div>
+                      <div>{% trans "Tel. 972-3-3039000" %}</div>
+                      <div class="main-footer-button-container">
+                        <a href="{% url 'contact:index' %}" class="alt-blue title-font button">{% trans "Contact Us" %}</a>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+
+              <div class="footer-pearl">
+                <a href="https://www.pearlcohen.com"><img src="{% static 'images/pearlcohen.png' %}" alt="Pearl Cohen" /></a>
+              </div>
+            </div>
+        </div>
+      </footer>
+
+      <nav id="side-menu">
+        <div class="side-menu-top">
+          <h5 class="side-menu-title side-menu-padded">
+            <a href="#" id="side-menu-close" class="white-link">
+              <span class="show-for-sr">Close</span>
+              <span aria-label="{% trans "Navigation" %}" class="about-link">X</span>
+            </a>
+            <span class="show-for-medium">{% trans "Navigation" %}</span>
+          </h5>
+        </div>
+        <form method="get" action="{% url 'search:index'%}" class="hide-for-medium top-search">
+          <label class="show-for-sr" for="search">{% trans "Search" %}</label>
+          <input type="text" name="q" id="search" value="{{ request.GET.q }}">
+          <button type="submit" class="search-button" aria-label="{% trans "Search" %}">
+            <i class="fa fa-search"></i>
+          </button>
+        </form>
+        <div class="side-menu-bottom border-top side-menu-padded">
+          <ul class="vertical menu" data-accordion-menu>
+            <li>
+              <a href="#">{% trans "Sections" %}</a>
+              <ul class="menu vertical nested">
+                <li><a href="{% url 'content:index' content_type='news' %}"> {% trans "News" %} </a></li>
+                <li><a href="{% url 'content:index' content_type='articles' %}"> {% trans "Articles" %} </a></li>
+                {% if LANGUAGE_CODE == 'he' %}
+                <li><a href="{% url 'content:index' content_type='computer-law' %}"> {% trans "Verdicts" %} </a></li>
+                <li><a href="{% url 'content:index' content_type='legislation' %}"> {% trans "Legislation" %} </a></li>
+                <li><a href="{% url 'knowledge:index' %}">{% trans "Knowledge Centers" %}</a></li>
+                {% endif %}
+              </ul>
+            </li>
+            {% if LANGUAGE_CODE == 'he' %}
+            <li>
+              <a href="#">{% trans "Topics" %}</a>
+              {% get_cached_generic_categories as cached_generic_categories %}
+              <ul class="menu vertical nested">
+              {% for cat in cached_generic_categories %}
+                <li><a href="{{cat.get_absolute_url}}">{{cat.name}}</a></li>
+              {% endfor %}
+              </ul>
+            </li>
+            {% endif %}
+            <li>
+              <a href="{% url 'links:index' %}">{% trans "Links" %}</a>
+              {% get_cached_links_categories as cached_links_categories%}
+              <ul class="menu vertical nested">
+              {% for cat in cached_links_categories %}
+                <li><a href="{{cat.get_absolute_url}}">{{cat.name}}</a></li>
+              {% endfor %}
+              </ul>
+            </li>
+            {% if LANGUAGE_CODE == 'he' %}
+            <li><a href="{% url 'pages:page' slug='updates' %}">{% trans "Site Updates" %}</a></li>
+            {% endif %}
+            <li>
+              <a href="{% url 'pages:page' slug='about' %}">{% trans "About" %}</a>
+            </li>
+            <li>
+              <a href="{% url 'pages:page' slug='about-group' %}">{% trans "About Group" %}</a>
+            </li>
+            <li>
+              <a href="{% url 'practices:index' %}">{% trans "Practice Areas" %}</a>
+            </li>
+            <li>
+              <a href="{% url 'lawyers:index' %}">{% trans "Group Lawyers" %}</a>
+            </li>
+            <li>
+              <a href="{% url 'pages:page' slug='terms' %}">{% trans "Terms of Use" %}</a>
+            </li>
+            <li>
+              <a href="{% url 'pages:page' slug='privacy' %}">{% trans "Privacy Policy" %}</a>
+            </li>
+            <li>
+              <a href="{% url 'pages:page' slug='accessibility' %}">{% trans "Accessibility Statement" %}</a>
+            </li>
+            <li>
+              <a href="{% url 'contact:index' %}">{% trans "Contact Us" %}</a>
+            </li>
+            <li>
+              {% if user.is_authenticated %}
+                <a href="{% url 'my:settings' %}" class="red-link">{% trans "Setting" %}</a>
+              {% else %}
+                <a href="{% url 'account_signup' %}" class="red-link">{% trans "Register" %}</a>
+              {% endif %}
+            </li>
+          </ul>
+        </div>
+        <div class="hide-for-large text-center side-menu-social-links border-top">
+          {% include "_social_buttons.html" %}
+        </div>
+      </nav>
+
+      {% if not user.is_authenticated %}
+      <div class="reveal full-width" id="loginModal" data-reveal>
+        <div class="row alt-blue-bg inner">
+          <div class="large-4 large-offset-4 medium-6 medium-offset-3 columns grid-top-bottom-padded">
+            <h3 class="normal">{% trans 'Log in' %}</h3>
+            <p>
+              {% url 'account_signup' as signup_url%}
+              {% blocktrans %}New user? <a href="{{ signup_url }}">Click here</a> to register{% endblocktrans %}
+            </p>
+            {% get_login_form as login_form %}
+            {% crispy login_form %}
+            <button class="close-button small" data-close aria-label="Close modal" type="button">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    {% block javascript %}
+      <!-- Latest JQuery -->
+      <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+
+      <!-- Latest compiled and minified JavaScript -->
+      <script src="{% static 'js/foundation.min.js' %}?v=1"></script>
+      <script charset="utf-8">
+        // initialize foundation
+        $(document).foundation();
+      </script>
+      <!-- Your stuff: Third-party javascript libraries go here -->
+      <script>
+      nl_lang = "{{LANGUAGE_CODE}}";
+      nl_pos = "{{LANGUAGE_BIDI|yesno:'bl,br'}}";
+      nl_link = "{% url 'pages:page' slug='accessibility' %}";
+      nl_lic = "MitsYXcuY28uaWw=";
+      nl_dir = "/static/nagish/";
+      nl_compact = 1;
+      nl_accordion = 1;
+      </script>
+      <script src="/static/nagish/nagishli.js?v=2.3.0" charset="utf-8" defer></script>
+      <!-- place project specific Javascript in this file -->
+      <!-- <script src="{% static 'js/accessibility.js'|add_direction:'rtl_only' %}"></script> -->
+      <script src="{% static 'js/project.js' %}?v=7"></script>
+
+      {% if debug %}
+      <!-- live reload in devel -->
+      <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+      {% endif %}
+    {% endblock javascript %}
+
+  </body>
+</html>

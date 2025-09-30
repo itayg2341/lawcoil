@@ -1,0 +1,11 @@
+{% load i18n %}
+  <div class="row collapse">
+    <div class="small-12 columns border-bottom border-top light-gray-bg grid-top-double-margin show-for-large">
+      <div class="grid-top-bottom-padded">
+        <a href="{% url 'my:topics' %}" class="bold grid-start-padded{% if not is_my_topics %} gray-link{% endif %}">{% trans "My Topics"%}</a>
+        <a href="#" class="bold gray-link grid-start-padded">{% trans "My Notes" %}</a>
+        <a href="{% url 'my:content' %}" class="bold grid-start-padded{% if not is_my_content %} gray-link{% endif %}">{% trans "My Content" %}</a>
+        <a href="{% url 'my:settings' %}" class="bold grid-start-padded{% if not is_my_settings %} gray-link{% endif %}">{% trans "Setting" %}</a>
+      </div>
+    </div>
+  </div>

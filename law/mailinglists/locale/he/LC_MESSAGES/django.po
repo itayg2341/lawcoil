@@ -1,0 +1,189 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-03-06 00:09+0200\n"
+"PO-Revision-Date: 2019-03-06 00:37+0200\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: admin.py:27
+msgid "All Categories"
+msgstr "כל הקטגוריות"
+
+#: admin.py:29
+msgid "Categories"
+msgstr "קטגוריות"
+
+#: admin.py:61 apps.py:7 forms.py:13 forms.py:14 models.py:60
+msgid "Mailing Lists"
+msgstr "רשימות דיוור"
+
+#: models.py:13
+msgid "Do not send by days"
+msgstr "אל תשלח לפי ימים"
+
+#: models.py:14
+msgid "1 Days"
+msgstr "יום"
+
+#: models.py:15
+msgid "2 Days"
+msgstr "יומיים"
+
+#: models.py:16
+msgid "3 Days"
+msgstr "3 ימים"
+
+#: models.py:17
+msgid "4 Days"
+msgstr "4 ימים"
+
+#: models.py:18
+msgid "5 Days"
+msgstr "5 ימים"
+
+#: models.py:19
+msgid "6 Days"
+msgstr "6 ימים"
+
+#: models.py:20
+msgid "7 Days"
+msgstr "7 ימים"
+
+#: models.py:21
+msgid "8 Days"
+msgstr "8 ימים"
+
+#: models.py:22
+msgid "9 Days"
+msgstr "9 ימים"
+
+#: models.py:23
+msgid "10 Days"
+msgstr "10 ימים"
+
+#: models.py:24
+msgid "11 Days"
+msgstr "11 ימים"
+
+#: models.py:25
+msgid "12 Days"
+msgstr "12 ימים"
+
+#: models.py:26
+msgid "13 Days"
+msgstr "13 ימים"
+
+#: models.py:27
+msgid "14 Days"
+msgstr "14 ימים"
+
+#: models.py:32
+msgid "Name"
+msgstr "שם"
+
+#: models.py:34
+msgid "Full Content"
+msgstr "תוכן מלא"
+
+#: models.py:35
+msgid "Send full content of items"
+msgstr "שלח את התוכן המלא של הפריטים, ללא קיצוץ הידיעה"
+
+#: models.py:36
+msgid "Private"
+msgstr "פרטית"
+
+#: models.py:37
+msgid "Last Sent"
+msgstr "נשלחה לאחרונה"
+
+#: models.py:38
+msgid "Send every X days"
+msgstr "מספר ימים לשליחה"
+
+#: models.py:42
+msgid "Send every X items"
+msgstr "מספר פריטים לשליחה"
+
+#: models.py:43
+msgid "0 Means no emails based on items count"
+msgstr "0 פירושו שלא יישלחו הודעות על בסיס כמות פריטים חדשים"
+
+#: models.py:44
+msgid "Last Checked"
+msgstr "תאריך בדיקה אחרונה"
+
+#: models.py:46
+msgid "Description"
+msgstr "תאור"
+
+#: models.py:48
+msgid "List for Content Type"
+msgstr "עבור סוג תוכן"
+
+#: models.py:50
+msgid "Leave empty for all content types"
+msgstr "להשאיר ריק עבור כל סוגי התוכן"
+
+#: models.py:52
+msgid "Topics"
+msgstr ""
+
+#: models.py:55 models.py:108
+msgid "Subscribers"
+msgstr "מנויים"
+
+#: models.py:59
+msgid "Mailing List"
+msgstr "רשימת דיוור"
+
+#: models.py:107
+msgid "Subscriber"
+msgstr "מנוי"
+
+#: templates/mailinglists/unsubscribe.html:4
+#: templates/mailinglists/unsubscribe.html:8
+msgid "Unsubscribe"
+msgstr "הסרה מרשימות דיוור"
+
+#: templates/mailinglists/unsubscribe.html:11
+#, python-format
+#| msgid "Do you want to unsubscribe <b>%(email)s</b> from "
+msgid "Subscription removed for <b>%(email)s</b> from"
+msgstr "בוטלה ההרשמה של <b>%(email)s</b> אל"
+
+#: templates/mailinglists/unsubscribe.html:13
+#: templates/mailinglists/unsubscribe.html:21
+msgid "all mailing lists"
+msgstr "כל רשימות דיוור"
+
+#: templates/mailinglists/unsubscribe.html:19
+#, python-format
+msgid "Do you want to unsubscribe <b>%(email)s</b> from "
+msgstr "האם ברצונך לבטל את ההרשמה של <b>%(email)s</b> אל "
+
+#: templates/mailinglists/unsubscribe.html:25
+msgid "Yes, remove me"
+msgstr "כן, הסר אותי"
+
+#: templates/mailinglists/unsubscribe.html:26
+msgid "No"
+msgstr "לא"
+
+#~ msgid "Mailing List User"
+#~ msgstr "משתמש רשימות דיוור"
+
+#~ msgid "Mailing List Users"
+#~ msgstr "משתמשי רשימות דיוור"

@@ -1,0 +1,45 @@
+{% extends "base.html" %}{% load i18n staticfiles thumbnail %}
+
+{% block title %}{% trans "Knowledge Centers" %} - {{ block.super }}{% endblock %}
+
+{% block content %}
+  <div id="knowledge-center-outer">
+    <div class="title-outer">
+      <h1>{% trans "Knowledge Centers" %}</h1>
+      <select id="knowledge-centers-switcher" data-base-url="{% url 'knowledge:index' %}" aria-hidden="true">
+        <option value="">{% trans "Knowledge Centers Library" %}</option>
+        {% for center in centers %}
+        <option value="{{ center.slug }}">{{ center.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <img src="{% static 'images/knowledge-centers.jpg' %}" alt="{% trans "Knowledge Centers" %}">
+  </div>
+
+  <div class="border-top border-bottom grid-all-double-padded">
+    <h4>{% blocktrans %}A Comprehensive overview of legal practices the Internet,
+    Cyber &amp; Copyright group of PearlCohen specialized in
+    centering around the dynamic interface between law and technology.{% endblocktrans %}</h4>
+  </div>
+
+  <div class="row collapse" data-equalizer data-equalize-on="medium">
+  {% for center in centers %}
+    <div class="text-center light-gray-bg medium-6 columns border-bottom{% if forloop.counter0|divisibleby:2 %} border-end {% endif %}{% if forloop.last %} end{% endif %}" data-equalizer-watch>
+      {% if center.small_photo %}
+        <img src="{% thumbnail center.small_photo 583x177 crop=True %}" alt="{{ center.name }}">
+      {% else %}
+        <img src="http://placehold.it/583x177.jpg" alt="{{ center.name }}">
+      {% endif %}
+      <h2 class="grid-top-padded">{{ center.name }}</h2>
+      <div>
+        {{ center.description|safe }}
+      </div>
+      <div>
+        <a href="{{ center.get_absolute_url }}" class="alt-blue title-font text-large button">
+          {% blocktrans with name=center.name %}Learn about {{ name }}{% endblocktrans %}
+        </a>
+      </div>
+    </div>
+  {% endfor %}
+  </div>
+{% endblock %}

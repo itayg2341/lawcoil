@@ -1,0 +1,36 @@
+@import "../../../node_modules/foundation-sites/scss/util/util";
+@import "settings";
+@import "../../../node_modules/foundation-sites/scss/foundation";
+@import "../../../node_modules/font-awesome/scss/font-awesome.scss";
+
+@include foundation-global-styles;
+@include foundation-grid;
+@include foundation-typography;
+@include foundation-button;
+@include foundation-forms;
+@include foundation-visibility-classes;
+@include foundation-menu;
+@include foundation-accordion-menu;
+@include foundation-menu;
+@include foundation-close-button;
+@include foundation-reveal;
+@include foundation-callout;
+@include foundation-dropdown;
+@include foundation-tooltip;
+@include foundation-pagination;
+@include foundation-float-classes;
+
+@import "almoni_tzar";
+@import "categories_font";
+@import "common";
+@import "header";
+@import "footer";
+@import "links";
+@import "item";
+@import "sidemenu";
+@import "search";
+@import "users";
+@import "lawyer";
+@import "knowledge_centers";
+@import "annotator";
+@import "django-debug-toolbar";

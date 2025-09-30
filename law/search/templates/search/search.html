@@ -1,0 +1,127 @@
+{% extends 'base.html' %}{% load i18n content_tags core_tags %}
+
+{% block title %}{% blocktrans %}Search for {{ search_term }}{% endblocktrans %} - {{ block.super }}{% endblock %}
+
+{% block body_class %}{{block.super}} search-page{% endblock body_class %}
+{% block content %}
+  <div class="row collapse" aria-hidden="true">
+    <div class="small-12 columns border-bottom">&nbsp;</div>
+  </div>
+  <div class="row collapse">
+    <div class="small-12 columns border-bottom content-listing-title grid-padded">
+      <h4 class="grid-padded">
+        <a href="#" class="gray-link top advanced-search-toggle" data-toggle="advanced-search-dropdown"
+           aria-has-popup="true" title="{% trans "Click for advanced search" %}">
+          {% trans 'Advanced Search' %}
+          <i class="fa fa-chevron-{{LANGUAGE_END}}" aria-hidden="true"></i>
+        </a>
+      </h4>
+      <div id="advanced-search-dropdown" class="dropdown-pane"
+           data-dropdown data-auto-focus="true" data-close-on-click="true">
+        <form action="{% url 'search:index' %}" id="advanced-search-form">
+          <div class="grid-all-double-padded border-bottom">
+            <label for="advanced-search-term">{% trans 'Search' %}</label>
+            <input type="text" name="q" id="advanced-search-term" value="{{ search_term }}">
+            <button type="submit" aria-label="{% trans "Search" %}">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+          <div class="row collapse">
+            <div class="medium-7 columns border-end" id="advanced-search-sections">
+              <div class="grid-all-double-padded">
+                {% for option in form.search_in %}
+                <div class="row">
+                  <div class="medium-3 columns">{{ option }}</div>
+                  <div class="medium-6 columns end">
+                    {% if forloop.counter == 2 %}{{ form.articles_topic }}{% endif %}
+                    {% if forloop.counter == 3 %}{{ form.news_topic }}{% endif %}
+                    {% if forloop.counter == 4 %}{{ form.computer_law_topic }}{% endif %}
+                    {% if forloop.counter == 5 %}{{ form.legislation_topic }}{% endif %}
+                  </div>
+                </div>
+                {% endfor %}
+
+              </div>
+            </div>
+            <div class="medium-5 columns">
+              <div class="grid-all-double-padded">
+                <label for="id_time_frame">{{ form.time_frame.label }}
+                </label>
+                {{ form.time_frame }}
+              </div>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+{% if not has_enough_query %}
+  <div class="row grid-top-padded">
+    <div class="small-8 small-offset-2 columns">
+      <div class="warning callout text-center">
+        {% blocktrans with min_length=view.MIN_VALID_QUERY_LENGTH %}Please enter at least {{ min_length }} characters{% endblocktrans %}
+      </div>
+    </div>
+  </div>
+{% elif not paginator.count %}
+  <div class="row grid-top-padded">
+    <div class="medium-6 medium-offset-3 columns">
+      <div class="warning callout text-center">
+        {% blocktrans %}No matches found for &quot;{{ search_term }}&quot;{% endblocktrans %}
+      </div>
+    </div>
+  </div>
+{% else %}
+  <div class="row collapse grid-top-padded border-bottom">
+    <div class="medium-4 columns">
+      <div class="grid-all-padded">
+        {% blocktrans with total_found=paginator.count %}Found {{ total_found }} results for <b>{{ search_term }}</b>{% endblocktrans %}
+      </div>
+    </div>
+  </div>
+  <div class="row collapse" id="main-equalizer" data-equalizer data-equalize-on="medium">
+    {% for col in items_cols %}
+    <div class="large-3 medium-4 columns {% if not forloop.last %}border-end-medium-up {% endif %}listing-col topics-col items-col-{{forloop.counter}}{% if forloop.counter > 1 %} show-for-medium{% endif %}{% if forloop.counter == 4 %} show-for-large{% endif %}" data-equalizer-watch>
+        {% for item in col %}
+        {% listing_item item %}
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
+  {% if is_paginated %}
+  <div class="grid-all-padded border-top">
+    <ul class="pagination" role="navigation" aria-label="Pagination">
+      {% if page_obj.has_previous %}
+      <li>
+        <a href="./?{% url_replace q=search_term page=page_obj.previous_page_number %}">
+          <i class="fa fa-chevron-{{LANGUAGE_START}}" aria-label="Previous Page"></i>
+        </a>
+      </li>
+      {% endif %}
+
+      {% for num in page_obj.page_range %}
+        <li {% if num == page_obj.number %}class="current"{% endif %}>
+        {% if not num %}<li class="disabled"><a>...</a>
+        {% else %}
+          {% if num == page_obj.number %}
+            {{ num }}
+          {% else %}
+            <a href="./?{% url_replace q=search_term page=num %}">{{ num }}</a>
+          {% endif %}
+        {% endif %}
+      </li>
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <li>
+          <a href="./?{% url_replace q=search_term page=page_obj.next_page_number %}">
+            <i class="fa fa-chevron-{{LANGUAGE_END}}" aria-label="Next Page"></i>
+          </a>
+        </li>
+      {% endif %}
+    </ul>
+  </div>
+  {% endif %}
+{% endif %}
+{% endblock %}

@@ -1,0 +1,383 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-05 12:20+0300\n"
+"PO-Revision-Date: 2020-10-20 01:09+0300\n"
+"Last-Translator: Meir Kriheli <mkriheli@gmail.com>\n"
+"Language-Team: LANGUAGE <he@li.org>\n"
+"Language: he\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: admin.py:64
+msgid "Watch Words"
+msgstr ""
+
+#: admin.py:110 apps.py:7 models.py:93
+msgid "Content"
+msgstr "תוכן"
+
+#: managers.py:33
+#, python-format
+msgid "Item type does not exist: %s"
+msgstr "תוכן מסוג זה לא קיים: %s"
+
+#: managers.py:45 models.py:229
+msgid "Articles"
+msgstr "מאמרים"
+
+#: managers.py:46 models.py:240
+msgid "News Items"
+msgstr "חדשות"
+
+#: managers.py:47 models.py:251
+msgid "Computer Laws"
+msgstr "פסקי דין"
+
+#: managers.py:48 models.py:261
+msgid "Legislation"
+msgstr "חקיקה"
+
+#: models.py:31
+msgid "Name"
+msgstr "שם"
+
+#: models.py:32 models.py:90
+msgid "Slug"
+msgstr "שם ל-url"
+
+#: models.py:33
+msgid "Color"
+msgstr "צבע"
+
+#: models.py:34
+msgid "CSS icon class"
+msgstr "css עבור הצלמית"
+
+#: models.py:36 models.py:94
+msgid "Language"
+msgstr "שפה"
+
+#: models.py:38
+msgid "Hot Topic"
+msgstr "נושאים חמים"
+
+#: models.py:45
+msgid "Content Category"
+msgstr "קטגוריית תוכן"
+
+#: models.py:46
+msgid "Content Categories"
+msgstr "קטגוריות תוכן"
+
+#: models.py:89
+msgid "Title"
+msgstr "כותרת"
+
+#: models.py:91
+msgid "Created At"
+msgstr "תאריך"
+
+#: models.py:97
+msgid "Published"
+msgstr "מקוון"
+
+#: models.py:100 templates/content/_full_article_in_admin.html:17
+msgid "Contributors"
+msgstr "מאת"
+
+#: models.py:102
+msgid "Content Type"
+msgstr "סוג תוכן"
+
+#: models.py:104
+msgid "Reading Time"
+msgstr "זמן קריאה"
+
+#: models.py:107
+msgid "Sub Title"
+msgstr "כותרת משנה"
+
+#: models.py:109
+msgid "Short Description"
+msgstr "תאור קצר"
+
+#: models.py:112
+msgid "Attached file"
+msgstr "קובץ מצורף"
+
+#: models.py:114
+msgid "Link to"
+msgstr "קישור אל"
+
+#: models.py:117 templates/content/_full_article_in_admin.html:14
+msgid "Categories"
+msgstr "קטגוריות"
+
+#: models.py:121
+msgid "Email words notification sent"
+msgstr ""
+
+#: models.py:188 models.py:190
+msgid "Facebook"
+msgstr "פייסבוק"
+
+#: models.py:228
+msgid "Article"
+msgstr "מאמר"
+
+#: models.py:239
+msgid "News Item"
+msgstr "ידיעה"
+
+#: models.py:250
+msgid "Computer Law"
+msgstr "פסק דין"
+
+#: models.py:262
+msgid "Legislations"
+msgstr "חקיקה"
+
+#: templates/content/_category_tag_follow.html:9 views.py:412
+msgid "Following"
+msgstr "במעקב"
+
+#: templates/content/_category_tag_follow.html:13
+#: templates/content/_category_tag_follow.html:19
+msgid "Follow"
+msgstr "עקבו"
+
+#: templates/content/_listing_item.html:18
+msgid "Read More"
+msgstr "קראו עוד"
+
+#: templates/content/_listing_item.html:21 templates/content/detail.html:88
+msgid "Reading time"
+msgstr "זמן קריאה"
+
+#: templates/content/_listing_item.html:23 templates/content/detail.html:90
+msgid "Less than a minute"
+msgstr "פחות מדקה"
+
+#: templates/content/_listing_item.html:25 templates/content/detail.html:92
+#, python-format
+msgid "1 Minute"
+msgid_plural "%(minutes)s minutes"
+msgstr[0] "דקה אחת"
+msgstr[1] "%(minutes)s דקות"
+
+#: templates/content/category.html:3 templates/content/category.html:15
+msgid "Topics"
+msgstr "נושאים"
+
+#: templates/content/category.html:14 templates/content/listing.html:16
+msgid "Click for topic selection"
+msgstr "לחצו לבחירת נושא"
+
+#: templates/content/category.html:59
+#, python-format
+msgid "More from %(category_name)s"
+msgstr "עוד מ%(category_name)s"
+
+#: templates/content/category.html:68
+#, python-format
+msgid "No %(category_name)s items found"
+msgstr "לא נמצאו פריטי  %(category_name)s"
+
+#: templates/content/detail.html:15
+msgid "Edit"
+msgstr "עריכה"
+
+#: templates/content/detail.html:50
+msgid "By"
+msgstr "מאת"
+
+#: templates/content/detail.html:66 templates/content/detail.html:153
+msgid "This article is edited and published by the"
+msgstr "מאמר זה נערך ופורסם ע&quot;י"
+
+#: templates/content/detail.html:67
+msgid "Internet, Cyber &amp; Copyright Group"
+msgstr "קבוצת האינטרנט, הסייבר וזכויות היוצרים"
+
+#: templates/content/detail.html:68
+msgid "at Pearl Cohen led by Haim Ravia"
+msgstr "בפרל כהן בראשות חיים רביה"
+
+#: templates/content/detail.html:76
+msgid "Might interest you"
+msgstr "אולי יעניין אותך גם"
+
+#: templates/content/detail.html:96 templates/content/detail.html:97
+msgid "Share this page"
+msgstr "שתפו עמוד זה"
+
+#: templates/content/detail.html:100 templates/content/detail.html:102
+msgid "Save to &quot;My Content&quot;"
+msgstr ""
+
+#: templates/content/detail.html:100 templates/content/detail.html:105
+msgid "Remove from &quot;My Content&quot;"
+msgstr ""
+
+#: templates/content/detail.html:110 templates/content/detail.html:111
+msgid "Share on Facebook"
+msgstr "שתפו בפייסבוק"
+
+#: templates/content/detail.html:114 templates/content/detail.html:115
+msgid "Share on Linkedin"
+msgstr "שתפו בלינקדאין"
+
+#: templates/content/detail.html:118 templates/content/detail.html:119
+msgid "Share on Google+"
+msgstr "שתפו בגוגל+"
+
+#: templates/content/detail.html:122 templates/content/detail.html:123
+msgid "Share on Twitter"
+msgstr "שתפו בטוויטר"
+
+#: templates/content/detail.html:126 templates/content/detail.html:127
+msgid "Share via Email"
+msgstr "שתפו באמצעות דואר אלקטרוני"
+
+#: templates/content/detail.html:136
+msgid "View Document"
+msgstr "עיון במסמך"
+
+#: templates/content/detail.html:146
+msgid "Visit Link"
+msgstr "בקרו בקישור"
+
+#: templates/content/detail.html:154
+#| msgid "Internet, Cyber &amp; Copyright Group"
+msgid "Cyber, Privacy, and Copyright Group"
+msgstr "קבוצת הסייבר, הפרטיות וזכויות היוצרים"
+
+#: templates/content/detail.html:155
+msgid ""
+"\n"
+"        at Pearl Cohen. The Group specializes in legal matters related to "
+"computer systems and the Internet,\n"
+"        maintaining expertise in cutting-edge areas such as artificial "
+"intelligence, internet law, data protection,\n"
+"        cybersecurity and privacy, computer law and contracts, electronic "
+"signatures, communications, copyright,\n"
+"        open source, and intellectual property.\n"
+"        "
+msgstr ""
+"\n"
+"        בפרל כהן. הקבוצה עוסקת בסוגיות המתעוררות בעת שימוש במערכות מחשב "
+"ונמצאות בחזית הידע המשפטי:\n"
+"        בינה מלאכותית, משפט באינטרנט, הגנת מידע, סייבר ופרטיות, "
+"דיני וחוזי מחשבים, חתימה אלקטרונית, תקשורת , זכויות יוצרים, קוד פתוח וקניין רוחני."
+
+#: templates/content/index.html:4
+msgid ""
+"Copyright, Privacy, Open Source, Information Technology, Internet Law, "
+"Israeli Law"
+msgstr ""
+
+#: templates/content/index.html:15
+msgid "My Content"
+msgstr "התכנים שלי"
+
+#: templates/content/index.html:20 templates/content/index.html:54
+msgid "Insights"
+msgstr "פסיקה עדכנית"
+
+#: templates/content/index.html:46
+msgid "More of My Content"
+msgstr "עוד תכנים שלי"
+
+#: templates/content/index.html:69
+msgid "More Insights"
+msgstr "עוד פסיקה עדכנית"
+
+#: templates/content/listing.html:17
+#, python-format
+msgid "%(model_verbose_name)s Topics"
+msgstr "נושאי %(model_verbose_name)s"
+
+#: templates/content/listing.html:63
+#, python-format
+msgid "More %(model_verbose_name)s"
+msgstr "עוד %(model_verbose_name)s"
+
+#: templates/content/listing.html:72
+#, python-format
+msgid "No %(model_verbose_name)s found"
+msgstr "לא נמצאו %(model_verbose_name)s"
+
+#: templates/content/mailinglist_words.html:66
+msgid "Watch words"
+msgstr ""
+
+#: views.py:36 views.py:198
+#, python-format
+msgid "%s - News: Internet Law"
+msgstr ""
+
+#: views.py:40 views.py:202
+#, python-format
+msgid "%s - Articles: Internet Law"
+msgstr ""
+
+#: views.py:44 views.py:206
+#, python-format
+msgid "%s - Computer Laws"
+msgstr "%s - פסקי דין"
+
+#: views.py:48 views.py:210
+#, python-format
+msgid "%s - Legislation"
+msgstr "%s - חקיקה"
+
+#: views.py:287
+msgid "Invalid date"
+msgstr "תאריך לא חוקי"
+
+#: views.py:415
+msgid "Already Following"
+msgstr "במעקב"
+
+#: views.py:434 views.py:437
+msgid "Not Following"
+msgstr "במעקב"
+
+#~ msgid ""
+#~ "\n"
+#~ "        at Pearl Cohen led by Haim Ravia. The group deals with issues "
+#~ "that arise\n"
+#~ "        when using computer systems and the Internet and are at the "
+#~ "forefront of\n"
+#~ "        legal knowledge: Internet Law, computing laws and contracts, "
+#~ "electronic\n"
+#~ "        signature, communications, information security and privacy, "
+#~ "copyright and\n"
+#~ "        intellectual property - alongside complementary fields\n"
+#~ "        such as civil law and commercial representation and litigation.\n"
+#~ "        "
+#~ msgstr ""
+#~ "\n"
+#~ "        בפרל כהן בראשות חיים רביה. הקבוצה עוסקת בסוגיות המתעוררות "
+#~ "בעת        שימוש במערכות מחשב ואינטרנט ונמצאות בחזית הידע המשפטי:        "
+#~ "משפט באינטרנט, דיני וחוזי מחשבים, חתימה אלקטרונית, תקשורת,        אבטחת "
+#~ "מידע ופרטיות, זכויות יוצרים וקניין רוחני -        כל זאת לצד עיסוק "
+#~ "בתחומים משלימים כדוגמת משפט אזרחי ומסחרי        וייצוג והופעות בבתי משפט."
+
+#~ msgid "More Hot Topics"
+#~ msgstr "עוד נושאים חמים"
+
+#~ msgid "Hot Topics"
+#~ msgstr "נושאים חמים"
+
+#~ msgid "00. Content"
+#~ msgstr "00. תוכן"

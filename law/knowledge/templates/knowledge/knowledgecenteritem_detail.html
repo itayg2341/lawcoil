@@ -1,0 +1,41 @@
+{% extends "base.html" %}{% load i18n thumbnail %}
+
+{% block title %}{{ object.title }} - {{ object.knowledge_center.name }} - {% trans "Knowledge Centers" %} - {{ block.super }}{% endblock %}
+
+{% block content %}
+  <div id="knowledge-center-outer">
+    <div class="title-outer">
+      <h1>{{ object.knowledge_center.name }}</h1>
+      <select id="knowledge-centers-switcher" data-base-url="{% url 'knowledge:index' %}" aria-hidden="true">
+        <option value="">{% trans "Knowledge Centers Library" %}</option>
+        {% for center in centers %}
+          <option value="{{ center.slug }}">{{ center.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    {% if object.knowledge_center.photo %}
+      <img src="{% thumbnail object.knowledge_center.photo 1168x370 crop=True %}" alt="{{ object.knowledge_center.name }}">
+    {% else %}
+      <img src="http://placehold.it/1168x370.jpg" alt="{{ object.knowledge_center.name }}">
+    {% endif %}
+  </div>
+
+  <div class="row">
+    <article class="grid-top-padded medium-10 medium-offset-1 columns">
+      <header>
+        <h1>{{ object.title }}</h1>
+      </header>
+      {{ object.content|safe }}
+      {% if object.attachment %}
+        <div class="text-center">
+          <a href="{{ object.attachment.url }}" class="text-large alt-blue title-font button">{% trans "View Document" %}</a>
+        </div>
+      {% endif %}
+      {% if object.url %}
+        <div class="text-center">
+          <a href="{{ object.url }}" class="text-large alt-blue title-font button" target="_blank" rel="noopener">{% trans "Visit Link" %}</a>
+        </div>
+      {% endif %}
+    </article>
+  </div>
+{%  endblock %}

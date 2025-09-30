@@ -1,0 +1,27 @@
+@font-face{
+	font-family:'almoni-tzar';
+	font-weight:200; /*(extralight)*/
+	font-style: normal;
+	src: url('#{$almoni-tzar-font-path}/almoni-tzar-aaa-200.eot');
+	src: url('#{$almoni-tzar-font-path}/almoni-tzar-aaa-200.eot#iefix') format('embedded-opentype'),
+		url('#{$almoni-tzar-font-path}/almoni-tzar-aaa-200.woff') format('woff'),
+		url('#{$almoni-tzar-font-path}/almoni-tzar-aaa-200.ttf') format('truetype');
+}
+@font-face{
+	font-family:'almoni-tzar';
+	font-weight:300; /*(light)*/
+	font-style: normal;
+	src: url('#{$almoni-tzar-font-path}/almoni-tzar-aaa-300.eot');
+	src: url('#{$almoni-tzar-font-path}/almoni-tzar-aaa-300.eot#iefix') format('embedded-opentype'),
+		url('#{$almoni-tzar-font-path}/almoni-tzar-aaa-300.woff') format('woff'),
+		url('#{$almoni-tzar-font-path}/almoni-tzar-aaa-300.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'almoni-tzar';
+  font-weight: 400; /*(regular)*/
+  font-style: normal;
+  src: url('#{$almoni-tzar-font-path}/almoni-tzar-aaa-400.eot');
+  src: url('#{$almoni-tzar-font-path}/almoni-tzar-aaa-400.eot#iefix') format('embedded-opentype'),
+    url('#{$almoni-tzar-font-path}/almoni-tzar-aaa-400.woff') format('woff'),
+    url('#{$almoni-tzar-font-path}/almoni-tzar-aaa-400.ttf') format('truetype');
+}

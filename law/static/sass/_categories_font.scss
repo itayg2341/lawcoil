@@ -1,0 +1,110 @@
+@font-face {
+    font-family: 'categories';
+    src:    url('#{$categories-font-path}/categories.eot?cqzesf');
+    src:    url('#{$categories-font-path}/categories.eot?cqzesf#iefix') format('embedded-opentype'),
+        url('#{$categories-font-path}/categories.ttf?cqzesf') format('truetype'),
+        url('#{$categories-font-path}/categories.woff?cqzesf') format('woff'),
+        url('#{$categories-font-path}/categories.svg?cqzesf#categories') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.category-icon {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'categories' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    display: inline-block;
+    vertical-align: bottom;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.apple-icon:before {
+    content: "\e900";
+}
+.civil-procedure-icon:before {
+    content: "\e901";
+}
+.commercial-torts-icon:before {
+    content: "\e902";
+}
+.communication-icon:before {
+    content: "\e903";
+}
+.computer-crime-icon:before {
+    content: "\e904";
+}
+.copyright-icon:before {
+    content: "\e905";
+}
+.criminal-procedure-icon:before {
+    content: "\e906";
+}
+.domain-names-icon:before {
+    content: "\e907";
+}
+.ecommerce-icon:before {
+    content: "\e908";
+}
+.electronic-evidence-icon:before {
+    content: "\e909";
+}
+.facebook-icon:before {
+    content: "\e90a";
+}
+.freedom-of-speech-icon:before {
+    content: "\e90b";
+}
+.gambling-icon:before {
+    content: "\e90c";
+}
+.google-icon:before {
+    content: "\e90d";
+}
+.labor-employment-law-icon:before {
+    content: "\e90e";
+}
+.microsoft-icon:before {
+    content: "\e90f";
+}
+.misc-icon:before {
+    content: "\e910";
+}
+.open-source-icon:before {
+    content: "\e911";
+}
+.opinions-icon:before {
+    content: "\e912";
+}
+.patents-icon:before {
+    content: "\e913";
+}
+.privacy-security-icon:before {
+    content: "\e914";
+}
+.regulation-government-icon:before {
+    content: "\e915";
+}
+.sex-porn-icon:before {
+    content: "\e916";
+}
+.spam-email-icon:before {
+    content: "\e917";
+}
+.suppliers-liability-icon:before {
+    content: "\e918";
+}
+.trademarks-icon:before {
+    content: "\e919";
+}
+.visitors-exposure-icon:before {
+    content: "\e91a";
+}
+

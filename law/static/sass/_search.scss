@@ -1,0 +1,29 @@
+#advanced-search-dropdown {
+  label {
+    color: white;
+    display: inline-block;
+    line-height: 3em;
+  }
+
+  option {
+    background-color: $alt-blue;
+    padding: 0.4em;
+    border-bottom: 1px solid $line-color;
+  }
+
+  select {
+    margin-bottom: 1.5rem;
+  }
+
+  #advanced-search-term {
+    display: inline-block;
+    width: 14em;
+    margin: 0 1em;
+    background-color: $alt-blue;
+  }
+
+  #id_time_frame {
+    width: 15em;
+    margin: 0 1em;
+  }
+}

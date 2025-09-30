@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Unsubscribe" %}{% endblock %}
+
+{% block content %}
+<div class="grid-all-padded">
+  <p><h1>{% trans "Unsubscribe" %}</h1></p>
+{% if removed %}
+<p>
+  {% blocktrans %}Subscription removed for <b>{{ email }}</b> from{% endblocktrans %}
+  <strong>
+    {% if mailing_list %}{{mailing_list.name}}{% else %}{% trans "all mailing lists" %}{% endif %}.
+  </strong>
+</p>
+{% else %}
+  <form action="." method="POST">{% csrf_token %}
+    <p>
+    {% blocktrans %}Do you want to unsubscribe <b>{{email}}</b> from {% endblocktrans %}
+    <strong>
+    {% if mailing_list %}{{mailing_list.name}}{% else %}{% trans "all mailing lists" %}{% endif %}
+    </strong>?
+    </p>
+    <p>
+      <button class="button" type="submit">{% trans "Yes, remove me" %}</button>
+      <a class="secondary button" href="{% url 'home' %}" >&nbsp;&nbsp;{% trans "No" %}&nbsp;&nbsp;</a>
+    </p>
+  </form>
+{% endif %}
+</div>
+{% endblock content %}
+

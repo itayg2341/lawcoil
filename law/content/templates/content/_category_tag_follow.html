@@ -1,0 +1,23 @@
+{% load i18n content_tags %}
+<span class="category-tag rounded" style="background-color: {{category.color}}">
+  <a href="{{category.get_absolute_url}}" class="white-link">
+    <i class="category-icon {{category.icon_css_class}}" aria-hidden="true"></i>
+    {{category.name}}
+  </a>
+  {% if user.is_authenticated %}
+    {% if category|is_followed_by:user %}
+        <span class="follow">{% trans "Following" %}</span>
+      </a>
+    {% else %}
+      <a class="follow white-link follow-link" href="{% url 'topics:follow' cat_slug=category.slug %}">
+        {% trans "Follow" %}
+        <i class="fa fa-chevron-{{LANGUAGE_END}}"></i>
+      </a>
+    {% endif %}
+  {% else %}
+      <a class="follow white-link login-link" href="{% url 'account_login' %}">
+        {% trans "Follow" %}
+        <i class="fa fa-chevron-{{LANGUAGE_END}}"></i>
+      </a>
+  {% endif %}
+</span>

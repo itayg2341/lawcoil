@@ -1,0 +1,20 @@
+{% extends "base.html" %}{% load i18n %}
+
+{% block title %}{% trans "Message sent" %} - {{ block.super }}{% endblock %}
+
+{% block content %}
+
+  <div class="row">
+    <div class="medium-8 medium-offset-2 columns">
+      <h1 class="blue-title grid-top-double-margin grid-bottom-double-margin">{% trans "Contact Us" %}</h1>
+      <div class="row">
+        <div class="medium-12 columns">
+          <div class="success callout grid-bottom-double-margin">
+            <p>{% trans "Sent the message. Thank you for contacting us." %}</p>
+            <p>{% trans "We will check the message and reply in case of need." %}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,30 @@
+.links-sidebar {
+  list-style-type: none;
+  margin: 0;
+  padding: rem-calc(25) rem-calc(20) rem-calc(40);
+  background: $dark-blue;
+  color: white;
+
+  li {
+    margin: rem-calc(8) 0;
+  }
+  a {
+    color: white;
+
+    &:hover {
+      color: $anchor-color;
+    }
+  }
+
+  .active {
+    a {
+      color: $anchor-color;
+    }
+  }
+}
+
+.links-sub-title {
+  margin-bottom: 0;
+  padding-top: rem-calc(10);
+  padding-bottom: rem-calc(10);
+}
