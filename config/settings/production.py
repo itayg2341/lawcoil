@@ -1,3 +1,6 @@
+from __future__ import absolute_import, unicode_literals
+# LOCAL DEVELOPMENT OVERRIDE FOR PRODUCTION SETTINGS
+DEBUG = False
 # -*- coding: utf-8 -*
 '''
 Production Configurations
@@ -8,11 +11,6 @@ Production Configurations
 - Use Redis on Heroku
 
 '''
-from __future__ import absolute_import, unicode_literals
-
-# from boto.s3.connection import OrdinaryCallingFormat
-from django.utils import six
-
 
 from .common import *  # noqa
 
@@ -36,8 +34,9 @@ SECURITY_MIDDLEWARE = (
 )
 
 
-# Make sure djangosecure.middleware.SecurityMiddleware is listed first
-MIDDLEWARE_CLASSES = SECURITY_MIDDLEWARE + MIDDLEWARE_CLASSES
+
+# Prepend SECURITY_MIDDLEWARE to the MIDDLEWARE list
+MIDDLEWARE = SECURITY_MIDDLEWARE + tuple(MIDDLEWARE)
 
 SECURE_HSTS_SECONDS = 31536000
 SECURE_HSTS_PRELOAD = True
@@ -57,6 +56,7 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 # Hosts/domain names that are valid for this site
 # See https://docs.djangoproject.com/en/1.6/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['law.co.il'])
+print("[DEBUG] ALLOWED_HOSTS:", ALLOWED_HOSTS)
 # END SITE CONFIGURATION
 
 # INSTALLED_APPS += ("gunicorn", )
@@ -89,8 +89,8 @@ ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['law.co.il'])
 #         AWS_EXPIRY, AWS_EXPIRY))
 # }
 
-STATIC_ROOT = '/var/www/django-law.co.il/static/'
-MEDIA_ROOT = '/var/www/django-law.co.il/media/'
+STATIC_ROOT = '/home/itay_g/lawcoil/staticfiles'
+MEDIA_ROOT = '/home/itay_g/lawcoil/mediafiles'
 
 # URL that handles the media served from MEDIA_ROOT, used for managing
 # stored files.
@@ -125,30 +125,34 @@ EMAIL_USE_TLS = True
 
 # TEMPLATE CONFIGURATION
 # ------------------------------------------------------------------------------
-# See:
-# https://docs.djangoproject.com/en/dev/ref/templates/api/#django.template.loaders.cached.Loader
-TEMPLATES[0]['OPTIONS']['loaders'] = [
-    ('django.template.loaders.cached.Loader', [
-        'django.template.loaders.filesystem.Loader', 'django.template.loaders.app_directories.Loader', ]),
-]
+# LOCAL DEVELOPMENT OVERRIDE FOR PRODUCTION SETTINGS
+DEBUG = False
+# -*- coding: utf-8 -*
+'''
+Production Configurations
 
-# DATABASE CONFIGURATION
-# ------------------------------------------------------------------------------
-# Raises ImproperlyConfigured exception if DATABASE_URL not in os.environ
-DATABASES['default'] = env.db("DATABASE_URL")
+- Use djangosecure
+- Use Amazon's S3 for storing static files and uploaded media
+- Use mailgun to send emails
+- Use Redis on Heroku
 
-# CACHING
+'''
+
+
+from .common import *  # noqa
+
+# CACHES CONFIGURATION
 # ------------------------------------------------------------------------------
-# Heroku URL does not pass the DB number, so we parse it in
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#caches
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        #"LOCATION": "{0}/{1}".format(env.cache_url('REDIS_URL', default="redis://127.0.0.1:6379"), 0),
+        # "LOCATION": "{0}/{1}".format(env.cache_url('REDIS_URL', default="redis://127.0.0.1:6379"), 0),
         "LOCATION": "redis://127.0.0.1:6379/0",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
             "IGNORE_EXCEPTIONS": True,  # mimics memcache behavior.
-                                        # http://niwinz.github.io/django-redis/latest/#_memcached_exceptions_behavior
+            # http://niwinz.github.io/django-redis/latest/#_memcached_exceptions_behavior
         }
     }
 }
@@ -202,7 +206,7 @@ LOGGING = {
     }
 }
 
-PREPEND_WWW = True
+PREPEND_WWW = False
 
 # Custom Admin URL, use {% url 'admin:index' %}
 ADMIN_URL = env('DJANGO_ADMIN_URL')

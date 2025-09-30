@@ -1,0 +1,38 @@
+html {
+  margin: 3em 4em; }
+
+.main-header {
+  display: none; }
+
+.main-content {
+  border: 0 none; }
+
+.main-footer {
+  display: none; }
+
+.sidebar-contrib-photo {
+  display: none; }
+
+.sidebar-contrib-name strong {
+  font-weight: normal; }
+
+.item-tags {
+  display: none; }
+
+.item-actions {
+  display: none; }
+
+.footer-signup {
+  display: none; }
+
+.reading-time {
+  display: none; }
+
+.listing-time {
+  font-weight: normal;
+  text-align: right; }
+
+.sidebar-contrib {
+  text-align: right; }
+
+/*# sourceMappingURL=print_rtl.css.map */

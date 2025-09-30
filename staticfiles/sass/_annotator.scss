@@ -1,0 +1,17 @@
+html[dir="rtl"] {
+  .annotator-editor {
+    .annotator-controls {
+      text-align: left;
+    }
+  }
+
+  .annotator-widget * {
+    text-align: right;
+  }
+
+  .annotator-viewer {
+    .annotator-controls {
+      float: left;
+    }
+  }
+}

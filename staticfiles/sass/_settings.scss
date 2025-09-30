@@ -1,0 +1,51 @@
+// foundation variables
+$global-width: rem-calc(1170);
+$global-radius: rem-calc(20);
+$body-font-color: #2f3847;
+$body-font-family: 'Open Sans', Helvetica, Arial, sans-serif !default;
+$header-font-family: 'Open Sans Condensed', 'Open Sans', Helvetica, Arial, sans-serif !default;
+$header-font-weight: 300;
+$primary-color: #3c7fb2;
+$anchor-color: $primary-color;
+$accordionmenu-arrows: false;
+$menu-item-padding: 0.5rem 0;
+$menu-margin-nested: 2rem;
+$reveal-background: transparent;
+$reveal-overlay-background: rgba(white, 0.65);
+$dropdown-radius: 0;
+$dropdown-border: 0 none;
+$tooltip-radius: 0;
+$pagination-item-padding: rem-calc(3);
+$pagination-font-size: rem-calc(18);
+$pagination-arrows: false;
+$pagination-item-background-current: transparent;
+$pagination-item-color-current: $primary-color;
+$pagination-margin-bottom: 0;
+
+// our own custom styles
+
+$main-header-margin-top: rem-calc(34);
+$main-header-blue: $primary-color;
+$line-color: #b9b9b9;
+$alt-blue: #9eccee;
+$alt-red: #db717b;
+$dark-blue: #333949;
+$light-gray: #f1f5f8;
+$pale-blue: #d1eafe;
+
+$language-start: left !default;
+$language-end: right !default;
+
+
+$main-header-bottom-nav-height: rem-calc(47);
+$main-header-search-button-width: rem-calc(48);
+
+$categories-font-path: '../fonts';
+$almoni-tzar-font-path: '../fonts';
+
+$side-menu-width: rem-calc(300);
+$side-menu-width-small: rem-calc(220);
+$side-menu-background-color: $body-font-color;
+$side-menu-text-color: white;
+
+$default-avatar: "../images/user.png"

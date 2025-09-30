@@ -1,0 +1,344 @@
+.main-header {
+  text-align: center;
+  margin-top: $main-header-margin-top;
+
+  .slogan {
+    color: $main-header-blue;
+    font-size: 1.5rem;
+  }
+
+  @include breakpoint(medium down) {
+    margin-top: $main-header-margin-top - 0.5;
+    border-bottom: 1px solid $line-color;
+
+    .anon & {
+      padding-bottom: rem-calc(8px);
+    }
+  }
+
+  .logo {
+    @include breakpoint(medium only) {
+      margin-bottom: 0;
+    }
+
+    img {
+      @include breakpoint(medium only) {
+        width: 130px;
+      }
+      @include breakpoint(small only) {
+        width: 90px;
+      }
+    }
+  }
+}
+
+.alt-login {
+  position: absolute;
+  top: $main-header-margin-top - 0.5;
+  #{$language-end}: rem-calc(12px);
+  font-size: 1.25rem;
+
+  @include breakpoint(medium only) {
+    line-height: 4rem;
+  }
+  @include breakpoint(small only) {
+    line-height: 2rem;
+  }
+}
+
+.header-social-links {
+  display: inline-block;
+  margin-#{$language-start}: 20px;
+
+  a {
+    display: inline-block;
+    margin-#{$language-start}: 5px;
+  }
+}
+
+.main-header-top-nav, .main-header-bottom-nav {
+  font-size: 1.5rem;
+}
+
+.main-header-bottom-nav {
+  border-top: 1px solid $line-color;
+  border-bottom: 1px solid $line-color;
+}
+
+.main-header-bottom-inner {
+  position: relative;
+}
+
+.header-login {
+  a {
+    display: inline-block;
+    padding: 0 10px 0 10px;
+  }
+}
+
+$user-logo-height: 37px;
+.header-logged-in {
+  display: inline-block;
+  height: $user-logo-height + 2;
+  line-height: $user-logo-height + 2;
+  padding-#{$language-end}: 50px;
+  position: relative;
+
+  &.no-avatar {
+    background: url($default-avatar) 0 50% no-repeat;
+  }
+
+  .header-logged-in-avatar {
+    position: absolute;
+    display: block;
+    top: 0;
+    height: $user-logo-height;
+    width: $user-logo-height;
+    #{$language-end}: 0;
+    overflow: hidden;
+    border-radius: $user-logo-height / 2;
+    border: 2px solid $anchor-color;
+
+    img {
+      display: block;
+    }
+  }
+  @include breakpoint(medium) {
+    margin-#{$language-end}: 3em;
+  }
+
+  html[dir=ltr] & {
+    background-position: 100% 50%;
+  }
+}
+
+
+.header-lang-nav {
+  .gray-link {
+    display: inline-block;
+    margin-#{$language-end}: rem-calc(20px);
+    @include breakpoint(medium down) {
+      margin-#{$language-end}: rem-calc(8px);
+    }
+  }
+}
+
+.alt-lang-nav {
+  position: absolute;
+  top: $main-header-margin-top - 0.5;
+  margin-#{$language-start}: rem-calc(12px);
+
+  .language-select {
+    font-size: 1.25rem;
+  }
+
+  .gray-link {
+    display: inline-block;
+    margin-#{$language-end}: rem-calc(8px);
+  }
+
+  @include breakpoint(medium only) {
+    line-height: 4rem;
+  }
+}
+
+@mixin main-header-about-button {
+  height: $main-header-bottom-nav-height;
+  line-height: $main-header-bottom-nav-height - rem-calc(1);
+  width: 52px;
+  color: white;
+  background-color: $body-font-color;
+  text-align: center;
+  font-weight: bold;
+  font-size: 2rem;
+
+  &:hover {
+    color: $alt-blue;
+  }
+}
+
+.main-header-about-link {
+  @include main-header-about-button;
+  display: inline-block;
+}
+
+.main-header-about-slogan {
+  position: absolute;
+  #{$language-end}: 0;
+  height: 100%;
+  color: white;
+  background-color: $body-font-color;
+  width: 0;
+  overflow: hidden;
+  transition: width 0.5s ease-in-out;
+  font-size: 1rem;
+  line-height: $main-header-bottom-nav-height - rem-calc(1);
+
+  &.expanded {
+    width: 100%;
+    padding-#{$language-start}: 2em;
+    text-align: $language-start;
+
+    .main-header-about-close {
+      display: block;
+    }
+  }
+}
+
+.main-header-about-close {
+  @include main-header-about-button;
+  position: absolute;
+  #{$language-end}: 0;
+  top: 0;
+  font-weight: normal;
+  display: none;
+  font-size: 1.5rem;
+}
+
+.top-search {
+  background-color: $pale-blue;
+  height: $main-header-bottom-nav-height;
+  position: relative;
+  transition: width 0.5s ease-in-out;
+  overflow: hidden;
+
+  .main-header-bottom-inner & {
+    @include breakpoint(medium only) {
+      position: absolute;
+      #{$language-start}: 0;
+      width: 0;
+    }
+
+    &.expanded {
+      display: block;
+      width: 100%;
+    }
+  }
+
+}
+
+#search {
+  background: transparent;
+  border: 0 none;
+  height: 100%;
+  box-shadow: none;
+  position: absolute;
+  #{$language-end}: $main-header-search-button-width;
+  #{$language-start}: 0;
+  top: 0;
+  bottom: 0;
+  width: auto;
+}
+
+.search-button {
+  position: absolute;
+  #{$language-end}: 0;
+  top: 0;
+  height: $main-header-bottom-nav-height;
+  line-height: $main-header-bottom-nav-height;
+  width: $main-header-search-button-width;
+}
+
+.top-menu {
+  list-style-type: none;
+  margin: 0;
+
+  li {
+    display: inline-block;
+    margin: 0;
+    line-height: $main-header-bottom-nav-height;
+
+    a {
+      display: block;
+      height: $main-header-bottom-nav-height;
+      padding: 0 rem-calc(5);
+    }
+  }
+}
+
+.main-header-user-dd-menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  background-color: $alt-blue;
+  display: none;
+  text-align: $language-start;
+
+  &.expanded {
+    display: block;
+  }
+
+  a {
+    display: inline-block;
+    margin: 0 1rem;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+#alt-header-logged-in-dropdown {
+  background-color: $alt-blue;
+  width: 100%;
+  padding: 1rem 2rem;
+
+  a {
+    display: block;
+    text-align: right;
+    padding: rem-calc(4);
+    font-weight: bold;
+  }
+}
+
+.search-expand {
+  background-color: $pale-blue;
+  height: $main-header-bottom-nav-height;
+  display: block;
+  text-align: center;
+  line-height: $main-header-bottom-nav-height;
+}
+
+.alt-header-logged-in {
+
+  @include breakpoint(small only) {
+    border-top: 1px solid $line-color;
+  }
+
+  a {
+    display: block;
+  }
+
+  &.no-avatar {
+    background: url($default-avatar) 99% 50% no-repeat;
+    padding-#{$language-start}: 45px;
+
+    html[dir=ltr] & {
+      background-position: 0 50%;
+    }
+  }
+
+  .header-logged-in-avatar {
+    display: inline-block;
+    height: $user-logo-height * 2 / 3;
+    width: $user-logo-height * 2 / 3;
+    overflow: hidden;
+    border-radius: $user-logo-height / 2;
+    border: 2px solid $anchor-color;
+    vertical-align: middle;
+
+    img {
+      display: block;
+      height: 100%;
+      width: 100%;
+    }
+
+  }
+}
+
+.advanced-search-link {
+  padding: rem-calc(map-get($grid-column-gutter, medium) / 4) 0;
+  display: inline-block;
+}

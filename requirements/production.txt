@@ -12,4 +12,4 @@ django-storages>=1.14.2
 Collectfast>=2.2.0
 
 # Mailgun Support
-django-mailgun>=0.9.1
+## django-mailgun removed: not available on PyPI, use django-mailgun2 or configure Mailgun via EMAIL_BACKEND

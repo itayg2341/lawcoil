@@ -1,0 +1,519 @@
+.gray-link {
+  color: $body-font-color;
+}
+
+.red-link, .red {
+  color: $alt-red;
+}
+
+.white-link {
+  color: white;
+
+  &:hover {
+    color: $pale-blue;
+  }
+}
+
+.main-content {
+  @include breakpoint(large) {
+    border-left: 1px solid $line-color;
+    border-right: 1px solid $line-color;
+  }
+}
+
+.no-border {
+  border: 0 none !important;
+}
+
+
+.text-start {
+  text-align: $language-start;
+}
+
+.text-end {
+  text-align: $language-end;
+}
+
+.text-small {
+  font-size: $small-font-size;
+}
+
+.text-large {
+  font-size: larger;
+}
+
+.float-start {
+  float: $language-start;
+}
+
+.float-end {
+  float: $language-end;
+}
+
+@include breakpoint(large) {
+  .float-start-large {
+    float: $language-start;
+  }
+
+  .float-end-large {
+    float: $language-end;
+  }
+}
+
+.alt-blue {
+  @include button-style($alt-blue, auto, $body-font-color);
+}
+
+.dark-blue {
+  @include button-style($body-font-color, auto, white);
+
+  &:hover {
+    background-color: lighten($body-font-color, 15%);
+  }
+}
+
+.alt-red {
+  color: $alt-red !important;
+}
+
+.primary-blue {
+  color: $primary-color;
+}
+
+.grid-padded {
+  @each $breakpoint, $value in $grid-column-gutter {
+    $padding: rem-calc($value) / 2;
+
+    @include breakpoint($breakpoint) {
+      padding-left: $padding;
+      padding-right: $padding;
+    }
+
+    @include breakpoint($breakpoint only) {
+      &.no-padding-for-#{$breakpoint} {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+  }
+}
+
+.grid-padded-small-only {
+  @include breakpoint(small only){
+    padding-left: map-get($grid-column-gutter, small) / 2;
+    padding-right: map-get($grid-column-gutter, small) / 2;
+  }
+}
+
+.grid-start-padded {
+  @each $breakpoint, $value in $grid-column-gutter {
+    $padding: rem-calc($value) / 2;
+
+    @include breakpoint($breakpoint) {
+      padding-#{$language-start}: $padding;
+    }
+  }
+}
+
+.grid-end-padded {
+  @each $breakpoint, $value in $grid-column-gutter {
+    $padding: rem-calc($value) / 2;
+
+    @include breakpoint($breakpoint) {
+      padding-#{$language-end}: $padding;
+    }
+  }
+}
+
+.grid-top-padded {
+  @each $breakpoint, $value in $grid-column-gutter {
+    $padding: rem-calc($value) / 2;
+
+    @include breakpoint($breakpoint) {
+      padding-top: $padding;
+    }
+  }
+}
+.grid-top-margin {
+  @each $breakpoint, $value in $grid-column-gutter {
+    $margin: rem-calc($value) / 2;
+
+    @include breakpoint($breakpoint) {
+      margin-top: $margin;
+
+      &-for-#{$breakpoint} {
+        margin-top: $margin;
+      }
+    }
+  }
+}
+
+.grid-bottom-padded {
+  @each $breakpoint, $value in $grid-column-gutter {
+    $padding: rem-calc($value) / 2;
+
+    @include breakpoint($breakpoint) {
+      padding-bottom: $padding;
+    }
+  }
+}
+
+.grid-bottom-double-margin {
+  @each $breakpoint, $value in $grid-column-gutter {
+    $margin: rem-calc($value);
+
+    @include breakpoint($breakpoint) {
+      margin-bottom: $margin;
+    }
+  }
+
+  &-for-large {
+    @include breakpoint(large) {
+      margin-bottom: rem-calc(map-get($grid-column-gutter, 'medium'));
+    }
+  }
+}
+
+.grid-all-double-padded {
+  @each $breakpoint, $value in $grid-column-gutter {
+    $padding: rem-calc($value);
+
+    @include breakpoint($breakpoint) {
+      padding: $padding;
+    }
+  }
+}
+
+.grid-top-double-margin {
+  @each $breakpoint, $value in $grid-column-gutter {
+    $margin: rem-calc($value);
+
+    @include breakpoint($breakpoint) {
+      margin-top: $margin;
+    }
+  }
+
+  &-for-large {
+    @include breakpoint(large) {
+      margin-top: rem-calc(map-get($grid-column-gutter, 'medium'));
+    }
+  }
+}
+
+.grid-top-bottom-padded {
+  @each $breakpoint, $value in $grid-column-gutter {
+    $padding: rem-calc($value) / 2;
+
+    @include breakpoint($breakpoint) {
+      padding-top: $padding;
+      padding-bottom: $padding;
+    }
+  }
+}
+
+.grid-all-padded {
+  @each $breakpoint, $value in $grid-column-gutter {
+    $padding: rem-calc($value) / 2;
+
+    @include breakpoint($breakpoint) {
+      padding: $padding;
+    }
+  }
+}
+
+.border-top {
+  border-top: 1px solid $line-color;
+
+  @each $breakpoint in $breakpoint-classes {
+    @include breakpoint($breakpoint) {
+      &-for-#{$breakpoint} {
+        border-top: 1px solid $line-color;
+      }
+    }
+  }
+}
+
+.border-bottom {
+  border-bottom: 1px solid $line-color;
+}
+
+.border-bottom-medium-up {
+  @include breakpoint(medium) {
+    border-bottom: 1px solid $line-color;
+  }
+}
+
+.border-start {
+  border-#{$language-start}: 1px solid $line-color;
+}
+
+.border-end {
+  border-#{$language-end}: 1px solid $line-color;
+}
+
+.border-end-medium-up {
+  @include breakpoint(medium) {
+    border-#{$language-end}: 1px solid $line-color;
+  }
+}
+
+.border-all {
+  border: 1px solid $line-color;
+}
+
+.bottom-spacer {
+  height: rem-calc(80);
+}
+
+.menu-inline {
+  li {
+    a {
+      display: inline;
+    }
+  }
+
+  .fa {
+    font-size: smaller;
+  }
+}
+
+.smaller {
+  font-size: smaller;
+}
+
+.larger-for-small {
+  @include breakpoint(small only) {
+    font-size: 150%;
+  }
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.normal {
+  font-weight: 400;
+}
+
+
+.header-even-margin {
+  margin-top: 0.4em;
+  margin-bottom: 0.4em;
+}
+
+$splash-image-height: 420px;
+$tall-splash-image-height: 615px;
+
+.listing-col, .hot-items-col {
+
+  @include breakpoint(medium) {
+    padding-bottom: rem-calc(50);
+  }
+
+  .dark-blue.button {
+    font-weight: bold;
+    font-size: 1em;
+  }
+}
+
+.index-items-col-2, .index-items-col-3 {
+  @include breakpoint(large) {
+    padding-top: $splash-image-height;
+  }
+}
+
+.index-items-col-3 {
+  position: relative;
+  overflow: visible;
+
+  .large-splash-image {
+    display: none;
+    @include breakpoint(large up) {
+      background-color: $body-background;
+      display: block;
+      width: 201%;
+      height: $splash-image-height;
+      #{$language-end}: 0;
+      top: 0;
+      position: absolute;
+      z-index: 5;
+      background-size: 100% 100%;
+    }
+  }
+}
+
+.tall-splash-image {
+  width: 100%;
+  height: $tall-splash-image-height;
+  background-size: 100% 100%;
+}
+
+.is-accordion-submenu-parent {
+  > a::after {
+    font-size: smaller;
+    font-family: FontAwesome;
+    content: "\f067";
+    display: inline-block;
+    padding: 0.5rem;
+  }
+
+  &[aria-expanded="true"] {
+    > a::after {
+      content: "\f078";
+    }
+  }
+}
+
+.alt-blue-bg {
+  background-color: $alt-blue;
+}
+
+.light-gray-bg {
+  background-color: $light-gray;
+}
+
+.light-gray-bg-small {
+  @include breakpoint(small only) {
+    background-color: $light-gray;
+  }
+}
+
+.reveal {
+  &.full-width {
+    width: 100%;
+    max-width: none;
+    border-radius: 0;
+    border: 0;
+    margin: 0;
+    padding-#{$language-start}: 20px;
+    padding-#{$language-end}: 0;
+    outline: none;
+    overflow: hidden;
+
+    @include breakpoint(medium down) {
+      padding-#{$language-start}: 0;
+      padding-#{$language-end}: 0;
+    }
+  }
+
+  .inner {
+    position: relative;
+  }
+
+}
+
+body {
+  &.is-reveal-open {
+    // overflow: auto;
+  }
+}
+
+.label-hidden {
+  label {
+    @include element-invisible;
+  }
+}
+
+.large-margined {
+  margin-top: 8em;
+  margin-bottom: 8em;
+}
+
+.no-margin {
+  margin: 0;
+}
+
+.filter-by {
+  padding-top: 2em;
+  padding-bottom: 1em;
+  text-align: center;
+
+  .button {
+    margin: 1ex;
+  }
+}
+
+.pagination {
+  font-weight: bold;
+}
+
+.with-error, .error {
+  color: $alt-red;
+
+  label {
+    color: $alt-red;
+  }
+  input, textarea {
+    border-color: $alt-red;
+    margin-bottom: 0;
+  }
+
+  ul {
+    list-style-type: none;
+    margin-#{$language-start}: 0;
+  }
+}
+
+.title-sub {
+  color: $body-font-color;
+  font-size: rem-calc(18);
+
+  @include breakpoint(small only) {
+    display: block;
+    padding-top: rem-calc(8);
+  }
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.blue-title {
+  color: $anchor-color;
+}
+
+.icon-with-circle {
+  border: 1px solid $anchor-color;
+  border-radius: 50%;
+  padding: rem-calc(6);
+}
+
+.title-font {
+  font-family: "almoni-tzar", 'Open Sans Condensed', "Open Sans", Helvetica, Arial, sans-serif;
+
+  &.button {
+    padding: rem-calc(8) rem-calc(20);
+  }
+}
+
+.block-image {
+  width: 100%;
+  display: block;
+  height: auto;
+}
+
+.subtitle {
+  font-family: $header-font-family;
+  color: $primary-color;
+  font-size: 150%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.row {
+  @include breakpoint(small only) {
+    &.no-margin-for-small {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+}
+
+#about-popup-menu {
+  &.dropdown-pane {
+    width: 100%;
+    padding: 0;
+  }
+}
