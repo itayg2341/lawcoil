@@ -91,6 +91,7 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 MIDDLEWARE = [
     # Make sure djangosecure.middleware.SecurityMiddleware is listed first
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',  # Added for Django i18n support
     'allauth.account.middleware.AccountMiddleware',
     # 'solid_i18n.middleware.SolidLocaleMiddleware',  # Removed for Django 4.x compatibility
     'django.middleware.common.CommonMiddleware',

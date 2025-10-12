@@ -8,6 +8,7 @@ from django.contrib import admin
 from django.contrib.auth.views import LogoutView
 from django.views import defaults as default_views
 from django.views.generic import RedirectView
+from django.conf.urls.i18n import i18n_patterns
 
 from law.content.const import CONTENT_TYPES_RE
 from law.content.views import HomeView
@@ -15,10 +16,19 @@ from law.seo.urls import urlpatterns as seo_patterns
 from law.mailinglists.views import UnsubscribeView
 
 
-urlpatterns = seo_patterns + [
-    re_path(r'^$', HomeView.as_view(), name='home'),
+# Non-internationalized URLs (admin, API, etc.)
+urlpatterns = [
     # Django Admin, use {% url 'admin:index' %}
     re_path(settings.ADMIN_URL, admin.site.urls),
+    
+    # Add language switching URLs
+    re_path(r'^i18n/', include('django.conf.urls.i18n')),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# Internationalized URLs (user-facing content)
+urlpatterns += i18n_patterns(
+    *seo_patterns,  # Include SEO patterns
+    re_path(r'^$', HomeView.as_view(), name='home'),
 
     # User management
     re_path(r'^users/', include(('law.users.urls', 'users'), namespace='users')),
@@ -47,7 +57,25 @@ urlpatterns = seo_patterns + [
     re_path(r'^annotations/', include(('law.annotations.urls', 'annotations'), namespace='annotations')),
     re_path(r'unsubscribe/(?P<hash>[^/].*)/', UnsubscribeView.as_view(), name='unsubscribe'),
     re_path(r'^', include(('law.pages.urls', 'pages'), namespace='pages')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    prefix_default_language=False  # This allows Hebrew (default) to not have /he/ prefix
+)
+
+urlpatterns += static(
+    'node_modules', document_root=str(settings.ROOT_DIR.path('node_modules')))
+
+if settings.DEBUG:
+    # This allows the error pages to be debugged during development, just visit
+    # these url in browser to see how these error pages look like.
+    urlpatterns += [
+        re_path(r'^400/$', default_views.bad_request),
+        re_path(r'^403/$', default_views.permission_denied),
+        re_path(r'^404/$', default_views.page_not_found),
+        re_path(r'^500/$', default_views.server_error),
+    ]
+
+    # Add Django Debug Toolbar URLs
+    import debug_toolbar
+    urlpatterns = [re_path(r'^__debug__/', include(debug_toolbar.urls))] + urlpatterns
 
 urlpatterns += static(
     'node_modules', document_root=str(settings.ROOT_DIR.path('node_modules')))
