@@ -268,8 +268,8 @@
           </h5>
         </div>
         <form method="get" action="{% url 'search:index'%}" class="hide-for-medium top-search">
-          <label class="show-for-sr" for="search">{% trans "Search" %}</label>
-          <input type="text" name="q" id="search" value="{{ request.GET.q }}">
+          <label class="show-for-sr" for="search-mobile">{% trans "Search" %}</label>
+          <input type="text" name="q" id="search-mobile" value="{{ request.GET.q }}">
           <button type="submit" class="search-button" aria-label="{% trans "Search" %}">
             <i class="fa fa-search"></i>
           </button>

@@ -1,12 +1,23 @@
 
 from django import template
 from django.utils.http import urlencode
+from django.utils.translation import get_language
 
 register = template.Library()
 
 @register.filter
 def add_direction(value, arg=None):
-    """Dummy add_direction filter for legacy template compatibility. Returns value unchanged."""
+    """
+    Add direction suffix to CSS filenames for RTL languages.
+    For Hebrew (RTL), changes 'style.css' to 'style_rtl.css'
+    """
+    language = get_language() or 'he'
+    
+    # Only modify for RTL languages and CSS files
+    if language == 'he' and value.endswith('.css'):
+        # Replace .css with _rtl.css
+        return value.replace('.css', '_rtl.css')
+    
     return value
 
 

@@ -20,6 +20,11 @@ TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
 # Note: This key only used for development and testing.
 SECRET_KEY = env("DJANGO_SECRET_KEY", default=')%v4j93!a!xq)d@gqkbcx5^4yk=n=jksk$y6rcu15ngww*4&do')
 
+# HOSTS CONFIGURATION
+# ------------------------------------------------------------------------------
+# Allow all hosts during development including the production IP for testing
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]', '35.226.53.245']
+
 # Mail settings
 # ------------------------------------------------------------------------------
 EMAIL_HOST = 'localhost'

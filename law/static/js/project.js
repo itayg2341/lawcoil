@@ -1,4 +1,4 @@
-(function($) {
+(function ($) {
   'use strict';
 
   function topicsGetter(e) {
@@ -19,7 +19,7 @@
 
     $this.html('<i class="fa fa-spinner fa-pulse fa-fw"></i><span class="show-for-sr">Loading...</span>');
 
-    $.get(topicsParams.topicsUrl, params).done(function(result) {
+    $.get(topicsParams.topicsUrl, params).done(function (result) {
       if (result.rendered_items) {
         $this.html(origContent);
         if (result.category === 'hot-topics') {
@@ -29,7 +29,7 @@
           }
         } else {
           var $topicsColumns = $('.topics-col:visible'),
-              totalCols = $topicsColumns.length;
+            totalCols = $topicsColumns.length;
 
           for (var i = 0, l = result.rendered_items.length; i < l; i++) {
             var item = result.rendered_items[i];
@@ -45,7 +45,18 @@
         else {
           $parent.remove();
         }
-        new Foundation.Equalizer($('#main-equalizer')).applyHeight();
+        // Safe Foundation.Equalizer initialization with proper DOM checks
+        try {
+          var $equalizer = $('#main-equalizer');
+          if ($equalizer.length > 0 && typeof Foundation !== 'undefined' && Foundation.Equalizer) {
+            var equalizer = new Foundation.Equalizer($equalizer);
+            if (equalizer && typeof equalizer.applyHeight === 'function') {
+              equalizer.applyHeight();
+            }
+          }
+        } catch (e) {
+          console.log('Foundation Equalizer error:', e);
+        }
       }
     });
 
@@ -62,7 +73,18 @@
     }
 
     var $modal = $('#loginModal');
-    $modal.foundation('open');
+    // Safe Foundation modal opening with validation
+    try {
+      if ($modal.length > 0 && $modal.hasClass('reveal')) {
+        $modal.foundation('open');
+      } else {
+        console.log('Login modal not found or not properly initialized');
+      }
+    } catch (e) {
+      console.log('Foundation modal open error:', e);
+      // Fallback: show modal with basic CSS
+      $modal.show();
+    }
   }
 
   function doLogin(ev) {
@@ -74,10 +96,10 @@
     $form.find('.form-error').remove();
 
     $.post($form.attr('action'), $form.serialize())
-      .done(function() {
+      .done(function () {
         window.location.reload();
       })
-      .fail(function(xhr) {
+      .fail(function (xhr) {
         var result = xhr.responseJSON;
 
         if (result.form_errors) {
@@ -94,7 +116,7 @@
           }
         }
       })
-      .always(function() {
+      .always(function () {
         $('#submit-id-submit_login').prop('disabled', false);
       });
   }
@@ -106,7 +128,7 @@
       url = $this.attr('href');
 
     $.post(url, {})
-      .done(function(result) {
+      .done(function (result) {
         if (result.success) {
           var parent = $this.parent();
 
@@ -123,7 +145,7 @@
       url = $this.attr('href');
 
     $.post(url, {})
-      .done(function(result) {
+      .done(function (result) {
         if (result.success) {
           $this.parent().parent().fadeOut();
         }
@@ -137,9 +159,18 @@
       url = $this.attr('href'),
       $icon = $this.find('.fa');
 
-    $this.foundation('hide');
+    // Safe Foundation hide method with validation
+    try {
+      if ($this.length > 0 && typeof $this.foundation === 'function') {
+        $this.foundation('hide');
+      }
+    } catch (e) {
+      console.log('Foundation hide error:', e);
+      // Fallback: hide with basic CSS
+      $this.hide();
+    }
     $.post(url, {})
-      .done(function(result) {
+      .done(function (result) {
         $icon.toggleClass('fa-bookmark-o', !result.is_saved);
         $icon.toggleClass('fa-bookmark', result.is_saved);
 
@@ -148,11 +179,11 @@
         var el = $('<div class="callout success"></div>')
           .html(result.message);
         el.appendTo($this.parent().parent());
-        setTimeout(function() {
-          el.fadeOut(500, function() {el.remove();});
+        setTimeout(function () {
+          el.fadeOut(500, function () { el.remove(); });
         }, 2000);
       })
-      .fail(function(result) {
+      .fail(function (result) {
         if (result.status === 401) {
           showLogin();
         }
@@ -171,7 +202,7 @@
 
     function handleChange() {
       var active = $radio_buttons.filter(':checked').val();
-      $selects.each(function() {
+      $selects.each(function () {
         var $this = $(this);
         $this.prop('disabled', $this.attr('id') !== 'id_' + active + '_topic');
       });
@@ -184,22 +215,22 @@
   function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie != '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = jQuery.trim(cookies[i]);
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
+      var cookies = document.cookie.split(';');
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = jQuery.trim(cookies[i]);
+        // Does this cookie string begin with the name we want?
+        if (cookie.substring(0, name.length + 1) == (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
         }
+      }
     }
     return cookieValue;
   }
 
   function addDynamicCsrfToken() {
     var csrftoken = getCookie('csrftoken');
-    $('form[method="post"]').each(function() {
+    $('form[method="post"]').each(function () {
       var $form = $(this),
         hasToken = !!($form.find('input[name="csrfmiddlewaretoken"]').length);
 
@@ -220,7 +251,7 @@
       totalCols = visibleCols.length;
 
     // sort the items in descending order
-    allItems.sort(function(a, b) {
+    allItems.sort(function (a, b) {
       var aDate = $(a).data('date'),
         bDate = $(b).data('date');
 
@@ -243,7 +274,7 @@
         isListingPage = $('.listing-with-images').length,
         col = 0;
 
-      allItems.each(function(index) {
+      allItems.each(function (index) {
         var imageToAppend = null,
           imageToPrepend = null;;
 
@@ -286,8 +317,49 @@
       });
     }
 
-    $(visibleCols.get(totalCols -1 )).append($('.more-button-container'))
-    Foundation.reInit('equalizer');
+    $(visibleCols.get(totalCols - 1)).append($('.more-button-container'))
+    // Enhanced Foundation.reInit with comprehensive error handling
+    try {
+      if (typeof Foundation !== 'undefined' && Foundation.reInit && typeof Foundation.reInit === 'function') {
+        // Check if equalizer elements exist and are properly initialized
+        var $equalizerElements = $('[data-equalizer]');
+        if ($equalizerElements.length > 0) {
+          // Validate each element has proper DOM methods before reInit
+          var validElements = $equalizerElements.filter(function () {
+            var elem = this;
+            return elem &&
+              typeof elem.getBoundingClientRect === 'function' &&
+              elem.offsetParent !== null && // Element is visible
+              $(elem).data('zfPlugin') !== undefined; // Has Foundation plugin data
+          });
+
+          if (validElements.length > 0) {
+            // Additional safety check before calling reInit
+            if (Foundation._plugins && Foundation._plugins['equalizer']) {
+              Foundation.reInit('equalizer');
+            } else {
+              console.log('Foundation equalizer plugin not available');
+            }
+          }
+        }
+      }
+    } catch (e) {
+      console.log('Foundation reInit error:', e);
+      // Fallback: try to manually trigger equalizer on individual elements
+      try {
+        $('[data-equalizer]').each(function () {
+          var $this = $(this);
+          if ($this.length && this.getBoundingClientRect) {
+            // Use Foundation's string method safely
+            if (Foundation.string && typeof Foundation.string === 'object') {
+              $this.foundation('_reflow');
+            }
+          }
+        });
+      } catch (fallbackError) {
+        console.log('Foundation fallback error:', fallbackError);
+      }
+    }
   }
 
   function getUrlParameter(sParam) {
@@ -307,42 +379,42 @@
     return null;
   };
 
-  $(document).ready(function() {
+  $(document).ready(function () {
 
     $('[data-topics-url]').on('click', topicsGetter);
 
-    $('.main-header-about-link').click(function(e) {
+    $('.main-header-about-link').click(function (e) {
       e.preventDefault();
       $('.main-header-about-slogan').addClass('expanded');
     });
 
-    $('.search-expand').click(function(e) {
+    $('.search-expand').click(function (e) {
       e.preventDefault();
       e.stopPropagation();
       $('.main-header-bottom-nav .top-search').addClass('expanded');
 
-      $('body').off('click').click(function() {
+      $('body').off('click').click(function () {
         $('.main-header-bottom-nav .top-search').removeClass('expanded');
       });
     });
 
 
-    $('.header-logged-in').click(function(e) {
+    $('.header-logged-in').click(function (e) {
       e.preventDefault();
       $('.main-header-user-dd-menu').addClass('expanded');
     });
 
-    $('.main-header-about-close').click(function(e) {
+    $('.main-header-about-close').click(function (e) {
       e.preventDefault();
       $('.main-header-about-slogan').removeClass('expanded');
     });
 
-    $('.main-header-user-dd-menu-close').click(function(e) {
+    $('.main-header-user-dd-menu-close').click(function (e) {
       e.preventDefault();
       $('.main-header-user-dd-menu').removeClass('expanded');
     });
 
-    $('#toggle-nav, #alt-toggle-nav').click(function(e) {
+    $('#toggle-nav, #alt-toggle-nav').click(function (e) {
       e.preventDefault();
       var $sideMenu = $('#side-menu'),
         menuHeight;
@@ -356,7 +428,7 @@
       $sideMenu.addClass('expanded');
     });
 
-    $('#side-menu-close').click(function(e) {
+    $('#side-menu-close').click(function (e) {
       e.preventDefault();
       $('#side-menu').removeClass('expanded');
     });
@@ -370,7 +442,7 @@
     // toggle arrow on dropdown show/hide
     var prevChevron;
 
-    $('[data-dropdown]').on('show.zf.dropdown', function(ev, $el) {
+    $('[data-dropdown]').on('show.zf.dropdown', function (ev, $el) {
       var fa = $el.prev().find('.fa'),
         elClass = fa.attr('class');
       if (elClass.indexOf('fa-chevron') > -1) {
@@ -379,7 +451,7 @@
       }
     });
 
-    $('[data-dropdown]').on('hide.zf.dropdown', function(ev, $el) {
+    $('[data-dropdown]').on('hide.zf.dropdown', function (ev, $el) {
       if (prevChevron) {
         var fa = $el.prev().find('.fa');
         fa.attr('class', prevChevron);
@@ -387,17 +459,17 @@
       }
     });
 
-    $('.alt-header-logged-in a').on('click', function(ev) {
+    $('.alt-header-logged-in a').on('click', function (ev) {
       ev.preventDefault();
     });
 
     setupSearchForm();
 
-    $('#id_avatar').on('change', function() {
+    $('#id_avatar').on('change', function () {
       $('.my-settings-file-description').text($(this).val());
     });
 
-    $('#knowledge-centers-switcher').on('change', function() {
+    $('#knowledge-centers-switcher').on('change', function () {
       var $this = $(this);
       if ($this.val()) {
         window.location.href = $this.data('baseUrl') + $this.val() + '/';
@@ -415,9 +487,9 @@
     if (document.dir === 'rtl') {
       options.icon = {
         position: {
-          bottom: {size: 50, units: 'px'},
-            left: {size: 0, units: 'px'},
-            type: 'fixed'
+          bottom: { size: 50, units: 'px' },
+          left: { size: 0, units: 'px' },
+          type: 'fixed'
         }
       };
     }
@@ -436,14 +508,20 @@
 
   reorderElementsOnMediaChange();
 
-  $(window).on('changed.zf.mediaquery', function(event, newSize, oldSize) {
-    reorderElementsOnMediaChange(newSize, oldSize);
+  $(window).on('changed.zf.mediaquery', function (event, newSize, oldSize) {
+    try {
+      reorderElementsOnMediaChange(newSize, oldSize);
+    } catch (e) {
+      console.log('Media query change error:', e);
+    }
   });
 
-  $('.advanced-search-link').click(function(e) {
+  $('.advanced-search-link').click(function (e) {
     e.preventDefault();
     var url = $('.top-search').attr('action');
-    var params = {q: $('#search').val(), adv: 1};
+    // Get search value from whichever search field is visible
+    var searchVal = $('#search:visible').val() || $('#search-mobile:visible').val() || '';
+    var params = { q: searchVal, adv: 1 };
     window.location.href = url + '?' + $.param(params);
     return false;
   });
@@ -462,9 +540,8 @@
  * Licensed under the New BSD License
  * See: http://www.opensource.org/licenses/bsd-license.php
  */
-(function($) {
-  $.fn.formset = function(opts)
-  {
+(function ($) {
+  $.fn.formset = function (opts) {
     var options = $.extend({}, $.fn.formset.defaults, opts),
       flatExtraClasses = options.extraClasses.join(' '),
       totalForms = $('#id_' + options.prefix + '-TOTAL_FORMS'),
@@ -473,14 +550,14 @@
       childElementSelector = 'input,select,textarea,label,div',
       $$ = $(this),
 
-      applyExtraClasses = function(row, ndx) {
+      applyExtraClasses = function (row, ndx) {
         if (options.extraClasses) {
           row.removeClass(flatExtraClasses);
           row.addClass(options.extraClasses[ndx % options.extraClasses.length]);
         }
       },
 
-      updateElementIndex = function(elem, prefix, ndx) {
+      updateElementIndex = function (elem, prefix, ndx) {
         var idRegex = new RegExp(prefix + '-(\\d+|__prefix__)-'),
           replacement = prefix + '-' + ndx + '-';
         if (elem.attr("for")) elem.attr("for", elem.attr("for").replace(idRegex, replacement));
@@ -488,11 +565,11 @@
         if (elem.attr('name')) elem.attr('name', elem.attr('name').replace(idRegex, replacement));
       },
 
-      hasChildElements = function(row) {
+      hasChildElements = function (row) {
         return row.find(childElementSelector).length > 0;
       },
 
-      showAddButton = function() {
+      showAddButton = function () {
         return maxForms.length == 0 ||   // For Django versions pre 1.2
           (maxForms.val() == '' || (maxForms.val() - totalForms.val() > 0));
       },
@@ -500,33 +577,33 @@
       /**
        * Indicates whether delete link(s) can be displayed - when total forms > min forms
        */
-      showDeleteLinks = function() {
+      showDeleteLinks = function () {
         return minForms.length == 0 ||   // For Django versions pre 1.7
           (minForms.val() == '' || (totalForms.val() - minForms.val() > 0));
       },
 
-      insertDeleteLink = function(row) {
+      insertDeleteLink = function (row) {
         var delCssSelector = $.trim(options.deleteCssClass).replace(/\s+/g, '.'),
           addCssSelector = $.trim(options.addCssClass).replace(/\s+/g, '.');
         if (row.is('TR')) {
           // If the forms are laid out in table rows, insert
           // the remove button into the last table cell:
-          row.children(':last').append('<a class="' + options.deleteCssClass +'" href="javascript:void(0)">' + options.deleteText + '</a>');
+          row.children(':last').append('<a class="' + options.deleteCssClass + '" href="javascript:void(0)">' + options.deleteText + '</a>');
         } else if (row.is('UL') || row.is('OL')) {
           // If they're laid out as an ordered/unordered list,
           // insert an <li> after the last list item:
-          row.append('<li><a class="' + options.deleteCssClass + '" href="javascript:void(0)">' + options.deleteText +'</a></li>');
+          row.append('<li><a class="' + options.deleteCssClass + '" href="javascript:void(0)">' + options.deleteText + '</a></li>');
         } else {
           // Otherwise, just insert the remove button as the
           // last child element of the form's container:
-          row.append('<a class="' + options.deleteCssClass + '" href="javascript:void(0)">' + options.deleteText +'</a>');
+          row.append('<a class="' + options.deleteCssClass + '" href="javascript:void(0)">' + options.deleteText + '</a>');
         }
         // Check if we're under the minimum number of forms - not to display delete link at rendering
-        if (!showDeleteLinks()){
+        if (!showDeleteLinks()) {
           row.find('a.' + delCssSelector).hide();
         }
 
-        row.find('a.' + delCssSelector).click(function() {
+        row.find('a.' + delCssSelector).click(function () {
           var row = $(this).parents('.' + options.formCssClass),
             del = row.find('input:hidden[id $= "-DELETE"]'),
             buttonRow = row.siblings("a." + addCssSelector + ', .' + options.formCssClass + '-add'),
@@ -544,20 +621,20 @@
             forms = $('.' + options.formCssClass).not('.formset-custom-template');
             totalForms.val(forms.length);
           }
-          for (var i=0, formCount=forms.length; i<formCount; i++) {
+          for (var i = 0, formCount = forms.length; i < formCount; i++) {
             // Apply `extraClasses` to form rows so they're nicely alternating:
             applyExtraClasses(forms.eq(i), i);
             if (!del.length) {
               // Also update names and IDs for all child controls (if this isn't
               // a delete-able inline formset) so they remain in sequence:
-              forms.eq(i).find(childElementSelector).each(function() {
+              forms.eq(i).find(childElementSelector).each(function () {
                 updateElementIndex($(this), options.prefix, i);
               });
             }
           }
           // Check if we've reached the minimum number of forms - hide all delete link(s)
-          if (!showDeleteLinks()){
-            $('a.' + delCssSelector).each(function(){$(this).hide();});
+          if (!showDeleteLinks()) {
+            $('a.' + delCssSelector).each(function () { $(this).hide(); });
           }
           // Check if we need to show the add button:
           if (buttonRow.is(':hidden') && showAddButton()) buttonRow.show();
@@ -567,7 +644,7 @@
         });
       };
 
-    $$.each(function(i) {
+    $$.each(function (i) {
       var row = $(this),
         del = row.find('input:checkbox[id $= "-DELETE"]');
       if (del.length) {
@@ -577,10 +654,10 @@
         if (del.is(':checked')) {
           // If an inline formset containing deleted forms fails validation, make sure
           // we keep the forms hidden (thanks for the bug report and suggested fix Mike)
-          del.before('<input type="hidden" name="' + del.attr('name') +'" id="' + del.attr('id') +'" value="on" />');
+          del.before('<input type="hidden" name="' + del.attr('name') + '" id="' + del.attr('id') + '" value="on" />');
           row.hide();
         } else {
-          del.before('<input type="hidden" name="' + del.attr('name') +'" id="' + del.attr('id') +'" />');
+          del.before('<input type="hidden" name="' + del.attr('name') + '" id="' + del.attr('id') + '" />');
         }
         // Hide any labels associated with the DELETE checkbox:
         $('label[for="' + del.attr('id') + '"]').hide();
@@ -602,7 +679,7 @@
         // If a form template was specified, we'll clone it to generate new form instances:
         template = (options.formTemplate instanceof $) ? options.formTemplate : $(options.formTemplate);
         template.removeAttr('id').addClass(options.formCssClass + ' formset-custom-template');
-        template.find(childElementSelector).each(function() {
+        template.find(childElementSelector).each(function () {
           updateElementIndex($(this), options.prefix, '__prefix__');
         });
         insertDeleteLink(template);
@@ -612,7 +689,7 @@
         template = $('.' + options.formCssClass + ':last').clone(true).removeAttr('id');
         template.find('input:hidden[id $= "-DELETE"]').remove();
         // Clear all cloned fields, except those the user wants to keep (thanks to brunogola for the suggestion):
-        template.find(childElementSelector).not(options.keepFieldValues).each(function() {
+        template.find(childElementSelector).not(options.keepFieldValues).each(function () {
           var elem = $(this);
           // If this is a checkbox or radiobutton, uncheck it.
           // This fixes Issue 1, reported by Wilson.Andrew.J:
@@ -641,20 +718,20 @@
         addButton = $$.filter(':last').next();
         if (hideAddButton) addButton.hide();
       }
-      addButton.click(function() {
+      addButton.click(function () {
         var formCount = parseInt(totalForms.val()),
           row = options.formTemplate.clone(true).removeClass('formset-custom-template'),
           buttonRow = $($(this).parents('tr.' + options.formCssClass + '-add').get(0) || this)
         delCssSelector = $.trim(options.deleteCssClass).replace(/\s+/g, '.');
         applyExtraClasses(row, formCount);
         row.insertBefore(buttonRow).show();
-        row.find(childElementSelector).each(function() {
+        row.find(childElementSelector).each(function () {
           updateElementIndex($(this), options.prefix, formCount);
         });
         totalForms.val(formCount + 1);
         // Check if we're above the minimum allowed number of forms -> show all delete link(s)
-        if (showDeleteLinks()){
-          $('a.' + delCssSelector).each(function(){$(this).show();});
+        if (showDeleteLinks()) {
+          $('a.' + delCssSelector).each(function () { $(this).show(); });
         }
         // Check if we've exceeded the maximum allowed number of forms:
         if (!showAddButton()) buttonRow.hide();

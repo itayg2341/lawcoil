@@ -287,7 +287,14 @@
     }
 
     $(visibleCols.get(totalCols -1 )).append($('.more-button-container'))
-    Foundation.reInit('equalizer');
+    // Foundation.reInit('equalizer'); // Commented out - causing errors
+    try {
+      if (typeof Foundation !== 'undefined' && Foundation.reInit) {
+        Foundation.reInit('equalizer');
+      }
+    } catch (e) {
+      console.log('Foundation reInit error:', e);
+    }
   }
 
   function getUrlParameter(sParam) {
@@ -443,7 +450,9 @@
   $('.advanced-search-link').click(function(e) {
     e.preventDefault();
     var url = $('.top-search').attr('action');
-    var params = {q: $('#search').val(), adv: 1};
+    // Get search value from whichever search field is visible
+    var searchVal = $('#search:visible').val() || $('#search-mobile:visible').val() || '';
+    var params = {q: searchVal, adv: 1};
     window.location.href = url + '?' + $.param(params);
     return false;
   });

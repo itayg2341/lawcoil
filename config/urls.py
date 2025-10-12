@@ -7,6 +7,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth.views import LogoutView
 from django.views import defaults as default_views
+from django.views.generic import RedirectView
 
 from law.content.const import CONTENT_TYPES_RE
 from law.content.views import HomeView
@@ -23,6 +24,8 @@ urlpatterns = seo_patterns + [
     re_path(r'^users/', include(('law.users.urls', 'users'), namespace='users')),
     re_path(r'^accounts/logout/$', LogoutView.as_view(next_page='/'),
         name="account_logout_without_confirm"),
+    re_path(r'^login/$', RedirectView.as_view(url='/accounts/login/', permanent=True), 
+        name="login_redirect"),
     re_path(r'^accounts/', include('allauth.urls')),
 
     # Your stuff: custom urls includes go here

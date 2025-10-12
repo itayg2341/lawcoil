@@ -25,7 +25,7 @@ module.exports = function (grunt) {
       mailserverpid: 'mailserver.pid',
     }
   };
-  const sass = require('node-sass');
+  const sass = require('sass');
 
   grunt.initConfig({
 
@@ -49,7 +49,7 @@ module.exports = function (grunt) {
           '<%= paths.js %>/**/*.js',
           '<%= paths.sass %>/**/*.{scss,sass}',
           '<%= paths.app %>/**/*.html'
-          ],
+        ],
         options: {
           spawn: false,
           livereload: true,
@@ -60,32 +60,32 @@ module.exports = function (grunt) {
     // see: https://github.com/sindresorhus/grunt-sass
     sass: {
       dev: {
-          options: {
-              outputStyle: 'nested',
-              sourceMap: true,
-              precision: 10,
-              implementation: sass
-          },
-          files: {
-              '<%= paths.css %>/project.css': '<%= paths.sass %>/project.scss',
-              '<%= paths.css %>/project_rtl.css': '<%= paths.sass %>/project_rtl.scss',
-              '<%= paths.css %>/print.css': '<%= paths.sass %>/print.scss',
-              '<%= paths.css %>/print_rtl.css': '<%= paths.sass %>/print_rtl.scss'
-          },
+        options: {
+          outputStyle: 'nested',
+          sourceMap: true,
+          precision: 10,
+          implementation: sass
+        },
+        files: {
+          '<%= paths.css %>/project.css': '<%= paths.sass %>/project.scss',
+          '<%= paths.css %>/project_rtl.css': '<%= paths.sass %>/project_rtl.scss',
+          '<%= paths.css %>/print.css': '<%= paths.sass %>/print.scss',
+          '<%= paths.css %>/print_rtl.css': '<%= paths.sass %>/print_rtl.scss'
+        },
       },
       dist: {
-          options: {
-              outputStyle: 'compressed',
-              sourceMap: false,
-              precision: 10,
-              implementation: sass
-          },
-          files: {
-              '<%= paths.css %>/project.css': '<%= paths.sass %>/project.scss',
-              '<%= paths.css %>/project_rtl.css': '<%= paths.sass %>/project_rtl.scss',
-              '<%= paths.css %>/print.css': '<%= paths.sass %>/print.scss',
-              '<%= paths.css %>/print_rtl.css': '<%= paths.sass %>/print_rtl.scss'
-          },
+        options: {
+          outputStyle: 'compressed',
+          sourceMap: false,
+          precision: 10,
+          implementation: sass
+        },
+        files: {
+          '<%= paths.css %>/project.css': '<%= paths.sass %>/project.scss',
+          '<%= paths.css %>/project_rtl.css': '<%= paths.sass %>/project_rtl.scss',
+          '<%= paths.css %>/print.css': '<%= paths.sass %>/print.scss',
+          '<%= paths.css %>/print_rtl.css': '<%= paths.sass %>/print_rtl.scss'
+        },
       }
     },
 
@@ -96,16 +96,18 @@ module.exports = function (grunt) {
 
         processors: [
           require('pixrem')(), // add fallbacks for rem units
-          require('autoprefixer-core')({browsers: [
-            'Android 2.3',
-            'Android >= 4',
-            'Chrome >= 20',
-            'Firefox >= 24',
-            'Explorer >= 8',
-            'iOS >= 6',
-            'Opera >= 12',
-            'Safari >= 6'
-          ]}), // add vendor prefixes
+          require('autoprefixer-core')({
+            browsers: [
+              'Android 2.3',
+              'Android >= 4',
+              'Chrome >= 20',
+              'Firefox >= 24',
+              'Explorer >= 8',
+              'iOS >= 6',
+              'Opera >= 12',
+              'Safari >= 6'
+            ]
+          }), // add vendor prefixes
           require('cssnano')() // minify the result
         ]
       },
@@ -145,10 +147,10 @@ module.exports = function (grunt) {
     'build'
   ]);
   grunt.registerTask('start-email-server', [
-      'bgShell:runMailDump'
+    'bgShell:runMailDump'
   ]);
 
   grunt.registerTask('stop-email-server', [
-      'bgShell:stopMailDump'
+    'bgShell:stopMailDump'
   ]);
 };

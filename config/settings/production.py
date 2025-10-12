@@ -1,7 +1,4 @@
-from __future__ import absolute_import, unicode_literals
-# LOCAL DEVELOPMENT OVERRIDE FOR PRODUCTION SETTINGS
-DEBUG = False
-# -*- coding: utf-8 -*
+# -*- coding: utf-8 -*-
 '''
 Production Configurations
 
@@ -11,6 +8,7 @@ Production Configurations
 - Use Redis on Heroku
 
 '''
+from __future__ import absolute_import, unicode_literals
 
 from .common import *  # noqa
 
@@ -55,8 +53,12 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 # ------------------------------------------------------------------------------
 # Hosts/domain names that are valid for this site
 # See https://docs.djangoproject.com/en/1.6/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['law.co.il'])
+ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['law.co.il', '35.226.53.245'])
 print("[DEBUG] ALLOWED_HOSTS:", ALLOWED_HOSTS)
+
+# LOCAL DEVELOPMENT OVERRIDE FOR PRODUCTION SETTINGS
+DEBUG = True  # Temporarily enable for debugging
+
 # END SITE CONFIGURATION
 
 # INSTALLED_APPS += ("gunicorn", )

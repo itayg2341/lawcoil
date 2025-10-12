@@ -214,7 +214,7 @@ TEMPLATES = [
                 'django.template.context_processors.tz',
                 'django.contrib.messages.context_processors.messages',
                 # Your stuff: custom template context processors go here
-                # 'bidiutils.context_processors.bidi',  # Removed: not compatible with Python 3.12
+                'law.core.context_processors.bidi',  # Replacement for bidiutils
             ],
         },
     },
@@ -274,7 +274,7 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'
 # Select the correct user model
 AUTH_USER_MODEL = 'users.User'
 LOGIN_REDIRECT_URL = 'users:redirect'
-LOGIN_URL = 'account_signup'
+LOGIN_URL = '/accounts/login/'
 
 # SLUGLIFIER
 AUTOSLUG_SLUGIFY_FUNCTION = 'slugify.slugify'
