@@ -58,7 +58,7 @@ class APIAnnotationView(views.CsrfExemptMixin, views.JsonRequestResponseMixin,
     require_json = True
 
     def post(self, request, *args, **kwargs):
-        if not request.user.is_authenticated():
+        if not request.user.is_authenticated:
             raise PermissionDenied
 
         uri = self.request_json['uri']
@@ -101,7 +101,7 @@ class UpdateDeleteAnnotationView(views.CsrfExemptMixin,
 
     def get_annotation(self, request, annotation_id):
 
-        if not request.user.is_authenticated():
+        if not request.user.is_authenticated:
             raise ObjectDoesNotExist
 
         annotation = get_object_or_404(Annotation, pk=uuid.UUID(annotation_id))

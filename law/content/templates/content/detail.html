@@ -1,11 +1,15 @@
 {% extends "base.html" %}{% load i18n content_tags static %}
-{% block title %}{{object.title}} - {{model_verbose_name}} - {{block.super}}{% endblock %} {% block content %}
+
+{% block title %}{{object.title}} - {{model_verbose_name}} - {{block.super}}{% endblock %}
+
 {% block extra_head %}
 {{block.super}}
     <meta name="description" content="{{object.content|striptags|truncatewords:60}}">
     <meta name="author" content="{{ contributors|join:", " }}">
     <meta property="og:title" content="{{object.title}}">
 {% endblock extra_head %}
+
+{% block content %}
 <article class="grid-top-bottom-padded">
   <header>
     <div class="row no-margin-for-small">
@@ -165,9 +169,9 @@
   {% endif %}
       <script src="{% static 'js/annotator.min.js' %}"></script>
       <script>
-          var content_uri = '{{ create_slug_uri }}',
-              load_uri = {% if annotator_uri %}'{{ annotator_uri }}'{% else %}null{% endif %},
-              app = new annotator.App();
+          var content_uri = '{{ create_slug_uri }}';
+          var load_uri = {% if annotator_uri %}'{{ annotator_uri }}'{% else %}null{% endif %};
+          var app = new annotator.App();
 
           var pageUri = function () {
               return {

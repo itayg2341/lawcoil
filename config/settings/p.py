@@ -46,7 +46,7 @@ SECURE_CONTENT_TYPE_NOSNIFF = env.bool(
 SECURE_BROWSER_XSS_FILTER = True
 SESSION_COOKIE_SECURE = True
 SESSION_COOKIE_HTTPONLY = True
-SECURE_SSL_REDIRECT = env.bool("DJANGO_SECURE_SSL_REDIRECT", default=False)
+SECURE_SSL_REDIRECT = env.bool("DJANGO_SECURE_SSL_REDIRECT", default=True)
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 # SITE CONFIGURATION
@@ -55,6 +55,10 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 # See https://docs.djangoproject.com/en/1.6/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['law.co.il', '35.226.53.245'])
 print("[DEBUG] ALLOWED_HOSTS:", ALLOWED_HOSTS)
+
+# LOCAL DEVELOPMENT OVERRIDE FOR PRODUCTION SETTINGS
+DEBUG = True  # Temporarily enable for debugging
+
 # END SITE CONFIGURATION
 
 # INSTALLED_APPS += ("gunicorn", )
@@ -64,54 +68,51 @@ print("[DEBUG] ALLOWED_HOSTS:", ALLOWED_HOSTS)
 # Uploaded Media Files
 # ------------------------
 # See: http://django-storages.readthedocs.org/en/latest/index.html
-INSTALLED_APPS += (
-    'storages',
-)
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
+# INSTALLED_APPS += (
+#     'storages',
+# )
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 #
-AWS_ACCESS_KEY_ID = env('DJANGO_AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = env('DJANGO_AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = env('DJANGO_AWS_STORAGE_BUCKET_NAME')
-AWS_AUTO_CREATE_BUCKET = True
-AWS_QUERYSTRING_AUTH = False
-AWS_S3_REGION_NAME = env('DJANGO_AWS_S3_REGION_NAME', default='us-east-1')
-AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+# AWS_ACCESS_KEY_ID = env('DJANGO_AWS_ACCESS_KEY_ID')
+# AWS_SECRET_ACCESS_KEY = env('DJANGO_AWS_SECRET_ACCESS_KEY')
+# AWS_STORAGE_BUCKET_NAME = env('DJANGO_AWS_STORAGE_BUCKET_NAME')
+# AWS_AUTO_CREATE_BUCKET = True
+# AWS_QUERYSTRING_AUTH = False
+# AWS_S3_CALLING_FORMAT = OrdinaryCallingFormat()
 
 # AWS cache settings, don't change unless you know what you're doing:
-AWS_EXPIRY = 60 * 60 * 24 * 7
+# AWS_EXPIRY = 60 * 60 * 24 * 7
 
 # TODO See: https://github.com/jschneier/django-storages/issues/47
 # Revert the following and use str after the above-mentioned bug is fixed in
 # either django-storage-redux or boto
-AWS_HEADERS = {
-    'Cache-Control': 'max-age=%d, s-maxage=%d, must-revalidate' % (
-        AWS_EXPIRY, AWS_EXPIRY)
-}
+# AWS_HEADERS = {
+#     'Cache-Control': six.b('max-age=%d, s-maxage=%d, must-revalidate' % (
+#         AWS_EXPIRY, AWS_EXPIRY))
+# }
 
 # STATIC_ROOT = '/home/itay_g/lawcoil/staticfiles'
 # MEDIA_ROOT = '/home/itay_g/lawcoil/mediafiles'
 # STATIC_ROOT = 'staticfiles'
 # MEDIA_ROOT = 'mediafiles'
-# Local file storage (commented out for AWS)
-# STATIC_ROOT = '/var/www/django-law.co.il/static/'
-# MEDIA_ROOT = '/var/www/django-law.co.il/media/'
+STATIC_ROOT = '/var/www/django-law.co.il/static/'
+MEDIA_ROOT = '/var/www/django-law.co.il/media/'
 
 # URL that handles the media served from MEDIA_ROOT, used for managing
 # stored files.
-MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
+# MEDIA_URL = 'https://s3.amazonaws.com/%s/' % AWS_STORAGE_BUCKET_NAME
 
 # Static Assets
 # ------------------------
 
-# Use S3 for static files as well
-STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
+# STATICFILES_STORAGE = DEFAULT_FILE_STORAGE
+# STATIC_URL = MEDIA_URL
 
 # See: https://github.com/antonagestam/collectfast
 # For Django 1.7+, 'collectfast' should come before
 # 'django.contrib.staticfiles'
-AWS_PRELOAD_METADATA = True
-INSTALLED_APPS = ('collectfast', ) + INSTALLED_APPS
+# AWS_PRELOAD_METADATA = True
+# INSTALLED_APPS = ('collectfast', ) + INSTALLED_APPS
 
 # EMAIL
 # ------------------------------------------------------------------------------
@@ -130,8 +131,21 @@ EMAIL_USE_TLS = True
 
 # TEMPLATE CONFIGURATION
 # ------------------------------------------------------------------------------
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#template-debug
-TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
+# LOCAL DEVELOPMENT OVERRIDE FOR PRODUCTION SETTINGS
+DEBUG = False
+# -*- coding: utf-8 -*
+'''
+Production Configurations
+
+- Use djangosecure
+- Use Amazon's S3 for storing static files and uploaded media
+- Use mailgun to send emails
+- Use Redis on Heroku
+
+'''
+
+
+from .common import *  # noqa
 
 # CACHES CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -207,5 +221,5 @@ if ADMIN_URL.startswith('/'):
     ADMIN_URL = '^' + ADMIN_URL[1:]
 if not ADMIN_URL.endswith('/'):
     ADMIN_URL += '/'
-
+    
 # Your production stuff: Below this line define 3rd party library settings

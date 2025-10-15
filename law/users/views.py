@@ -116,7 +116,7 @@ class ToggleSaveView(CsrfExemptMixin, ItemsGetterMixin, AjaxResponseMixin,
 
     def post_ajax(self, request, *args, **kwargs):
 
-        if not request.user.is_authenticated():
+        if not request.user.is_authenticated:
             return self.render_json_response({'login_required': True}, 401)
 
         content_type = self.kwargs.get('content_type')

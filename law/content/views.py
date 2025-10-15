@@ -305,7 +305,7 @@ class ContentDetailView(DetailView):
 
         user = self.request.user
 
-        if user.is_anonymous():
+        if user.is_anonymous:
             return False
 
         return user.get_saved_item(self.object) is not None
@@ -348,7 +348,7 @@ class ContentDetailView(DetailView):
 
         annotator_url = None
 
-        if self.request.user.is_authenticated():
+        if self.request.user.is_authenticated:
             annotator_uri = signing.dumps(
                 [self.object.pk, self.request.user.pk],
                 key=settings.PASSWORD_ENC_KEY)

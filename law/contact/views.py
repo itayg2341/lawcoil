@@ -17,7 +17,7 @@ class FeedbackFormView(CreateView):
     def get_initial(self):
         req = self.request
         user = req.user
-        if req.method == 'GET' and user.is_authenticated():
+        if req.method == 'GET' and user.is_authenticated:
             return {
                 'name': user.name,
                 'email': user.email,
